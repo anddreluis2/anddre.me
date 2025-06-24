@@ -9,7 +9,6 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
 } from "./navigation-menu";
-import { ThemeToggle } from "./theme-toggle";
 
 type HeaderProps = {
   className?: string;
@@ -96,11 +95,6 @@ export function Header({ className }: HeaderProps) {
             })}
           </NavigationMenuList>
         </NavigationMenu>
-
-        {/* Theme toggle positioned on the right */}
-        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-          <ThemeToggle />
-        </div>
       </div>
     </header>
   );
