@@ -1,4 +1,4 @@
-import { HoverText } from "@/components/ui/hover-text";
+import { AnimatedHoverText } from "@/components/ui/animated-hover-text";
 
 interface DevToUser {
   name: string;
@@ -49,11 +49,17 @@ export default async function Essays() {
     return (
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
         <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-          <HoverText text="Essays" element="h1" className="font-bold" />
-          <HoverText
+          <AnimatedHoverText
+            text="Essays"
+            element="h1"
+            className="font-bold"
+            startDelay={200}
+          />
+          <AnimatedHoverText
             text="No articles found"
             element="p"
             className="text-muted-foreground"
+            startDelay={800}
           />
         </main>
       </div>
@@ -63,19 +69,23 @@ export default async function Essays() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <HoverText
+        <AnimatedHoverText
           text="Thoughts on technology, design, and development"
           element="h1"
           className="font-bold"
+          startDelay={200}
         />
 
         <div className="flex flex-col gap-4">
-          {essaysData.map((essay) => (
+          {essaysData.map((essay, index) => (
             <div key={essay.id} className="group cursor-pointer relative">
-              <h2 className="relative inline-block transition-colors duration-300 group-hover:text-foreground/80">
-                {essay.title}
-                <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
-              </h2>
+              <AnimatedHoverText
+                text={essay.title}
+                element="h2"
+                className="relative inline-block transition-colors duration-300 group-hover:text-foreground/80"
+                startDelay={800 + index * 200}
+              />
+              <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
             </div>
           ))}
         </div>

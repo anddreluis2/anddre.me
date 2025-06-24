@@ -1,3 +1,5 @@
+import { AnimatedHoverText } from "@/components/ui/animated-hover-text";
+
 const socialLinks = [
   {
     id: 1,
@@ -42,7 +44,7 @@ export default function Social() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <div className="flex flex-col gap-6">
-          {socialLinks.map((social) => (
+          {socialLinks.map((social, index) => (
             <a
               key={social.id}
               href={social.url}
@@ -51,13 +53,19 @@ export default function Social() {
               className="group cursor-pointer relative block"
             >
               <div className="flex flex-col gap-1">
-                <h2 className="relative inline-block transition-colors duration-300 group-hover:text-foreground/80 font-medium">
-                  {social.platform}
-                  <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
-                </h2>
-                <p className="text-sm text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-300">
-                  {social.description}
-                </p>
+                <AnimatedHoverText
+                  text={social.platform}
+                  element="h2"
+                  className="relative inline-block transition-colors duration-300 group-hover:text-foreground/80 font-medium"
+                  startDelay={200 + index * 200}
+                />
+                <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
+                <AnimatedHoverText
+                  text={social.description}
+                  element="p"
+                  className="text-sm text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-300"
+                  startDelay={400 + index * 200}
+                />
               </div>
             </a>
           ))}
