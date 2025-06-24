@@ -91,7 +91,7 @@ const projectsData: Project[] = [
     description:
       "My personal website built with modern web technologies to showcase my projects and professional experience. Features responsive design, theme switching, and custom animations.",
     technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Motion"],
-    link: "https://github.com/anddreluis2/andre.dev",
+    link: "https://github.com/anddreluis2/anddre.me",
   },
 ];
 
