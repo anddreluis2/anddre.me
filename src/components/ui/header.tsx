@@ -15,7 +15,8 @@ type HeaderProps = {
 };
 
 const NAVIGATION_ITEMS = [
-  { href: "/", label: "About Me" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/essays", label: "Essays" },
   { href: "/social", label: "Social Media" },
@@ -32,7 +33,7 @@ export function Header({ className }: HeaderProps) {
 
   // Aproximação do tamanho de cada tab baseado no texto
   const getTabWidth = (index: number) => {
-    const lengths = [100, 90, 80, 130]; // Tamanhos maiores para cobrir o texto + padding
+    const lengths = [70, 80, 95, 80, 120]; // Home, About, Projects, Essays, Social Media
     return lengths[index] || 90;
   };
 
