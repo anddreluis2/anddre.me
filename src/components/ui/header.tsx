@@ -63,7 +63,7 @@ export function Header({ className }: HeaderProps) {
 
               return (
                 <NavigationMenuItem key={item.href}>
-                  <Link href={item.href} legacyBehavior passHref>
+                  <Link href={item.href}>
                     <NavigationMenuLink
                       className={`
                         relative overflow-hidden transition-all duration-300 ease-in-out rounded-full px-4 py-2
