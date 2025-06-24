@@ -9,6 +9,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
 } from "./navigation-menu";
+import { ThemeToggle } from "./theme-toggle";
 
 type HeaderProps = {
   className?: string;
@@ -47,12 +48,12 @@ export function Header({ className }: HeaderProps) {
 
   return (
     <header className={className}>
-      <div className="container mx-auto flex justify-center py-4">
+      <div className="container mx-auto flex justify-center py-4 relative">
         <NavigationMenu>
           <NavigationMenuList className="relative bg-background/80 backdrop-blur-sm rounded-md px-2 py-1">
-            {/* Sliding background */}
+            {/* Sliding background - updated for better light mode visibility */}
             <div
-              className="absolute top-1 bottom-1 bg-gradient-to-r from-white/10 via-white/20 to-white/10 rounded-full transition-all duration-500 ease-in-out"
+              className="absolute top-1 bottom-1 bg-gradient-to-r from-white/20 via-white/30 to-white/20 dark:from-white/10 dark:via-white/20 dark:to-white/10 rounded-full transition-all duration-500 ease-in-out"
               style={{
                 left: getTabPosition(activeIndex),
                 width: getTabWidth(activeIndex),
@@ -70,8 +71,8 @@ export function Header({ className }: HeaderProps) {
                         relative overflow-hidden transition-all duration-300 ease-in-out rounded-full px-4 py-2
                         ${
                           isActive
-                            ? "text-white"
-                            : "text-muted-foreground hover:text-foreground"
+                            ? "text-foreground font-medium"
+                            : "text-foreground/60 hover:text-foreground"
                         }
                         ${
                           !isActive
@@ -80,9 +81,9 @@ export function Header({ className }: HeaderProps) {
                         }
                       `}
                     >
-                      {/* Shimmer effect for non-active items on hover */}
+                      {/* Shimmer effect for non-active items on hover - updated for light mode */}
                       {!isActive && (
-                        <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] skew-x-12 transition-transform duration-700" />
+                        <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-foreground/20 to-transparent translate-x-[-100%] skew-x-12 transition-transform duration-700" />
                       )}
 
                       <span className="relative z-10 font-medium">
@@ -95,6 +96,11 @@ export function Header({ className }: HeaderProps) {
             })}
           </NavigationMenuList>
         </NavigationMenu>
+
+        {/* Theme toggle positioned on the right */}
+        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
