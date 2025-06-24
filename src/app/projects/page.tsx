@@ -28,7 +28,7 @@ const ExperienceSection = ({
           className="group cursor-pointer relative block"
         >
           <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2 justify-center md:justify-start">
+            <div className="flex items-center gap-2 justify-center md:justify-start relative">
               <AnimatedHoverText
                 text={item.name}
                 element="h3"
@@ -48,8 +48,8 @@ const ExperienceSection = ({
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                 />
               </svg>
+              <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
             </div>
-            <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full md:left-0 left-1/2 md:transform-none -translate-x-1/2"></span>
             <AnimatedHoverText
               text={item.position}
               element="p"
