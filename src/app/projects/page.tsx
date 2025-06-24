@@ -10,6 +10,7 @@ export default function Projects() {
           element="p"
           className="text-muted-foreground"
         />
+        <HoverText text="Soon" element="p" className="text-muted-foreground" />
       </main>
     </div>
   );
