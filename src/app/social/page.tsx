@@ -41,9 +41,9 @@ const socialLinks = [
 
 export default function Social() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="flex flex-col gap-6">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-4 sm:p-8 pb-20 gap-8 sm:gap-16 lg:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-6 sm:gap-[32px] row-start-2 items-center sm:items-start w-full max-w-4xl px-4 sm:px-0">
+        <div className="flex flex-col gap-4 sm:gap-6 w-full max-w-2xl">
           {socialLinks.map((social, index) => (
             <a
               key={social.id}
@@ -53,15 +53,15 @@ export default function Social() {
               className="group cursor-pointer relative block"
             >
               <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 justify-center sm:justify-start">
                   <AnimatedHoverText
                     text={social.platform}
                     element="h2"
-                    className="relative inline-block transition-colors duration-300 group-hover:text-foreground/80 font-medium"
+                    className="relative inline-block transition-colors duration-300 group-hover:text-foreground/80 font-medium text-base sm:text-lg"
                     startDelay={200 + index * 200}
                   />
                   <svg
-                    className="w-3 h-3 text-muted-foreground/50 group-hover:text-muted-foreground transition-colors duration-300"
+                    className="w-3 h-3 text-muted-foreground/50 group-hover:text-muted-foreground transition-colors duration-300 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -78,7 +78,7 @@ export default function Social() {
                 <AnimatedHoverText
                   text={social.description}
                   element="p"
-                  className="text-sm text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-300"
+                  className="text-xs sm:text-sm text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-300 text-center sm:text-left"
                   startDelay={400 + index * 200}
                 />
               </div>
