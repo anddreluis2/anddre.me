@@ -47,16 +47,37 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center group"
+      className="relative w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center group overflow-hidden"
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
-      <div className="relative">
-        {theme === "light" ? (
-          <Moon className="w-4 h-4 text-foreground transition-transform duration-300 group-hover:scale-110" />
-        ) : (
-          <Sun className="w-4 h-4 text-foreground transition-transform duration-300 group-hover:scale-110" />
-        )}
+      <div className="relative w-4 h-4">
+        {/* Sun icon */}
+        <Sun
+          className={`w-4 h-4 text-foreground absolute top-0 left-0 transition-all duration-500 ease-in-out ${
+            theme === "dark"
+              ? "rotate-0 scale-100 opacity-100"
+              : "rotate-180 scale-75 opacity-0"
+          }`}
+        />
+
+        {/* Moon icon */}
+        <Moon
+          className={`w-4 h-4 text-foreground absolute top-0 left-0 transition-all duration-500 ease-in-out ${
+            theme === "light"
+              ? "rotate-0 scale-100 opacity-100"
+              : "-rotate-180 scale-75 opacity-0"
+          }`}
+        />
       </div>
+
+      {/* Subtle glow effect */}
+      <div
+        className={`absolute inset-0 rounded-full transition-all duration-500 ${
+          theme === "dark"
+            ? "bg-yellow-400/10 shadow-yellow-400/20"
+            : "bg-blue-400/10 shadow-blue-400/20"
+        } shadow-lg opacity-0 group-hover:opacity-100`}
+      />
     </button>
   );
 }
