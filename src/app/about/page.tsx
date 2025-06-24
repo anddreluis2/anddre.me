@@ -1,5 +1,5 @@
 import { HoverText } from "@/components/ui/hover-text";
-import Image from "next/image"; // Uncomment when adding your photo
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -45,12 +45,6 @@ export default function About() {
           </div>
         </div>
       </main>
-
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <p className="text-sm text-muted-foreground">
-          Let&apos;s build something amazing together.
-        </p>
-      </footer>
     </div>
   );
 }

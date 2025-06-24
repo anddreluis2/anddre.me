@@ -11,11 +11,6 @@ export default function Projects() {
           className="text-muted-foreground"
         />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <p className="text-sm text-muted-foreground">
-          More projects coming soon...
-        </p>
-      </footer>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/ui/header";
+import { LiveClock } from "@/components/ui/live-clock";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,9 @@ export default function RootLayout({
       >
         <Header className="fixed mt-14 mb-14 left-0 right-0 z-50" />
         <main className="">{children}</main>
+        <footer className="fixed bottom-8 left-0 right-0 flex justify-center z-50">
+          <LiveClock />
+        </footer>
       </body>
     </html>
   );

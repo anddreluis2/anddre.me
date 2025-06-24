@@ -80,11 +80,6 @@ export default async function Essays() {
           ))}
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <p className="text-sm text-muted-foreground">
-          Essays and articles coming soon...
-        </p>
-      </footer>
     </div>
   );
 }
