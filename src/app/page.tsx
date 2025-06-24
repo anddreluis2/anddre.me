@@ -11,9 +11,9 @@ export default function Home() {
           className="font-bold"
         />
         <HoverText
-          text="Frontend Engineering / Design Engineering"
+          text="Frontend Engineer and Design Engineering enthusiast."
           element="p"
-          className="text-muted-foreground"
+          className="text-muted-foreground max-w-2xl"
         />
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">

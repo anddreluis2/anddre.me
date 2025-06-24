@@ -71,8 +71,11 @@ export default async function Essays() {
 
         <div className="flex flex-col gap-4">
           {essaysData.map((essay) => (
-            <div key={essay.id} className="hover:underline cursor-pointer">
-              <h2>{essay.title}</h2>
+            <div key={essay.id} className="group cursor-pointer relative">
+              <h2 className="relative inline-block transition-colors duration-300 group-hover:text-foreground/80">
+                {essay.title}
+                <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
+              </h2>
             </div>
           ))}
         </div>
