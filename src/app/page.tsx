@@ -14,6 +14,12 @@ export default function Home() {
           element="p"
           className="text-muted-foreground max-w-2xl"
         />
+
+        <HoverText
+          text="Crafting the web from parser to pixel."
+          element="p"
+          className="text-muted-foreground max-w-2xl"
+        />
       </main>
     </div>
   );
