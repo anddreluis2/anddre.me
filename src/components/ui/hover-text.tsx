@@ -35,11 +35,11 @@ type HoverTextProps = {
  * Individual letter component with hover animation effects
  * Optimized for performance with transform and opacity animations
  */
-const HoverLetter = ({ letter, isDark }: HoverLetterProps): ReactElement => {
+const HoverLetter = ({ letter }: HoverLetterProps): ReactElement => {
   // Performance-optimized animation configuration
   const hoverAnimation = {
     scale: 1.8,
-    color: isDark ? "#ffffff" : "#4b3621",
+    color: "#ffffff",
     y: -4,
     transition: {
       type: "spring" as const,
