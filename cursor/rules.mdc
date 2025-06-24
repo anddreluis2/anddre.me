@@ -1,0 +1,287 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Portfolio Project Rules & Standards
+
+## 🎨 Design Quality Standards
+
+### Visual Hierarchy
+- **Typography Scale**: Use consistent type scale (1.125, 1.25, 1.5, 1.75, 2.0)
+- **Spacing System**: 4px base unit (4, 8, 12, 16, 24, 32, 48, 64, 96, 128)
+- **Color Contrast**: Minimum 4.5:1 for normal text, 3:1 for large text
+- **Interactive States**: All interactive elements must have hover, focus, active, and disabled states
+
+### Responsive Design
+- **Mobile First**: Design and code mobile-first, then scale up
+- **Breakpoints**: 
+  - `sm`: 640px
+  - `md`: 768px  
+  - `lg`: 1024px
+  - `xl`: 1280px
+  - `2xl`: 1536px
+- **Touch Targets**: Minimum 44px x 44px for interactive elements
+
+## 💻 Code Quality Standards
+
+### TypeScript Rules
+- **ALWAYS use `type` instead of `interface`** unless extending is required
+- **Strict mode enabled**: No `any` types allowed
+- **Explicit return types** for all functions
+- **Union types** preferred over enums when possible
+
+```typescript
+// ✅ Good
+type ButtonVariant = 'primary' | 'secondary' | 'ghost'
+type ButtonProps = {
+  variant: ButtonVariant
+  size: 'sm' | 'md' | 'lg'
+  children: React.ReactNode
+}
+
+// ❌ Avoid
+interface ButtonProps {
+  variant: string
+  size: any
+}
+```
+
+### Component Architecture
+- **Single Responsibility**: One component, one purpose
+- **Composition over Inheritance**: Use composition patterns
+- **Prop Drilling Limit**: Max 2 levels, use context or state management beyond
+- **Component Size**: Max 200 lines per component file
+
+### File Organization
+```
+src/
+├── components/
+│   ├── ui/           # Luxe UI components & custom UI
+│   ├── layout/       # Layout components
+│   └── feature/      # Feature-specific components
+├── lib/
+│   ├── utils.ts      # Utility functions
+│   ├── types.ts      # Shared type definitions
+│   └── constants.ts  # App constants
+├── hooks/            # Custom React hooks
+├── stores/           # State management
+└── styles/           # Global styles & themes
+```
+
+## ⚡ Next.js Best Practices
+
+### Performance Optimization
+- **Static Generation**: Use `generateStaticParams` for dynamic routes
+- **Image Optimization**: Always use `next/image` with proper sizing
+- **Bundle Analysis**: Run `npm run analyze` before deployments
+- **Code Splitting**: Use dynamic imports for heavy components
+
+```typescript
+// ✅ Dynamic imports for performance
+const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
+  loading: () => <Skeleton className="h-32 w-full" />
+})
+```
+
+### SEO & Meta Tags
+- **Metadata API**: Use Next.js 13+ metadata API
+- **Structured Data**: Implement JSON-LD for portfolio items
+- **Open Graph**: Complete OG tags for social sharing
+- **Canonical URLs**: Proper canonical URL structure
+
+### Server Components
+- **Server First**: Use Server Components by default
+- **Client Boundaries**: Mark client components with 'use client'
+- **Data Fetching**: Use Server Components for data fetching when possible
+
+## 🎭 Animation & Motion Standards
+
+### Framer Motion Guidelines
+- **Performance**: Use `transform` and `opacity` for animations
+- **Reduced Motion**: Respect `prefers-reduced-motion`
+- **Spring Animations**: Use spring physics for natural feel
+- **Stagger Effects**: Implement for list animations
+
+```typescript
+// ✅ Performance-optimized animations
+const slideIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { type: 'spring', stiffness: 100, damping: 15 }
+}
+```
+
+### Animation Hierarchy
+- **Micro-interactions**: 150-200ms
+- **Page transitions**: 300-500ms  
+- **Complex animations**: Max 800ms
+- **Loading states**: Infinite loops allowed
+
+## 🧩 Component Reusability
+
+### Compound Components Pattern
+```typescript
+// ✅ Reusable compound pattern
+type CardType = {
+  children: React.ReactNode
+  className?: string
+}
+
+const Card = ({ children, className }: CardType) => (
+  <div className={cn('rounded-lg border bg-card', className)}>
+    {children}
+  </div>
+)
+
+const CardHeader = ({ children }: { children: React.ReactNode }) => (
+  <div className="p-6 pb-0">{children}</div>
+)
+
+Card.Header = CardHeader
+Card.Content = CardContent
+Card.Footer = CardFooter
+```
+
+### Render Props & Higher-Order Components
+- **Render Props**: For sharing stateful logic
+- **Custom Hooks**: Extract reusable state logic
+- **HOCs**: Only for cross-cutting concerns (auth, logging)
+
+## 🎯 Luxe UI Integration
+
+### Component Customization
+- **Extend, Don't Replace**: Build upon Luxe UI components
+- **Consistent Theming**: Use CSS variables for theme consistency
+- **Accessible Overrides**: Maintain accessibility when customizing
+
+```typescript
+// ✅ Extending Luxe UI components
+type CustomButtonProps = ButtonProps & {
+  gradient?: boolean
+  glow?: boolean
+}
+
+const CustomButton = ({ gradient, glow, className, ...props }: CustomButtonProps) => (
+  <Button 
+    className={cn(
+      gradient && 'bg-gradient-to-r from-blue-500 to-purple-600',
+      glow && 'shadow-lg shadow-blue-500/25',
+      className
+    )}
+    {...props}
+  />
+)
+```
+
+## 🌐 Web Performance Tips
+
+### Core Web Vitals
+- **LCP**: Largest Contentful Paint < 2.5s
+- **FID**: First Input Delay < 100ms  
+- **CLS**: Cumulative Layout Shift < 0.1
+- **TTFB**: Time to First Byte < 800ms
+
+### Optimization Techniques
+- **Resource Hints**: Use `preload`, `prefetch`, `preconnect`
+- **Critical CSS**: Inline critical CSS, lazy load non-critical
+- **Font Optimization**: Use `font-display: swap`
+- **Image Formats**: WebP/AVIF with fallbacks
+
+### Bundle Optimization
+```typescript
+// ✅ Optimized imports
+import { Button } from '@/components/ui/button'
+// ❌ Avoid barrel imports for large libraries
+import * as Icons from 'lucide-react'
+```
+
+## 🔧 Development Workflow
+
+### Code Quality Tools
+- **ESLint**: Strict configuration with accessibility rules
+- **Prettier**: Consistent code formatting
+- **TypeScript**: Strict mode enabled
+- **Husky**: Pre-commit hooks for quality checks
+
+### Testing Strategy
+- **Unit Tests**: All utility functions and hooks
+- **Component Tests**: Critical user interactions
+- **E2E Tests**: Core user journeys
+- **Visual Regression**: Screenshot testing for UI components
+
+### Git Workflow
+- **Conventional Commits**: Use conventional commit messages
+- **Branch Naming**: `feature/`, `bugfix/`, `hotfix/` prefixes
+- **PR Requirements**: All checks must pass before merge
+- **Code Reviews**: Mandatory for all changes
+
+## 📝 Documentation Standards
+
+### Component Documentation
+```typescript
+/**
+ * Button component with multiple variants and sizes
+ * 
+ * @example
+ * <Button variant="primary" size="lg">
+ *   Click me
+ * </Button>
+ */
+type ButtonProps = {
+  /** Visual style variant */
+  variant: 'primary' | 'secondary' | 'ghost'
+  /** Size of the button */
+  size: 'sm' | 'md' | 'lg'
+  /** Button content */
+  children: React.ReactNode
+}
+```
+
+### README Requirements
+- **Installation**: Clear setup instructions
+- **Usage Examples**: Code examples for key features
+- **API Reference**: Complete prop documentation
+- **Performance Notes**: Optimization recommendations
+
+## 🚀 Deployment Standards
+
+### Build Optimization
+- **Static Export**: Use static export when possible
+- **Environment Variables**: Proper env var management
+- **Error Monitoring**: Integrate error tracking
+- **Analytics**: Performance and user analytics
+
+### Security
+- **CSP Headers**: Content Security Policy implementation
+- **HTTPS Only**: Force HTTPS in production
+- **Dependencies**: Regular security audits
+- **Secrets Management**: No secrets in client code
+
+---
+
+## Quick Reference
+
+### File Naming Conventions
+- **Components**: PascalCase (`Button.tsx`)
+- **Hooks**: camelCase with `use` prefix (`useLocalStorage.ts`)
+- **Utils**: camelCase (`formatDate.ts`)
+- **Types**: PascalCase with `Type` suffix (`ButtonType.ts`)
+
+### Import Order
+1. React imports
+2. Third-party libraries
+3. Internal components
+4. Utils and helpers
+5. Types
+6. Styles
+
+### Performance Checklist
+- [ ] Images optimized with `next/image`
+- [ ] Bundle size analyzed
+- [ ] Dynamic imports for heavy components
+- [ ] Server components used where possible
+- [ ] Metadata properly configured
+- [ ] Core Web Vitals passing
+
+Remember: **Quality over speed. Every line of code is a reflection of craftsmanship.**
