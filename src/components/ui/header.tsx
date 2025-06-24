@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -22,12 +23,41 @@ const NAVIGATION_ITEMS = [
 
 export function Header({ className }: HeaderProps) {
   const pathname = usePathname();
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const index = NAVIGATION_ITEMS.findIndex((item) => item.href === pathname);
+    setActiveIndex(index !== -1 ? index : 0);
+  }, [pathname]);
+
+  // Aproximação do tamanho de cada tab baseado no texto
+  const getTabWidth = (index: number) => {
+    const lengths = [100, 90, 80, 130]; // Tamanhos maiores para cobrir o texto + padding
+    return lengths[index] || 90;
+  };
+
+  const getTabPosition = (index: number) => {
+    let position = 8; // padding inicial
+    for (let i = 0; i < index; i++) {
+      position += getTabWidth(i) - 4; // largura com overlap menor
+    }
+    return position;
+  };
 
   return (
     <header className={className}>
       <div className="container mx-auto flex justify-center py-4">
         <NavigationMenu>
-          <NavigationMenuList className="bg-background/80 backdrop-blur-sm rounded-md px-2 py-1">
+          <NavigationMenuList className="relative bg-background/80 backdrop-blur-sm rounded-md px-2 py-1">
+            {/* Sliding background */}
+            <div
+              className="absolute top-1 bottom-1 bg-gradient-to-r from-white/10 via-white/20 to-white/10 rounded-full transition-all duration-500 ease-in-out"
+              style={{
+                left: getTabPosition(activeIndex),
+                width: getTabWidth(activeIndex),
+              }}
+            />
+
             {NAVIGATION_ITEMS.map((item) => {
               const isActive = pathname === item.href;
 
@@ -36,10 +66,10 @@ export function Header({ className }: HeaderProps) {
                   <Link href={item.href} legacyBehavior passHref>
                     <NavigationMenuLink
                       className={`
-                        relative overflow-hidden transition-all duration-300 ease-out rounded-full px-4 py-2
+                        relative overflow-hidden transition-all duration-300 ease-in-out rounded-full px-4 py-2
                         ${
                           isActive
-                            ? "bg-black text-white"
+                            ? "text-white"
                             : "text-muted-foreground hover:text-foreground"
                         }
                         ${
