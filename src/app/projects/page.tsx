@@ -62,7 +62,7 @@ const ExperienceSection = ({
 export default function Projects() {
   return (
     <div className="min-h-screen pt-24 p-4 sm:p-8 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-6 sm:gap-[32px] items-start w-full max-w-4xl mx-auto">
+      <main className="flex pt-48 flex-col gap-6 sm:gap-[32px] items-start w-full max-w-4xl mx-auto">
         <AnimatedHoverText
           text="Work & Projects"
           element="h1"
