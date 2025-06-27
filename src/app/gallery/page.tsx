@@ -29,35 +29,21 @@ export default async function Gallery() {
             </p>
           </div>
         ) : (
-          <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-              {imageBlobs.map((blob, index) => (
-                <div
-                  key={blob.url}
-                  className="relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                >
-                  <Image
-                    src={blob.url}
-                    alt={blob.pathname.replace("pics/", "")}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority={index < 3} // Prioritize first 3 images
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3 opacity-0 hover:opacity-100 transition-opacity">
-                    <p className="text-white text-sm truncate">
-                      {blob.pathname.replace("pics/", "")}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center text-sm text-muted-foreground">
-              Showing {imageBlobs.length} image
-              {imageBlobs.length !== 1 ? "s" : ""} from /pics
-            </div>
-          </>
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-1 w-full">
+            {imageBlobs.map((blob, index) => (
+              <div key={blob.url} className="break-inside-avoid mb-1">
+                <Image
+                  src={blob.url}
+                  alt={blob.pathname.replace("pics/", "")}
+                  width={400}
+                  height={400}
+                  className="w-full h-auto"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={index < 3} // Prioritize first 3 images
+                />
+              </div>
+            ))}
+          </div>
         )}
       </main>
     </div>
