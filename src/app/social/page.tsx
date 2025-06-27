@@ -53,28 +53,17 @@ export default function Social() {
               className="group cursor-pointer relative block"
             >
               <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-2 justify-center sm:justify-start">
-                  <AnimatedHoverText
-                    text={social.platform}
-                    element="h2"
-                    className="relative inline-block transition-colors duration-300 group-hover:text-foreground/80 font-medium text-base sm:text-lg"
-                    startDelay={200 + index * 200}
-                  />
-                  <svg
-                    className="w-3 h-3 text-muted-foreground/50 group-hover:text-muted-foreground transition-colors duration-300 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                <div className="flex items-center justify-center sm:justify-start">
+                  <div className="relative inline-block">
+                    <AnimatedHoverText
+                      text={social.platform}
+                      element="h2"
+                      className="transition-colors duration-300 group-hover:text-foreground/80 font-medium text-base sm:text-lg"
+                      startDelay={200 + index * 200}
                     />
-                  </svg>
+                    <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
+                  </div>
                 </div>
-                <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
                 <AnimatedHoverText
                   text={social.description}
                   element="p"
