@@ -2,7 +2,7 @@ import { AnimatedHoverText } from "@/components/ui/animated-hover-text";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Frontend Engineer",
+  title: "André Luis de Oliveira Andrade",
   description:
     "Frontend Engineer and Design Engineering enthusiast. Crafting the web from parser to pixel.",
 };
