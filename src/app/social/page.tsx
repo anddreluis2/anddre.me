@@ -1,4 +1,11 @@
 import { AnimatedHoverText } from "@/components/ui/animated-hover-text";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Social",
+  description:
+    "Connect with me across different platforms. Find my latest updates, projects, and ways to get in touch.",
+};
 
 const socialLinks = [
   {

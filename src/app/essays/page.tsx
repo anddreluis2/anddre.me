@@ -1,4 +1,11 @@
 import { AnimatedHoverText } from "@/components/ui/animated-hover-text";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Essays",
+  description:
+    "Thoughts on technology, design, and development. Technical articles and insights from a frontend engineer's perspective.",
+};
 
 interface DevToUser {
   name: string;

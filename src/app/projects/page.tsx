@@ -1,5 +1,12 @@
 import { AnimatedHoverText } from "@/components/ui/animated-hover-text";
 import { Experience, jobsData, projectsData } from "./data";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Work & Projects",
+  description:
+    "Professional experience and personal projects. A showcase of my work in frontend engineering and design engineering.",
+};
 
 const ExperienceSection = ({
   title,

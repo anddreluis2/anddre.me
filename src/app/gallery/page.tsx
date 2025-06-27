@@ -1,5 +1,12 @@
 import { list } from "@vercel/blob";
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Gallery",
+  description:
+    "Photography and visual moments. A collection of images capturing my perspective through the lens.",
+};
 
 export default async function Gallery() {
   const { blobs } = await list({

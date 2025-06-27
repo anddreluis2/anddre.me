@@ -1,5 +1,12 @@
 import { AnimatedHoverText } from "@/components/ui/animated-hover-text";
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Software Engineer with 5 years of experience building web interfaces. Currently diving into design engineering—bridging the gap between beautiful design and solid code.",
+};
 
 export default function About() {
   return (
