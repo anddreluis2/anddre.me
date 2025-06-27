@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.11",
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
     "@radix-ui/react-navigation-menu": "^1.2.13",
     "@radix-ui/react-separator": "^1.1.7",
     "@vercel/blob": "^1.1.1",

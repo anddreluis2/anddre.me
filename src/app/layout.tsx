@@ -30,9 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header className="fixed mt-14 mb-14 left-0 right-0 z-50" />
+        <Header className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50" />
         <main className="">{children}</main>
-        <footer className="fixed bottom-8 left-0 right-0 flex justify-center items-center gap-4 z-50">
+        <footer className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center items-center gap-4 z-50">
           <LiveClock />
           <ThemeToggle />
         </footer>

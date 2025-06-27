@@ -54,16 +54,16 @@ const ExperienceSection = ({
 
 export default function Projects() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-4 sm:p-8 pb-20 gap-8 sm:gap-16 lg:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-6 sm:gap-[32px] row-start-2 items-center w-full max-w-4xl px-4 sm:px-0">
+    <div className="min-h-screen pt-24 p-4 sm:p-8 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-6 sm:gap-[32px] items-start w-full max-w-4xl mx-auto">
         <AnimatedHoverText
           text="Work & Projects"
           element="h1"
-          className="font-bold text-lg sm:text-xl lg:text-2xl text-center"
+          className="font-bold text-lg sm:text-xl lg:text-2xl"
           startDelay={200}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 w-full max-w-3xl mt-4 sm:mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 w-full max-w-3xl">
           <ExperienceSection
             title="Professional Experience"
             items={jobsData}
