@@ -34,8 +34,13 @@ export function Header({ className }: HeaderProps) {
   const pathname = usePathname();
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const isActiveLink = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
+
   useEffect(() => {
-    const index = NAVIGATION_ITEMS.findIndex((item) => item.href === pathname);
+    const index = NAVIGATION_ITEMS.findIndex((item) => isActiveLink(item.href));
     setActiveIndex(index !== -1 ? index : 0);
   }, [pathname]);
 
@@ -70,7 +75,7 @@ export function Header({ className }: HeaderProps) {
               />
 
               {NAVIGATION_ITEMS.map((item) => {
-                const isActive = pathname === item.href;
+                const isActive = isActiveLink(item.href);
 
                 return (
                   <NavigationMenuItem key={item.href}>
@@ -119,12 +124,12 @@ export function Header({ className }: HeaderProps) {
               className="w-48 mt-2 z-[100] animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out data-[side=bottom]:slide-in-from-top-2"
             >
               {NAVIGATION_ITEMS.map((item) => {
-                const isActive = pathname === item.href;
+                const isActive = isActiveLink(item.href);
                 return (
                   <DropdownMenuItem key={item.href} asChild>
                     <Link
                       href={item.href}
-                      className={`w-full bg-black cursor-pointer transition-all duration-200 hover:scale-[1.02] ${
+                      className={`w-full cursor-pointer transition-all duration-200 hover:scale-[1.02] ${
                         isActive
                           ? "bg-accent text-accent-foreground font-medium"
                           : ""
