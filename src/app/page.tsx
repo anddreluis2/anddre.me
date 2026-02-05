@@ -21,14 +21,14 @@ export default function Home() {
           text="Frontend Engineer and Design Engineering enthusiast."
           element="p"
           className="text-muted-foreground max-w-2xl text-sm sm:text-base text-center sm:text-left"
-          startDelay={800}
+          startDelay={400}
         />
 
         <AnimatedHoverText
           text="Crafting the web from parser to pixel."
           element="p"
           className="text-muted-foreground max-w-2xl text-sm sm:text-base text-center sm:text-left"
-          startDelay={1400}
+          startDelay={600}
         />
       </main>
     </div>
