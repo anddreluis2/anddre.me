@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "highlight.js/styles/github-dark.css";
 
 :root {
   --background: #ffffff;
@@ -82,4 +83,19 @@ body {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* Code block styling for essays */
+.hljs {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem !important;
+  overflow-x: auto;
+}
+
+.dark .hljs {
+  background: #0a0a0a !important;
+  border-color: rgba(255, 255, 255, 0.1);
 }

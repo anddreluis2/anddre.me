@@ -74,8 +74,9 @@ export function Header({ className }: HeaderProps) {
 
                 return (
                   <NavigationMenuItem key={item.href}>
-                    <Link href={item.href}>
-                      <NavigationMenuLink
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={item.href}
                         className={`
                           relative overflow-hidden transition-all duration-300 ease-in-out rounded-full px-4 py-2
                           ${
@@ -98,8 +99,8 @@ export function Header({ className }: HeaderProps) {
                         <span className="relative z-10 font-medium">
                           {item.label}
                         </span>
-                      </NavigationMenuLink>
-                    </Link>
+                      </Link>
+                    </NavigationMenuLink>
                   </NavigationMenuItem>
                 );
               })}
