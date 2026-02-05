@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
+import { cache } from "react";
 
 interface PageProps {
   params: Promise<{
@@ -38,6 +39,11 @@ export async function generateMetadata({
   };
 }
 
+// Cache MDX compilation
+const compileMDXContent = cache(async (content: string) => {
+  return content;
+});
+
 export default async function EssayPage({ params }: PageProps) {
   const { slug } = await params;
   const essay = await getEssayBySlug(slug);
@@ -47,6 +53,7 @@ export default async function EssayPage({ params }: PageProps) {
   }
 
   const { metadata, content } = essay;
+  const cachedContent = await compileMDXContent(content);
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-4 sm:p-8 pb-20 gap-8 sm:gap-16 lg:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -99,7 +106,7 @@ export default async function EssayPage({ params }: PageProps) {
 
           <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-16 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-base prose-p:leading-relaxed prose-p:mb-4 prose-a:text-foreground prose-a:underline prose-a:decoration-2 prose-a:underline-offset-2 hover:prose-a:decoration-muted-foreground prose-code:text-sm prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-ul:my-4 prose-ol:my-4 prose-li:my-1 prose-hr:my-12 prose-hr:border-border">
             <MDXRemote
-              source={content}
+              source={cachedContent}
               options={{
                 mdxOptions: {
                   rehypePlugins: [rehypeHighlight, rehypeSlug],

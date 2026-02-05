@@ -44,7 +44,7 @@ export default async function Essays() {
         />
 
         <div className="flex flex-col gap-3 sm:gap-4 w-full max-w-2xl">
-          {essays.map((essay, index) => (
+          {essays.map((essay) => (
             <Link
               key={essay.slug}
               href={`/essays/${essay.slug}`}
@@ -52,12 +52,9 @@ export default async function Essays() {
             >
               <div className="flex flex-col gap-1">
                 <div className="relative inline-block">
-                  <AnimatedHoverText
-                    text={essay.title}
-                    element="h2"
-                    className="transition-colors duration-300 group-hover:text-foreground/80 text-sm sm:text-base font-medium leading-relaxed text-center sm:text-left"
-                    startDelay={800 + index * 200}
-                  />
+                  <h2 className="transition-colors duration-300 group-hover:text-foreground/80 text-sm sm:text-base font-medium leading-relaxed text-center sm:text-left">
+                    {essay.title}
+                  </h2>
                   <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
                 </div>
                 {essay.readingTime && essay.publishedAt && (

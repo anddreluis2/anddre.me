@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
+import { cache } from "react";
 
 const essaysDirectory = path.join(process.cwd(), "content/essays");
 
@@ -19,7 +20,9 @@ export interface Essay {
   content: string;
 }
 
-export async function getAllEssays(): Promise<EssayMetadata[]> {
+export const getAllEssays = cache(async function getAllEssays(): Promise<
+  EssayMetadata[]
+> {
   // Ensure directory exists
   if (!fs.existsSync(essaysDirectory)) {
     return [];
@@ -53,9 +56,11 @@ export async function getAllEssays(): Promise<EssayMetadata[]> {
     });
 
   return essays;
-}
+});
 
-export async function getEssayBySlug(slug: string): Promise<Essay | null> {
+export const getEssayBySlug = cache(async function getEssayBySlug(
+  slug: string
+): Promise<Essay | null> {
   try {
     const fullPath = path.join(essaysDirectory, `${slug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -76,9 +81,11 @@ export async function getEssayBySlug(slug: string): Promise<Essay | null> {
   } catch {
     return null;
   }
-}
+});
 
-export async function getEssayMetadata(slug: string): Promise<EssayMetadata | null> {
+export async function getEssayMetadata(
+  slug: string
+): Promise<EssayMetadata | null> {
   const essay = await getEssayBySlug(slug);
   return essay ? essay.metadata : null;
 }
