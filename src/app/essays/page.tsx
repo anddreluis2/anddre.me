@@ -51,11 +51,13 @@ export default async function Essays() {
               className="group cursor-pointer relative block"
             >
               <div className="flex flex-col gap-1">
-                <div className="relative inline-block">
-                  <h2 className="transition-colors duration-300 group-hover:text-foreground/80 text-sm sm:text-base font-medium leading-relaxed text-center sm:text-left">
-                    {essay.title}
-                  </h2>
-                  <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full"></span>
+                <div className="flex items-center justify-center sm:justify-start">
+                  <div className="relative inline-block">
+                    <h2 className="transition-colors duration-300 group-hover:text-foreground/80 text-sm sm:text-base font-medium leading-relaxed text-center sm:text-left">
+                      {essay.title}
+                    </h2>
+                    <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full" />
+                  </div>
                 </div>
                 {essay.readingTime && essay.publishedAt && (
                   <p className="text-xs text-muted-foreground text-center sm:text-left">
