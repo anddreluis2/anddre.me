@@ -18,14 +18,14 @@ export default function Home() {
           startDelay={200}
         />
         <AnimatedHoverText
-          text="Frontend Engineer and Design Engineering enthusiast."
+          text="Brazillian Software Engineer."
           element="p"
           className="text-muted-foreground max-w-2xl text-sm sm:text-base text-center sm:text-left"
           startDelay={400}
         />
 
         <AnimatedHoverText
-          text="Crafting the web from parser to pixel."
+          text="Helping to craft the web from parser to pixel."
           element="p"
           className="text-muted-foreground max-w-2xl text-sm sm:text-base text-center sm:text-left"
           startDelay={600}
