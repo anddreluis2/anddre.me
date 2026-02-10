@@ -377,10 +377,223 @@ A: (No answer provided)
 A: (No answer provided)
 
 <br />
+<br />
 
-## Architecture questions
+---
 
-_Content coming soon._
+<br />
+<br />
+
+<h1
+  id="architecture-questions"
+  style={{
+    fontSize: "2.25rem",
+    fontWeight: 700,
+    marginTop: 0,
+    marginBottom: "1rem",
+  }}
+>
+  Frontend architecture
+</h1>
+
+_This section contains common questions about frontend application architecture, with summarized answers._
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  🏛️ Fundamentals
+</h2>
+
+**Q: What are the main architectural patterns in modern frontend applications?**
+A: MVC (Model-View-Controller), MVVM (Model-View-ViewModel), and Component-Driven Architecture (CDA). CDA is the most common in modern frameworks like React.
+
+<br />
+
+**Q: What is separation of concerns?**
+A: It is dividing the application into distinct modules with unique responsibilities. Example: separating UI, state logic, and API calls.
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  ⚙️ Componentization
+</h2>
+
+**Q: What are reusable components?**
+A: UI blocks that can be used in different contexts, following principles like DRY (Don't Repeat Yourself).
+
+<br />
+
+**Q: What should you consider when designing a scalable component architecture?**
+A: Clear naming, composition, state isolation, and well-defined responsibilities.
+
+<br />
+
+**Q: When to use Context API, Redux, or other global state solutions?**
+A: Context API for simple and local data. Redux or other libraries for complex state shared among many components.
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  🧩 Micro Frontends
+</h2>
+
+**Q: What is a frontend monolith? And a micro frontend?**
+A: A monolith is a single large application. Micro frontends split the UI into multiple independent apps that coexist.
+
+<br />
+
+**Advantages of micro frontends:**
+
+- Allow independent teams to develop, deploy, and scale parts of the application separately
+- Enable incremental adoption of new technologies
+- Reduce the impact of failures by isolating problems in smaller parts
+
+<br />
+
+**Challenges of micro frontends:**
+
+- Complexity of integration between different micro frontends
+- Possible increase in bundle size due to duplicated dependencies
+- Managing communication and state sharing between micro frontends
+
+<br />
+
+**Best practices for micro frontends:**
+
+- Define clear communication contracts (events, APIs)
+- Use a shared design system to maintain visual consistency
+- Automate deployments and continuous integration for each micro frontend
+- Monitor performance and end-user experience across the entire application
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  📦 Folder Structure
+</h2>
+
+**Q: How do you structure folders in a large React application?**
+A: By domain (`features/user`, `features/orders`) or by type (`components/`, `pages/`, `hooks/`), depending on the team and project scale.
+
+<br />
+
+**Q: Domain-driven folders vs. file type?**
+A: Domain-based structure makes scalability and maintainability easier in large systems. By type is simpler for small teams.
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  🧠 Performance and Scalability
+</h2>
+
+**Q: How does architecture influence application performance?**
+A: Modularity and lazy loading reduce load time and make the bundle smaller.
+
+<br />
+
+**Q: Strategies for lazy loading and bundle optimization?**
+A: `React.lazy`, `Suspense`, dynamic imports, route splitting, and bundle analysis with tools like Webpack Bundle Analyzer.
+
+<br />
+
+**Q: When to use Server Components or SSR (Next.js)?**
+A: SSR improves SEO and TTFB. Server Components help avoid unnecessary client-side renders.
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  🛠️ Tools and Patterns
+</h2>
+
+**Q: How does using TypeScript impact architecture?**
+A: It helps prevent errors during development and makes code more predictable and documented.
+
+<br />
+
+**Q: Best practices with Tailwind, Styled Components, or CSS Modules?**
+A: Separate visual responsibilities, avoid logic in styles, and prefer consistent patterns throughout the project.
+
+<br />
+
+**Q: What is the importance of linting, testing, and CI/CD?**
+A: Linting prevents style/code issues. Testing ensures stability. CI/CD automates delivery and reduces errors.
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  🔐 Security
+</h2>
+
+**Q: Architectural security concerns in the frontend?**
+A: Input sanitization, correct use of tokens and headers, avoid exposing sensitive data in the bundle.
+
+<br />
+
+**Q: How to protect sensitive information in the frontend?**
+A: Do not put secrets in client code. Use environment variables on the backend and expose only what is necessary via a secure API.
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  📚 References
+</h2>
+
+- [The Clean Architecture by Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)
+- [Component-Driven Development](https://www.componentdriven.org/)
+- [Official Next.js Guide on Project Architecture](https://nextjs.org/docs/advanced-features/project-structure)
 
 <br />
 
