@@ -7,12 +7,17 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import { cache } from "react";
+import { FolderAccordion } from "@/components/ui/folder-accordion";
 
 interface PageProps {
   params: Promise<{
     slug: string;
   }>;
 }
+
+const mdxComponents = {
+  FolderAccordion,
+};
 
 export async function generateStaticParams() {
   const essays = await getAllEssays();
@@ -107,6 +112,7 @@ export default async function EssayPage({ params }: PageProps) {
           <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h1:text-3xl prose-h1:mt-0 prose-h1:mb-4 prose-h2:text-2xl prose-h2:mt-16 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-base prose-p:leading-relaxed prose-p:mb-4 prose-a:text-foreground prose-a:underline prose-a:decoration-2 prose-a:underline-offset-2 hover:prose-a:decoration-muted-foreground prose-code:text-sm prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6 prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6 prose-li:my-1 prose-hr:my-12 prose-hr:border-border">
             <MDXRemote
               source={cachedContent}
+              components={mdxComponents}
               options={{
                 mdxOptions: {
                   rehypePlugins: [rehypeHighlight, rehypeSlug],

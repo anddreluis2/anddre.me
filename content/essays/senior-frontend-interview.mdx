@@ -5,70 +5,26 @@ publishedAt: "2026-02-10"
 tags: ["react", "frontend", "architecture", "frontend-performance", "next"]
 ---
 
-> This is a blogpost based on my repo: [senior-frontend-interview](https://github.com/anddreluis2/senior-frontend-interview/).
+> This is a blogpost based on my repo: <u>[senior-frontend-interview](https://github.com/anddreluis2/senior-frontend-interview/)</u>.
+
+> But first things first, I need to gave some credits to my friends <u>[@mauvieira](https://github.com/mauvieira)</u> and <u>[@josethz00](https://github.com/josethz00)</u> who helped me to build this repo.
 
 <br />
 
-> Resuming in a few words: this is a list to you try to handle with your next frontend interviews, with a little FAQ based on my experience and of some friends.
+I divide this in very specific topics to make your life easier, so you can dive directly into your doubts.
 
-<br />
-
-> But first things first, I need to gave some credits to my friends [@mauvieira](https://github.com/mauvieira) and [@josethz00](https://github.com/josethz00) who helped me to build this repo.
-
-<br />
-
-Now let's divide this in topics:
-
-<br />
-
-- <u>[JavaScript questions](#javascript-interview-questions)</u>
-- <u>[Architecture questions](#architecture-questions)</u>
-- <u>[React questions](#react-questions)</u>
-- <u>[React performance questions](#react-performance-questions)</u>
-- <u>[Another common quesstions](#another-common-questions)</u>
-
-<br />
-
-<h1
-  id="javascript-interview-questions"
-  style={{
-    fontSize: "2rem",
-    fontWeight: 700,
-    marginTop: 0,
-    marginBottom: "1rem",
-  }}
->
-  JavaScript Interview Questions
-</h1>
+<FolderAccordion title="JavaScript Interview Questions" level={1}>
 
 _Some questions about frontend development that might be in your next JavaScript job interview._
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Closure and Scope
-</h2>
+<FolderAccordion title="Closure and Scope" level={2}>
 
 **Q: What is a closure and how does it work?**
 A: A closure is a function that returns another function, by using a closure you can access the function of an inner scope calling one after the other
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Asynchronous Programming
-</h2>
+<FolderAccordion title="Asynchronous Programming" level={2}>
 
 **Q: What are the differences between callbacks, promises, and async/await?**
 A: A promise is a future, is a function that usually involves calling external resources and can take a while to finish
@@ -80,18 +36,9 @@ Async/await is a modern syntax for promises in JavaScript, they have builtin err
 **Q: When would you use each?**
 A: Async/await whenever is possible, to ensure code quality
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Event Loop and Concurrency Model
-</h2>
+<FolderAccordion title="Event Loop and Concurrency Model" level={2}>
 
 **Q: How does the JavaScript event loop work?**
 A: (No answer provided)
@@ -101,50 +48,23 @@ A: (No answer provided)
 **Q: Explain the concept of the call stack and task queue.**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Prototype Inheritance vs. Classical Inheritance
-</h2>
+<FolderAccordion title="Prototype Inheritance vs. Classical Inheritance" level={2}>
 
 **Q: How does prototypal inheritance differ from classical inheritance?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Higher-Order Functions
-</h2>
+<FolderAccordion title="Higher-Order Functions" level={2}>
 
 **Q: Can you explain what a higher-order function is in JavaScript and provide an example?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  DOM Manipulation and Event Handling
-</h2>
+<FolderAccordion title="DOM Manipulation and Event Handling" level={2}>
 
 **Q: How would you add an event listener in vanilla JavaScript?**
 A: (No answer provided)
@@ -154,25 +74,16 @@ A: (No answer provided)
 **Q: What are the differences between event capturing and bubbling?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  ES6 and Beyond Features
-</h2>
+<FolderAccordion title="ES6 and Beyond Features" level={2}>
 
 **Q: Discuss arrow functions, template literals, destructuring, spread/rest operators, etc.**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-## 'this' Keyword
+<FolderAccordion title="'this' Keyword" level={2}>
 
 **Q: How does the 'this' keyword work in JavaScript?**
 A: (No answer provided)
@@ -182,228 +93,100 @@ A: (No answer provided)
 **Q: What are the different ways to bind 'this' in a function?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Memory Management
-</h2>
+<FolderAccordion title="Memory Management" level={2}>
 
 **Q: Discuss garbage collection and memory leaks in JavaScript.**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Design Patterns and Best Practices
-</h2>
+<FolderAccordion title="Design Patterns and Best Practices" level={2}>
 
 **Q: Discuss various design patterns (like Module, Observer, Singleton) and best practices in code organization and performance optimization.**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Testing and Debugging
-</h2>
+<FolderAccordion title="Testing and Debugging" level={2}>
 
 **Q: Discuss unit testing, integration testing, and debugging practices in JavaScript.**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Frameworks and Libraries
-</h2>
+<FolderAccordion title="Frameworks and Libraries" level={2}>
 
 **Q: Be prepared for questions related to specific frameworks (like React, Angular, or Node.js).**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Event Delegation
-</h2>
+<FolderAccordion title="Event Delegation" level={2}>
 
 **Q: Can you explain event delegation and why it's useful?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  JavaScript Engines
-</h2>
+<FolderAccordion title="JavaScript Engines" level={2}>
 
 **Q: How does a JavaScript engine like V8 execute code?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Hoisting
-</h2>
+<FolderAccordion title="Hoisting" level={2}>
 
 **Q: What is hoisting in JavaScript and how does it affect variable and function declarations?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Immutability
-</h2>
+<FolderAccordion title="Immutability" level={2}>
 
 **Q: What is immutability and how can it be achieved in JavaScript?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Cross-Browser Compatibility Issues
-</h2>
+<FolderAccordion title="Cross-Browser Compatibility Issues" level={2}>
 
 **Q: How do you ensure your JavaScript code works across different browsers?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Web Performance Optimization
-</h2>
+<FolderAccordion title="Web Performance Optimization" level={2}>
 
 **Q: What are some ways to improve the performance of a JavaScript application?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Security Concerns
-</h2>
+<FolderAccordion title="Security Concerns" level={2}>
 
 **Q: What are common security threats in JavaScript and how do you prevent them?**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Templating Engines and Server-Side Rendering
-</h2>
+<FolderAccordion title="Templating Engines and Server-Side Rendering" level={2}>
 
 **Q: If the role involves full-stack development, questions about server-side rendering and templating engines might come up.**
 A: (No answer provided)
 
-<br />
+</FolderAccordion>
 
----
+</FolderAccordion>
 
-<br />
-
-<h1
-  id="architecture-questions"
-  style={{
-    fontSize: "2.25rem",
-    fontWeight: 700,
-    marginTop: 0,
-    marginBottom: "1rem",
-  }}
->
-  Frontend architecture
-</h1>
+<FolderAccordion title="Frontend Architecture" level={1}>
 
 _This section contains common questions about frontend application architecture, with summarized answers._
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  🏛️ Fundamentals
-</h2>
+<FolderAccordion title="Fundamentals" level={2}>
+
 **Q: What are the main architectural patterns in modern frontend applications?**
 A: MVC (Model-View-Controller), MVVM (Model-View-ViewModel), and Component-Driven
 Architecture (CDA). CDA is the most common in modern frameworks like React.
@@ -413,18 +196,12 @@ Architecture (CDA). CDA is the most common in modern frameworks like React.
 **Q: What is separation of concerns?**
 A: It is dividing the application into distinct modules with unique responsibilities. Example: separating UI, state logic, and API calls.
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  ⚙️ Componentization
-</h2>
-**Q: What are reusable components?** A: UI blocks that can be used in different contexts,
-following principles like DRY (Don't Repeat Yourself).
+</FolderAccordion>
+
+<FolderAccordion title="Componentization" level={2}>
+
+**Q: What are reusable components?**
+A: UI blocks that can be used in different contexts, following principles like DRY (Don't Repeat Yourself).
 
 <br />
 
@@ -436,21 +213,12 @@ A: Clear naming, composition, state isolation, and well-defined responsibilities
 **Q: When to use Context API, Redux, or other global state solutions?**
 A: Context API for simple and local data. Redux or other libraries for complex state shared among many components.
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  🧩 Micro Frontends
-</h2>
-**Q: What is a frontend monolith? And a micro frontend?** A: A monolith is a single
-large application. Micro frontends split the UI into multiple independent apps that
-coexist.
+<FolderAccordion title="Micro Frontends" level={2}>
+
+**Q: What is a frontend monolith? And a micro frontend?**
+A: A monolith is a single large application. Micro frontends split the UI into multiple independent apps that coexist.
 
 <br />
 
@@ -477,41 +245,24 @@ coexist.
 - Automate deployments and continuous integration for each micro frontend
 - Monitor performance and end-user experience across the entire application
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  📦 Folder Structure
-</h2>
-**Q: How do you structure folders in a large React application?** A: By domain (`features/user`,
-`features/orders`) or by type (`components/`, `pages/`, `hooks/`), depending on the
-team and project scale.
+<FolderAccordion title="Folder Structure" level={2}>
+
+**Q: How do you structure folders in a large React application?**
+A: By domain (`features/user`, `features/orders`) or by type (`components/`, `pages/`, `hooks/`), depending on the team and project scale.
 
 <br />
 
 **Q: Domain-driven folders vs. file type?**
 A: Domain-based structure makes scalability and maintainability easier in large systems. By type is simpler for small teams.
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  🧠 Performance and Scalability
-</h2>
-**Q: How does architecture influence application performance?** A: Modularity and
-lazy loading reduce load time and make the bundle smaller.
+<FolderAccordion title="Performance and Scalability" level={2}>
+
+**Q: How does architecture influence application performance?**
+A: Modularity and lazy loading reduce load time and make the bundle smaller.
 
 <br />
 
@@ -523,20 +274,12 @@ A: `React.lazy`, `Suspense`, dynamic imports, route splitting, and bundle analys
 **Q: When to use Server Components or SSR (Next.js)?**
 A: SSR improves SEO and TTFB. Server Components help avoid unnecessary client-side renders.
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  🛠️ Tools and Patterns
-</h2>
-**Q: How does using TypeScript impact architecture?** A: It helps prevent errors
-during development and makes code more predictable and documented.
+<FolderAccordion title="Tools and Patterns" level={2}>
+
+**Q: How does using TypeScript impact architecture?**
+A: It helps prevent errors during development and makes code more predictable and documented.
 
 <br />
 
@@ -548,74 +291,35 @@ A: Separate visual responsibilities, avoid logic in styles, and prefer consisten
 **Q: What is the importance of linting, testing, and CI/CD?**
 A: Linting prevents style/code issues. Testing ensures stability. CI/CD automates delivery and reduces errors.
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  🔐 Security
-</h2>
-**Q: Architectural security concerns in the frontend?** A: Input sanitization, correct
-use of tokens and headers, avoid exposing sensitive data in the bundle.
+<FolderAccordion title="Security" level={2}>
+
+**Q: Architectural security concerns in the frontend?**
+A: Input sanitization, correct use of tokens and headers, avoid exposing sensitive data in the bundle.
 
 <br />
 
 **Q: How to protect sensitive information in the frontend?**
 A: Do not put secrets in client code. Use environment variables on the backend and expose only what is necessary via a secure API.
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  📚 References
-</h2>
+<FolderAccordion title="References" level={2}>
+
 - [The Clean Architecture by Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [Component-Driven Development](https://www.componentdriven.org/) - [Official Next.js
-Guide on Project Architecture](https://nextjs.org/docs/advanced-features/project-structure)
+- [Component-Driven Development](https://www.componentdriven.org/)
+- [Official Next.js Guide on Project Architecture](https://nextjs.org/docs/advanced-features/project-structure)
 
-<br />
-<br />
----
+</FolderAccordion>
 
-<br />
+</FolderAccordion>
 
-<h1
-  id="react-questions"
-  style={{
-    fontSize: "2.25rem",
-    fontWeight: 700,
-    marginTop: 0,
-    marginBottom: "1rem",
-  }}
->
-  React Questions
-</h1>
+<FolderAccordion title="React Questions" level={1}>
 
 _Here we can see some theoretical things that you will probably face in an interview_
 
-<br />
-
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Reconciliation Algorithm and how it impacts performance
-</h2>
+<FolderAccordion title="Reconciliation Algorithm and Performance" level={2}>
 
 The React Reconciliation algorithm is the process by which React efficiently updates the DOM. When a component's state or props change, React creates a new virtual DOM tree and compares it with the previous one (diffing).
 
@@ -624,18 +328,9 @@ The React Reconciliation algorithm is the process by which React efficiently upd
 - Uses keys to identify which children were changed, added, or removed
 - Updates only the parts of the DOM that changed
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Code-splitting in a React application
-</h2>
+<FolderAccordion title="Code-splitting in React" level={2}>
 
 Code-splitting is a technique to divide your bundle into smaller chunks that can be loaded on demand, improving initial load time. React supports code-splitting via:
 
@@ -643,18 +338,9 @@ Code-splitting is a technique to divide your bundle into smaller chunks that can
 2. **Suspense**: Provides a loading state while components are being loaded
 3. **Route-based splitting**: Loading components based on routes
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Describe the render props pattern and how it compares to hooks
-</h2>
+<FolderAccordion title="Render Props Pattern vs Hooks" level={2}>
 
 The render props pattern is a technique for sharing code between components using a prop whose value is a function. It was popular before hooks were introduced.
 
@@ -672,56 +358,34 @@ The render props pattern is a technique for sharing code between components usin
 - Cannot be used conditionally (must follow hook rules)
 - Sometimes less flexible for complex UI composition
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  State Management
-</h2>
+<FolderAccordion title="State Management" level={2}>
 
-- Client State
+- **Client State**
   - UI state (modals, tabs, etc)
   - User preferences
   - Application state, not from server
   - Complex client-side logic
-- Server State
+- **Server State**
   - Data fetched from APIs
   - Data that needs caching
   - Background refetching
   - Optimistic Updates - Optimistic updates are a UI pattern where the application immediately updates the interface after a user action, without waiting for server confirmation.
-- URL State
+- **URL State**
   - Pros: Shareable, Favorable, State Persistence
   - Uses: Filters, Selected Tabs, Selected Items, Multi-Step Flows
   - When not to use: Sensitive Information, High-frequency changes, Large Data Structures
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  useReducer and useState
-</h2>
+<FolderAccordion title="useReducer and useState" level={2}>
 
 We can implement a custom hook similar to useState using useReducer, creating a simple reducer that replaces the state with what is dispatched to it. Returns a tuple with the state and dispatch function.
-
-<br />
 
 ```tsx
 const [state, dispatch] = useReducer(reducer, initialArg, init?)
 ```
-
-<br />
 
 **reducer**: Must be pure, must receive **state** and **action** as arguments, must return the **next state**
 
@@ -729,22 +393,11 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 
 **init**: Initializer function that should return the initial state
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  useEffect Drama
-</h2>
+<FolderAccordion title="useEffect Drama" level={2}>
 
 **useEffect** and **useLayoutEffect** are both hooks for handling side effects, but differ in their execution timing:
-
-<br />
 
 **useEffect**
 
@@ -752,7 +405,6 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 - doesn't block the browser from updating
 - side effects
 
-<br />
 **useLayoutEffect**
 
 - executes synchronously **after** React performs DOM mutations
@@ -760,42 +412,23 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 - blocks the browser from painting until the effect is completed
 - modifies the DOM and wants to avoid visual flickering
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  API Calls
-</h2>
+<FolderAccordion title="API Calls" level={2}>
 
 **useEffect Limitations**
 
 - Race Conditions: handling non-sequential order
 - No built-in features for: retry, deduplication (multiple components requesting the same data), manual loading and error states, complex to clean up and avoid memory leaks, waterfalls (Sequential data dependencies create request cascades), no background refetching
 
-  <br />
-  **Best Practices**
+**Best Practices**
 
 - Custom Hook with AbortController: Create a new AbortController for this request, pass the signal to the request, if the signal is not aborted set the data. Cleanup: abort the request if component is unmounted or URL changes
 - Custom Hook with AbortController and Request Deduplication: Create a cache key based on URL and options, check if there's already a pending request for this URL, if not create a new promise and store it in the cache (local), remove from cache when completed
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Refs Refs Refs
-</h2>
+<FolderAccordion title="Refs Refs Refs" level={2}>
 
 **forwardRef**: component receives a ref and forwards it to a child DOM element or component. Use cases: accessing a DOM element inside a child, imperatively triggering actions on a child component, triggering input focus via ref
 
@@ -803,18 +436,9 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 
 **useImperativeHandle**: customizes the instance exposed when using a reference, allows a child to expose specific functions or properties to the parent. Use cases: wanting to limit which parts of a component are accessible via ref, exposing and customizing imperative methods. Example: modal triggering API on close
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Performance
-</h2>
+<FolderAccordion title="Performance Measurement & Optimization" level={2}>
 
 **How to measure?**
 
@@ -824,7 +448,6 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 - `why-did-you-render` library to track unnecessary re-renders
 - when **useMemo** is useful: calculation is computationally expensive, dependencies change infrequently, calculation result is used in the rendering phase
 
-<br />
 **Practical Approach**:
 
 1. identify bottlenecks using tools
@@ -832,11 +455,11 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 3. apply targeted optimizations
 4. measure again
 
-<br />
-
 **useCallback**: memoized version of the callback function that only changes if one of its dependencies has changed. Has a small performance cost, just part of the optimization strategy, not everywhere. Use cases: passing functions to optimized child components
 
-<br />
+</FolderAccordion>
+
+<FolderAccordion title="INP Optimization" level={2}>
 
 **Q: What is INP and how would you optimize it in a React application?**
 A: INP (Interaction to Next Paint) is a Core Web Vital that measures responsiveness to user interactions such as clicks, taps, and keyboard inputs. It became an official Google ranking factor in March 2024, with a "good" threshold below 200ms. To optimize INP in a React application:
@@ -850,7 +473,9 @@ A: INP (Interaction to Next Paint) is a Core Web Vital that measures responsiven
 
 As seen in the Vio case study, these optimizations can improve INP from poor scores (380ms) to good ones (175ms).
 
-<br />
+</FolderAccordion>
+
+<FolderAccordion title="Migrating to Next.js" level={2}>
 
 **Q: How would you approach migrating a client-rendered React application to Next.js for better performance?**
 A: Based on DoorDash's migration strategy:
@@ -872,12 +497,16 @@ A: Based on Inngest's experience:
 3. **Adapting to new routing conventions**: Leverage file-based structure with layout.js, page.js, loading.js, error.js
 4. **Balancing static and dynamic content**: Use static rendering where possible, stream dynamic content with React's streaming SSR
 
-<br />
+</FolderAccordion>
+
+<FolderAccordion title="SSR, CSR, and Hybrid Approaches" level={2}>
 
 **Q: How would you decide between SSR, CSR, and hybrid approaches in a Next.js application?**
 A: **Use SSR for**: Entry points and landing pages that need SEO, content-heavy pages, pages indexable by search engines, initial application shell. **Use CSR for**: Highly interactive parts after initial load, internal dashboards, features requiring frequent updates, components dependent on client-side APIs. **Hybrid (recommended)**: SSR for initial shell and critical content, CSR for subsequent interactions, progressive hydration, streaming SSR.
 
-<br />
+</FolderAccordion>
+
+<FolderAccordion title="Caching Strategies" level={2}>
 
 **Q: What caching strategies would you implement in a Next.js application to balance performance and data freshness?**
 A:
@@ -887,7 +516,9 @@ A:
 3. **Client-side**: React Query or SWR with staleness times
 4. **Monitoring**: Add monitoring, implement cache invalidation, test with fresh and cached data
 
-<br />
+</FolderAccordion>
+
+<FolderAccordion title="State Management Evolution" level={2}>
 
 **Q: How has state management in React applications evolved, and what approach would you recommend for a large-scale application?**
 A: **Current best practices**:
@@ -900,7 +531,9 @@ A: **Current best practices**:
 
 **Recommendation**: Modular approach, separate server state (React Query) from client state (Context/Zustand), place state close to where needed, URL params for routing state, proper memoization.
 
-<br />
+</FolderAccordion>
+
+<FolderAccordion title="Accessibility in React/Next.js" level={2}>
 
 **Q: How would you ensure accessibility in a React/Next.js application?**
 A:
@@ -911,38 +544,15 @@ A:
 4. **Framework features**: Next.js built-in features, accessible component libraries
 5. **From the start**: Include in design, train developers, part of definition of done
 
-<br />
-<br />
+</FolderAccordion>
 
----
+</FolderAccordion>
 
-<br />
-<br />
-
-<h1
-  id="react-performance-questions"
-  style={{
-    fontSize: "2.25rem",
-    fontWeight: 700,
-    marginTop: 0,
-    marginBottom: "1rem",
-  }}
->
-  React Performance & Best Practices
-</h1>
+<FolderAccordion title="React Performance & Best Practices" level={1}>
 
 _Some best practices to keep the performance on top_
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  1. Eliminating Async Waterfalls
-</h2>
+<FolderAccordion title="1. Eliminating Async Waterfalls" level={2}>
 
 **Q: What are "async waterfalls" and why are they problematic?**
 A: Async waterfalls occur when asynchronous operations are executed sequentially, one waiting for the other to complete, even when there's no real dependency between them. This is problematic because:
@@ -952,7 +562,9 @@ A: Async waterfalls occur when asynchronous operations are executed sequentially
 - Wastes resources by not leveraging parallelism
 
 <br />
+
 **❌ Incorrect (Sequential/Waterfall):**
+
 ```tsx
 async function load(id: string, skip: boolean) {
   const data = await fetchData(id); // Blocks even if skip is true
@@ -962,7 +574,9 @@ async function load(id: string, skip: boolean) {
 ```
 
 <br />
+
 **✅ Correct (Non-blocking):**
+
 ```tsx
 async function load(id: string, skip: boolean) {
   if (skip) return null;
@@ -977,7 +591,9 @@ async function load(id: string, skip: boolean) {
 A: When there are multiple independent async calls, use `Promise.all()` or start the promises simultaneously before awaiting.
 
 <br />
+
 **❌ Incorrect (Sequential):**
+
 ```tsx
 const userData = await fetchUser(id);
 const posts = await fetchPosts(id); // Unnecessarily waits for user to finish
@@ -985,7 +601,9 @@ const comments = await fetchComments(id); // Waits for user AND posts to finish
 ```
 
 <br />
+
 **✅ Correct (Parallel):**
+
 ```tsx
 // Option 1: Promise.all when all are needed
 const [userData, posts, comments] = await Promise.all([
@@ -1010,49 +628,55 @@ const comments = await commentsPromise;
 A: With TanStack Query, use `enabled` only for necessary validation, not to create cascades. Independent queries should start simultaneously.
 
 <br />
+
 **❌ Incorrect:**
+
 ```tsx
 const { data: user } = useQuery({
-  queryKey: ['user', id],
+  queryKey: ["user", id],
   queryFn: () => fetchUser(id),
 });
 
 const { data: posts } = useQuery({
-  queryKey: ['posts', id],
+  queryKey: ["posts", id],
   queryFn: () => fetchPosts(id),
   enabled: !!user, // Waterfall! Only fetches posts after user
 });
-````
+```
 
 <br />
+
 **✅ Correct (Parallel):**
+
 ```tsx
 const { data: user } = useQuery({
-  queryKey: ['user', id],
+  queryKey: ["user", id],
   queryFn: () => fetchUser(id),
 });
 
 const { data: posts } = useQuery({
-queryKey: ['posts', id],
-queryFn: () => fetchPosts(id),
-enabled: !!id, // Doesn't depend on user
+  queryKey: ["posts", id],
+  queryFn: () => fetchPosts(id),
+  enabled: !!id, // Doesn't depend on user
 });
+```
 
-````
 <br />
+
 **✅ Correct (Real Dependency):**
+
 ```tsx
 const { data: user } = useQuery({
-  queryKey: ['user', id],
+  queryKey: ["user", id],
   queryFn: () => fetchUser(id),
 });
 
 const { data: posts } = useQuery({
-  queryKey: ['posts', user?.userId],
+  queryKey: ["posts", user?.userId],
   queryFn: () => fetchPosts(user.userId),
   enabled: !!user?.userId, // OK: real data dependency
 });
-````
+```
 
 <br />
 
@@ -1060,26 +684,29 @@ const { data: posts } = useQuery({
 A: Data proximity means fetching data as close as possible to where it will be consumed, avoiding "prop drilling" of pending states.
 
 <br />
+
 **❌ Incorrect (Loading Prop Drilling):**
+
 ```tsx
 function Parent() {
-  const { data: user } = useQuery(['user'], fetchUser);
-  const { data: posts } = useQuery(['posts'], fetchPosts);
-  const { data: comments } = useQuery(['comments'], fetchComments);
+  const { data: user } = useQuery(["user"], fetchUser);
+  const { data: posts } = useQuery(["posts"], fetchPosts);
+  const { data: comments } = useQuery(["comments"], fetchComments);
   return <Child user={user} posts={posts} comments={comments} />;
 }
 
 function Child({ user, posts, comments }) {
-return <CommentsList comments={comments} />;
+  return <CommentsList comments={comments} />;
 }
-
-````
+```
 
 <br />
+
 **✅ Correct (Proximity):**
+
 ```tsx
 function Parent() {
-  const { data: user } = useQuery(['user'], fetchUser);
+  const { data: user } = useQuery(["user"], fetchUser);
   return (
     <>
       <UserProfile user={user} />
@@ -1090,32 +717,25 @@ function Parent() {
 
 function PostsSection({ userId }) {
   const { data: posts } = useQuery(
-    ['posts', userId],
+    ["posts", userId],
     () => fetchPosts(userId),
-    { enabled: !!userId }
+    { enabled: !!userId },
   );
   return <PostsList posts={posts} />;
 }
-````
+```
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  2. Render Optimization and Re-renders
-</h2>
+<FolderAccordion title="2. Render Optimization and Re-renders" level={2}>
 
 **Q: When and how to use useMemo to optimize render calculations?**
 A: Use `useMemo` to avoid unnecessary recalculations of complex logic or array transformations that don't need to be redone on every render.
 
 <br />
+
 **❌ Incorrect:**
+
 ```tsx
 function ProductList({ products, filter, sortBy }) {
   const filtered = products.filter((p) => p.category === filter);
@@ -1132,6 +752,8 @@ function ProductList({ products, filter, sortBy }) {
   );
 }
 ```
+
+<br />
 
 **✅ Correct:**
 
@@ -1160,6 +782,7 @@ function ProductList({ products, filter, sortBy }) {
 A: Use `useCallback` for functions passed as props to child components that use `React.memo`, or when the function is a dependency of another hook.
 
 <br />
+
 **❌ Incorrect:**
 
 ```tsx
@@ -1174,6 +797,8 @@ function Parent({ items }) {
   ));
 }
 ```
+
+<br />
 
 **✅ Correct:**
 
@@ -1198,6 +823,7 @@ function Parent({ items }) {
 A: High-frequency states (like text inputs) in global Contexts cause re-renders in all components consuming that context.
 
 <br />
+
 **❌ Incorrect:**
 
 ```tsx
@@ -1219,6 +845,7 @@ function UnrelatedComponent() {
 ```
 
 <br />
+
 **✅ Correct:**
 
 ```tsx
@@ -1244,23 +871,15 @@ function SearchInput() {
 }
 ```
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  3. JavaScript Performance and Structures
-</h2>
+<FolderAccordion title="3. JavaScript Performance and Structures" level={2}>
 
 **Q: How to avoid multiple iterations over the same list?**
 A: Combine operations like `filter`, `map`, and `reduce` into a single pass.
 
 <br />
+
 **❌ Incorrect (Multiple Iterations):**
 
 ```tsx
@@ -1274,6 +893,7 @@ function processProducts(products: Product[]) {
 ```
 
 <br />
+
 **✅ Correct (Single Iteration):**
 
 ```tsx
@@ -1292,6 +912,7 @@ function processProducts(products: Product[]) {
 A: Early return means returning early for error or loading states, avoiding excessive nesting.
 
 <br />
+
 **❌ Incorrect:**
 
 ```tsx
@@ -1318,6 +939,7 @@ function ProductPage({ productId }) {
 ```
 
 <br />
+
 **✅ Correct:**
 
 ```tsx
@@ -1344,6 +966,7 @@ function ProductPage({ productId }) {
 A: Cleanup prevents memory leaks and inconsistent behavior when the component unmounts.
 
 <br />
+
 **❌ Incorrect:**
 
 ```tsx
@@ -1354,6 +977,7 @@ useEffect(() => {
 ```
 
 <br />
+
 **✅ Correct:**
 
 ```tsx
@@ -1364,6 +988,7 @@ useEffect(() => {
 ```
 
 <br />
+
 **✅ Correct (AbortController for fetch):**
 
 ```tsx
@@ -1378,18 +1003,9 @@ useEffect(() => {
 }, []);
 ```
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  4. Golden Rules - Summary
-</h2>
+<FolderAccordion title="4. Golden Rules - Summary" level={2}>
 
 **Q: What are the main golden rules for React performance?**
 A:
@@ -1401,25 +1017,11 @@ A:
 - **Avoid Waterfalls**: Don't await conditionally used data. Use `Promise.all`. Start independent queries together.
 - **Early Returns**: Return loading/error before main JSX. Avoid nested ternaries.
 
-<br />
-<br />
+</FolderAccordion>
 
----
+</FolderAccordion>
 
-<br />
-<br />
-
-<h1
-  id="another-common-questions"
-  style={{
-    fontSize: "2.25rem",
-    fontWeight: 700,
-    marginTop: 0,
-    marginBottom: "1rem",
-  }}
->
-  Another common questions
-</h1>
+<FolderAccordion title="Another Common Questions" level={1}>
 
 **Q: What are the strategies we can use to optimize the performance of web applications?**
 A: CDNs, GraphQL (maybe) to reduce overfetching, improve backend performance, use SSR and/or SSG, lazy loading for loading assets only when it's needed, minimize and compress HTML, CSS and JS files, and optimize images by compressing and resizing them.
@@ -1447,19 +1049,7 @@ A:
 - Complex state management, because they are able to maintain persistent state and handle real-time updates
 - Highly interactive user interfaces, because there's no reload, so transitions between views are faster
 
-<br />
-
-<h2
-  id="default-frontend-javascript"
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  JavaScript
-</h2>
+<FolderAccordion title="JavaScript" level={2}>
 
 **Q: What is the advantage of using a Map instead of an object?**
 A:
@@ -1503,19 +1093,9 @@ A: Callback hell
 **Q: How do generators work?**
 A: Generators are on-demand functions, they can be paused and resumed, and the state is maintained along these "pauses and resumes". They return a generator object, each key of this object is the result of and yield operation, the last key is the return result.
 
-<br />
+</FolderAccordion>
 
-<h2
-  id="default-frontend-css"
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  CSS
-</h2>
+<FolderAccordion title="CSS" level={2}>
 
 **Q: How does CSS-in-JS work?**
 A: It is an approach that allows writing CSS directly within JavaScript files, making code maintenance and modularization easier.
@@ -1545,19 +1125,9 @@ A: A way to apply styles based on the container size, instead of the window view
 **Q: How does the CSS grid subgrid work?**
 A: The CSS Grid subgrid feature is an extension of the CSS Grid Layout Module that allows a nested grid to inherit its parent grid's rows or columns. This is especially useful when you want to align the content of nested grid items with the parent grid's structure, without having to duplicate row and column definitions or manage complex positioning with margins or padding.
 
-<br />
+</FolderAccordion>
 
-<h2
-  id="default-frontend-react"
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  React
-</h2>
+<FolderAccordion title="React" level={2}>
 
 **Q: What is the Virtual DOM? And why is it often more performant than manipulating the "real" DOM?**
 A:
@@ -1662,18 +1232,9 @@ A:
 - NestJS --> Express and Fastify
 - Type-GraphQL --> GraphQL
 
-<br />
+</FolderAccordion>
 
-<h2
-  style={{
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    marginTop: "2rem",
-    marginBottom: "0.5rem",
-  }}
->
-  Next
-</h2>
+<FolderAccordion title="Next.js" level={2}>
 
 **Q: What is the difference between getServerSideProps and getStaticProps?**
 A:
@@ -1729,4 +1290,6 @@ A:
 **Q: Is it possible to use a static CDN with Next?**
 A: Yes, you can use a static CDN with Next.js by configuring the assetPrefix option in your next.config.js file. The assetPrefix should be set to the URL of your CDN.
 
-<br />
+</FolderAccordion>
+
+</FolderAccordion>
