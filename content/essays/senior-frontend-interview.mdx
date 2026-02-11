@@ -41,9 +41,7 @@ Now let's divide this in topics:
   JavaScript Interview Questions
 </h1>
 
-Some questions about frontend development that might be in your next JavaScript job interview.
-
-<br />
+_Some questions about frontend development that might be in your next JavaScript job interview._
 
 <h2
   style={{
@@ -377,11 +375,9 @@ A: (No answer provided)
 A: (No answer provided)
 
 <br />
-<br />
 
 ---
 
-<br />
 <br />
 
 <h1
@@ -408,16 +404,14 @@ _This section contains common questions about frontend application architecture,
 >
   🏛️ Fundamentals
 </h2>
-
 **Q: What are the main architectural patterns in modern frontend applications?**
-A: MVC (Model-View-Controller), MVVM (Model-View-ViewModel), and Component-Driven Architecture (CDA). CDA is the most common in modern frameworks like React.
+A: MVC (Model-View-Controller), MVVM (Model-View-ViewModel), and Component-Driven
+Architecture (CDA). CDA is the most common in modern frameworks like React.
 
 <br />
 
 **Q: What is separation of concerns?**
 A: It is dividing the application into distinct modules with unique responsibilities. Example: separating UI, state logic, and API calls.
-
-<br />
 
 <h2
   style={{
@@ -429,9 +423,8 @@ A: It is dividing the application into distinct modules with unique responsibili
 >
   ⚙️ Componentization
 </h2>
-
-**Q: What are reusable components?**
-A: UI blocks that can be used in different contexts, following principles like DRY (Don't Repeat Yourself).
+**Q: What are reusable components?** A: UI blocks that can be used in different contexts,
+following principles like DRY (Don't Repeat Yourself).
 
 <br />
 
@@ -455,9 +448,9 @@ A: Context API for simple and local data. Redux or other libraries for complex s
 >
   🧩 Micro Frontends
 </h2>
-
-**Q: What is a frontend monolith? And a micro frontend?**
-A: A monolith is a single large application. Micro frontends split the UI into multiple independent apps that coexist.
+**Q: What is a frontend monolith? And a micro frontend?** A: A monolith is a single
+large application. Micro frontends split the UI into multiple independent apps that
+coexist.
 
 <br />
 
@@ -496,9 +489,9 @@ A: A monolith is a single large application. Micro frontends split the UI into m
 >
   📦 Folder Structure
 </h2>
-
-**Q: How do you structure folders in a large React application?**
-A: By domain (`features/user`, `features/orders`) or by type (`components/`, `pages/`, `hooks/`), depending on the team and project scale.
+**Q: How do you structure folders in a large React application?** A: By domain (`features/user`,
+`features/orders`) or by type (`components/`, `pages/`, `hooks/`), depending on the
+team and project scale.
 
 <br />
 
@@ -517,9 +510,8 @@ A: Domain-based structure makes scalability and maintainability easier in large 
 >
   🧠 Performance and Scalability
 </h2>
-
-**Q: How does architecture influence application performance?**
-A: Modularity and lazy loading reduce load time and make the bundle smaller.
+**Q: How does architecture influence application performance?** A: Modularity and
+lazy loading reduce load time and make the bundle smaller.
 
 <br />
 
@@ -543,9 +535,8 @@ A: SSR improves SEO and TTFB. Server Components help avoid unnecessary client-si
 >
   🛠️ Tools and Patterns
 </h2>
-
-**Q: How does using TypeScript impact architecture?**
-A: It helps prevent errors during development and makes code more predictable and documented.
+**Q: How does using TypeScript impact architecture?** A: It helps prevent errors
+during development and makes code more predictable and documented.
 
 <br />
 
@@ -569,9 +560,8 @@ A: Linting prevents style/code issues. Testing ensures stability. CI/CD automate
 >
   🔐 Security
 </h2>
-
-**Q: Architectural security concerns in the frontend?**
-A: Input sanitization, correct use of tokens and headers, avoid exposing sensitive data in the bundle.
+**Q: Architectural security concerns in the frontend?** A: Input sanitization, correct
+use of tokens and headers, avoid exposing sensitive data in the bundle.
 
 <br />
 
@@ -590,22 +580,826 @@ A: Do not put secrets in client code. Use environment variables on the backend a
 >
   📚 References
 </h2>
-
 - [The Clean Architecture by Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [Component-Driven Development](https://www.componentdriven.org/)
-- [Official Next.js Guide on Project Architecture](https://nextjs.org/docs/advanced-features/project-structure)
+- [Component-Driven Development](https://www.componentdriven.org/) - [Official Next.js
+Guide on Project Architecture](https://nextjs.org/docs/advanced-features/project-structure)
+
+<br />
+<br />
+---
 
 <br />
 
-## React questions
+<h1
+  id="react-questions"
+  style={{
+    fontSize: "2.25rem",
+    fontWeight: 700,
+    marginTop: 0,
+    marginBottom: "1rem",
+  }}
+>
+  React Questions
+</h1>
 
-_Content coming soon._
+_Here we can see some theoretical things that you will probably face in an interview_
 
 <br />
 
-## React performance questions
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  Reconciliation Algorithm and how it impacts performance
+</h2>
 
-_Content coming soon._
+The React Reconciliation algorithm is the process by which React efficiently updates the DOM. When a component's state or props change, React creates a new virtual DOM tree and compares it with the previous one (diffing).
+
+- React uses a heuristic O(n) algorithm instead of traditional O(n³) tree diffing
+- First compares elements of the same type
+- Uses keys to identify which children were changed, added, or removed
+- Updates only the parts of the DOM that changed
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  Code-splitting in a React application
+</h2>
+
+Code-splitting is a technique to divide your bundle into smaller chunks that can be loaded on demand, improving initial load time. React supports code-splitting via:
+
+1. **React.lazy():** Allows components to be loaded only when needed
+2. **Suspense**: Provides a loading state while components are being loaded
+3. **Route-based splitting**: Loading components based on routes
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  Describe the render props pattern and how it compares to hooks
+</h2>
+
+The render props pattern is a technique for sharing code between components using a prop whose value is a function. It was popular before hooks were introduced.
+
+**Render Props**:
+
+- Passes functions as props to share logic
+- Can lead to "callback hell" and deeply nested components
+- More verbose than hooks
+- Still useful for certain UI composition patterns
+
+**Hooks**:
+
+- More concise and readable
+- Easier to compose multiple pieces of logic
+- Cannot be used conditionally (must follow hook rules)
+- Sometimes less flexible for complex UI composition
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  State Management
+</h2>
+
+- Client State
+  - UI state (modals, tabs, etc)
+  - User preferences
+  - Application state, not from server
+  - Complex client-side logic
+- Server State
+  - Data fetched from APIs
+  - Data that needs caching
+  - Background refetching
+  - Optimistic Updates - Optimistic updates are a UI pattern where the application immediately updates the interface after a user action, without waiting for server confirmation.
+- URL State
+  - Pros: Shareable, Favorable, State Persistence
+  - Uses: Filters, Selected Tabs, Selected Items, Multi-Step Flows
+  - When not to use: Sensitive Information, High-frequency changes, Large Data Structures
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  useReducer and useState
+</h2>
+
+We can implement a custom hook similar to useState using useReducer, creating a simple reducer that replaces the state with what is dispatched to it. Returns a tuple with the state and dispatch function.
+
+<br />
+
+```tsx
+const [state, dispatch] = useReducer(reducer, initialArg, init?)
+```
+
+<br />
+
+**reducer**: Must be pure, must receive **state** and **action** as arguments, must return the **next state**
+
+**initialArg**
+
+**init**: Initializer function that should return the initial state
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  useEffect Drama
+</h2>
+
+**useEffect** and **useLayoutEffect** are both hooks for handling side effects, but differ in their execution timing:
+
+<br />
+
+**useEffect**
+
+- executes asynchronously after the browser has painted
+- doesn't block the browser from updating
+- side effects
+
+<br />
+**useLayoutEffect**
+
+- executes synchronously **after** React performs DOM mutations
+- but **before** browser painting
+- blocks the browser from painting until the effect is completed
+- modifies the DOM and wants to avoid visual flickering
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  API Calls
+</h2>
+
+**useEffect Limitations**
+
+- Race Conditions: handling non-sequential order
+- No built-in features for: retry, deduplication (multiple components requesting the same data), manual loading and error states, complex to clean up and avoid memory leaks, waterfalls (Sequential data dependencies create request cascades), no background refetching
+
+  <br />
+  **Best Practices**
+
+- Custom Hook with AbortController: Create a new AbortController for this request, pass the signal to the request, if the signal is not aborted set the data. Cleanup: abort the request if component is unmounted or URL changes
+- Custom Hook with AbortController and Request Deduplication: Create a cache key based on URL and options, check if there's already a pending request for this URL, if not create a new promise and store it in the cache (local), remove from cache when completed
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  Refs Refs Refs
+</h2>
+
+**forwardRef**: component receives a ref and forwards it to a child DOM element or component. Use cases: accessing a DOM element inside a child, imperatively triggering actions on a child component, triggering input focus via ref
+
+<br />
+
+**useImperativeHandle**: customizes the instance exposed when using a reference, allows a child to expose specific functions or properties to the parent. Use cases: wanting to limit which parts of a component are accessible via ref, exposing and customizing imperative methods. Example: modal triggering API on close
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  Performance
+</h2>
+
+**How to measure?**
+
+- DevTools: Record and interact, Analyze the flamegraph
+- Render duration, Commit frequency, Wasted renders
+- Custom hook with `performance.now()`
+- `why-did-you-render` library to track unnecessary re-renders
+- when **useMemo** is useful: calculation is computationally expensive, dependencies change infrequently, calculation result is used in the rendering phase
+
+<br />
+**Practical Approach**:
+
+1. identify bottlenecks using tools
+2. measure impact of optimizations
+3. apply targeted optimizations
+4. measure again
+
+<br />
+
+**useCallback**: memoized version of the callback function that only changes if one of its dependencies has changed. Has a small performance cost, just part of the optimization strategy, not everywhere. Use cases: passing functions to optimized child components
+
+<br />
+
+**Q: What is INP and how would you optimize it in a React application?**
+A: INP (Interaction to Next Paint) is a Core Web Vital that measures responsiveness to user interactions such as clicks, taps, and keyboard inputs. It became an official Google ranking factor in March 2024, with a "good" threshold below 200ms. To optimize INP in a React application:
+
+1. Profile performance using Chrome DevTools Performance panel
+2. Implement code-splitting and lazy loading with React.lazy() and Suspense
+3. Optimize event handlers with debouncing and event delegation
+4. Leverage React 18 concurrent features with startTransition
+5. Eliminate unnecessary re-renders with React.memo() and useMemo()
+6. Split long tasks into smaller chunks
+
+As seen in the Vio case study, these optimizations can improve INP from poor scores (380ms) to good ones (175ms).
+
+<br />
+
+**Q: How would you approach migrating a client-rendered React application to Next.js for better performance?**
+A: Based on DoorDash's migration strategy:
+
+1. Implement an incremental approach - migrate page by page
+2. Create a bridge between environments with shared context and isSSR flag
+3. Optimize SSR with lazy hydration for non-critical components
+4. Implement file-based routing replacing React Router
+5. Focus on high-impact pages first
+6. Establish monitoring and fallbacks
+
+<br />
+
+**Q: What challenges might you face when migrating to Next.js App Router and how would you address them?**
+A: Based on Inngest's experience:
+
+1. **Understanding the new caching behavior**: Start by disabling cache for dynamic data (export const dynamic = "force-dynamic")
+2. **Managing global state across layouts**: Move global state to URL parameters
+3. **Adapting to new routing conventions**: Leverage file-based structure with layout.js, page.js, loading.js, error.js
+4. **Balancing static and dynamic content**: Use static rendering where possible, stream dynamic content with React's streaming SSR
+
+<br />
+
+**Q: How would you decide between SSR, CSR, and hybrid approaches in a Next.js application?**
+A: **Use SSR for**: Entry points and landing pages that need SEO, content-heavy pages, pages indexable by search engines, initial application shell. **Use CSR for**: Highly interactive parts after initial load, internal dashboards, features requiring frequent updates, components dependent on client-side APIs. **Hybrid (recommended)**: SSR for initial shell and critical content, CSR for subsequent interactions, progressive hydration, streaming SSR.
+
+<br />
+
+**Q: What caching strategies would you implement in a Next.js application to balance performance and data freshness?**
+A:
+
+1. **CDN/Edge**: Configure cache headers, use ISR with revalidation, stale-while-revalidate
+2. **App Router caching**: cache: 'no-store' for dynamic data, time-based revalidation with next.revalidate, on-demand revalidation
+3. **Client-side**: React Query or SWR with staleness times
+4. **Monitoring**: Add monitoring, implement cache invalidation, test with fresh and cached data
+
+<br />
+
+**Q: How has state management in React applications evolved, and what approach would you recommend for a large-scale application?**
+A: **Current best practices**:
+
+1. Keep state local when possible
+2. React Context for shared state
+3. React Query/SWR for server state, Zustand or Jotai for global UI state, React Hook Form for forms
+4. Server-side state with Server Components
+5. Redux only for complex cases
+
+**Recommendation**: Modular approach, separate server state (React Query) from client state (Context/Zustand), place state close to where needed, URL params for routing state, proper memoization.
+
+<br />
+
+**Q: How would you ensure accessibility in a React/Next.js application?**
+A:
+
+1. **Semantic HTML and ARIA**: Appropriate elements, ARIA when needed, follow ARIA Authoring Practices
+2. **Keyboard navigation**: All interactive elements keyboard accessible, manage focus for modals, expected shortcuts
+3. **Test with assistive technologies**: Screen readers, keyboard-only testing, axe-core or Lighthouse
+4. **Framework features**: Next.js built-in features, accessible component libraries
+5. **From the start**: Include in design, train developers, part of definition of done
+
+<br />
+<br />
+
+---
+
+<br />
+<br />
+
+<h1
+  id="react-performance-questions"
+  style={{
+    fontSize: "2.25rem",
+    fontWeight: 700,
+    marginTop: 0,
+    marginBottom: "1rem",
+  }}
+>
+  React Performance & Best Practices
+</h1>
+
+_Some best practices to keep the performance on top_
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  1. Eliminating Async Waterfalls
+</h2>
+
+**Q: What are "async waterfalls" and why are they problematic?**
+A: Async waterfalls occur when asynchronous operations are executed sequentially, one waiting for the other to complete, even when there's no real dependency between them. This is problematic because:
+
+- Significantly increases total loading time
+- Unnecessarily blocks the UI
+- Wastes resources by not leveraging parallelism
+
+<br />
+**❌ Incorrect (Sequential/Waterfall):**
+```tsx
+async function load(id: string, skip: boolean) {
+  const data = await fetchData(id); // Blocks even if skip is true
+  if (skip) return null;
+  return process(data);
+}
+```
+
+<br />
+**✅ Correct (Non-blocking):**
+```tsx
+async function load(id: string, skip: boolean) {
+  if (skip) return null;
+  const data = await fetchData(id);
+  return process(data);
+}
+```
+
+<br />
+
+**Q: How to use Promise.all to avoid waterfalls in multiple async calls?**
+A: When there are multiple independent async calls, use `Promise.all()` or start the promises simultaneously before awaiting.
+
+<br />
+**❌ Incorrect (Sequential):**
+```tsx
+const userData = await fetchUser(id);
+const posts = await fetchPosts(id); // Unnecessarily waits for user to finish
+const comments = await fetchComments(id); // Waits for user AND posts to finish
+```
+
+<br />
+**✅ Correct (Parallel):**
+```tsx
+// Option 1: Promise.all when all are needed
+const [userData, posts, comments] = await Promise.all([
+  fetchUser(id),
+  fetchPosts(id),
+  fetchComments(id),
+]);
+
+// Option 2: Start all simultaneously and await as needed
+const userDataPromise = fetchUser(id);
+const postsPromise = fetchPosts(id);
+const commentsPromise = fetchComments(id);
+
+const userData = await userDataPromise;
+const posts = await postsPromise;
+const comments = await commentsPromise;
+```
+
+<br />
+
+**Q: How to avoid waterfalls with TanStack Query?**
+A: With TanStack Query, use `enabled` only for necessary validation, not to create cascades. Independent queries should start simultaneously.
+
+<br />
+**❌ Incorrect:**
+```tsx
+const { data: user } = useQuery({
+  queryKey: ['user', id],
+  queryFn: () => fetchUser(id),
+});
+
+const { data: posts } = useQuery({
+  queryKey: ['posts', id],
+  queryFn: () => fetchPosts(id),
+  enabled: !!user, // Waterfall! Only fetches posts after user
+});
+````
+
+<br />
+**✅ Correct (Parallel):**
+```tsx
+const { data: user } = useQuery({
+  queryKey: ['user', id],
+  queryFn: () => fetchUser(id),
+});
+
+const { data: posts } = useQuery({
+queryKey: ['posts', id],
+queryFn: () => fetchPosts(id),
+enabled: !!id, // Doesn't depend on user
+});
+
+````
+<br />
+**✅ Correct (Real Dependency):**
+```tsx
+const { data: user } = useQuery({
+  queryKey: ['user', id],
+  queryFn: () => fetchUser(id),
+});
+
+const { data: posts } = useQuery({
+  queryKey: ['posts', user?.userId],
+  queryFn: () => fetchPosts(user.userId),
+  enabled: !!user?.userId, // OK: real data dependency
+});
+````
+
+<br />
+
+**Q: What is "data proximity" and how to apply this concept?**
+A: Data proximity means fetching data as close as possible to where it will be consumed, avoiding "prop drilling" of pending states.
+
+<br />
+**❌ Incorrect (Loading Prop Drilling):**
+```tsx
+function Parent() {
+  const { data: user } = useQuery(['user'], fetchUser);
+  const { data: posts } = useQuery(['posts'], fetchPosts);
+  const { data: comments } = useQuery(['comments'], fetchComments);
+  return <Child user={user} posts={posts} comments={comments} />;
+}
+
+function Child({ user, posts, comments }) {
+return <CommentsList comments={comments} />;
+}
+
+````
+
+<br />
+**✅ Correct (Proximity):**
+```tsx
+function Parent() {
+  const { data: user } = useQuery(['user'], fetchUser);
+  return (
+    <>
+      <UserProfile user={user} />
+      <PostsSection userId={user?.id} />
+    </>
+  );
+}
+
+function PostsSection({ userId }) {
+  const { data: posts } = useQuery(
+    ['posts', userId],
+    () => fetchPosts(userId),
+    { enabled: !!userId }
+  );
+  return <PostsList posts={posts} />;
+}
+````
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  2. Render Optimization and Re-renders
+</h2>
+
+**Q: When and how to use useMemo to optimize render calculations?**
+A: Use `useMemo` to avoid unnecessary recalculations of complex logic or array transformations that don't need to be redone on every render.
+
+<br />
+**❌ Incorrect:**
+```tsx
+function ProductList({ products, filter, sortBy }) {
+  const filtered = products.filter((p) => p.category === filter);
+  const sorted = filtered.sort((a, b) => {
+    if (sortBy === "price") return a.price - b.price;
+    return a.name.localeCompare(b.name);
+  });
+  return (
+    <div>
+      {sorted.map((p) => (
+        <Product key={p.id} {...p} />
+      ))}
+    </div>
+  );
+}
+```
+
+**✅ Correct:**
+
+```tsx
+function ProductList({ products, filter, sortBy }) {
+  const sorted = useMemo(() => {
+    const filtered = products.filter((p) => p.category === filter);
+    return filtered.sort((a, b) => {
+      if (sortBy === "price") return a.price - b.price;
+      return a.name.localeCompare(b.name);
+    });
+  }, [products, filter, sortBy]);
+  return (
+    <div>
+      {sorted.map((p) => (
+        <Product key={p.id} {...p} />
+      ))}
+    </div>
+  );
+}
+```
+
+<br />
+
+**Q: When to use useCallback and what's its impact on function stability?**
+A: Use `useCallback` for functions passed as props to child components that use `React.memo`, or when the function is a dependency of another hook.
+
+<br />
+**❌ Incorrect:**
+
+```tsx
+const MemoizedButton = React.memo(Button);
+
+function Parent({ items }) {
+  const handleClick = (id: string) => {
+    console.log("Clicked", id);
+  };
+  return items.map((item) => (
+    <MemoizedButton key={item.id} onClick={() => handleClick(item.id)} />
+  ));
+}
+```
+
+**✅ Correct:**
+
+```tsx
+const MemoizedButton = React.memo(Button);
+
+function Parent({ items }) {
+  const handleClick = useCallback((id: string) => {
+    console.log("Clicked", id);
+  }, []);
+  return items.map((item) => (
+    <MemoizedButton key={item.id} id={item.id} onClick={handleClick} />
+  ));
+}
+```
+
+**⚠️ Important:** Don't use `useCallback` unnecessarily. Only use when: the function is passed to a memoized component (`React.memo`), or the function is a dependency of another hook (`useEffect`, `useMemo`).
+
+<br />
+
+**Q: Why shouldn't we put high-frequency states in React Context?**
+A: High-frequency states (like text inputs) in global Contexts cause re-renders in all components consuming that context.
+
+<br />
+**❌ Incorrect:**
+
+```tsx
+const SearchContext = createContext();
+
+function SearchProvider({ children }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  return (
+    <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
+      {children}
+    </SearchContext.Provider>
+  );
+}
+
+function UnrelatedComponent() {
+  const { searchTerm } = useContext(SearchContext);
+  return <div>Static content</div>;
+}
+```
+
+<br />
+**✅ Correct:**
+
+```tsx
+function SearchInput() {
+  const [searchTerm, setSearchTerm] = useState("");
+  return (
+    <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+  );
+}
+
+// OR: Zustand with granular selectors
+const useSearchStore = create((set) => ({
+  searchTerm: "",
+  setSearchTerm: (term) => set({ searchTerm: term }),
+}));
+
+function SearchInput() {
+  const searchTerm = useSearchStore((s) => s.searchTerm);
+  const setSearchTerm = useSearchStore((s) => s.setSearchTerm);
+  return (
+    <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+  );
+}
+```
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  3. JavaScript Performance and Structures
+</h2>
+
+**Q: How to avoid multiple iterations over the same list?**
+A: Combine operations like `filter`, `map`, and `reduce` into a single pass.
+
+<br />
+**❌ Incorrect (Multiple Iterations):**
+
+```tsx
+function processProducts(products: Product[]) {
+  const active = products.filter((p) => p.active);
+  const withDiscount = active.filter((p) => p.discount > 0);
+  const prices = withDiscount.map((p) => p.price * (1 - p.discount));
+  const total = prices.reduce((sum, p) => sum + p, 0);
+  return total;
+}
+```
+
+<br />
+**✅ Correct (Single Iteration):**
+
+```tsx
+function processProducts(products: Product[]) {
+  return products.reduce((total, product) => {
+    if (!product.active || product.discount === 0) return total;
+    const discountedPrice = product.price * (1 - product.discount);
+    return total + discountedPrice;
+  }, 0);
+}
+```
+
+<br />
+
+**Q: What is the "early return" pattern and how does it improve readability?**
+A: Early return means returning early for error or loading states, avoiding excessive nesting.
+
+<br />
+**❌ Incorrect:**
+
+```tsx
+function ProductPage({ productId }) {
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useQuery(["product", productId], fetchProduct);
+  return (
+    <div>
+      {isLoading ? (
+        <Loading />
+      ) : error ? (
+        <Error />
+      ) : product ? (
+        <div>
+          <h1>{product.name}</h1>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+```
+
+<br />
+**✅ Correct:**
+
+```tsx
+function ProductPage({ productId }) {
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useQuery(["product", productId], fetchProduct);
+  if (isLoading) return <Loading />;
+  if (error) return <Error />;
+  if (!product) return null;
+  return (
+    <div>
+      <h1>{product.name}</h1>
+    </div>
+  );
+}
+```
+
+<br />
+
+**Q: Why is it important to cleanup in useEffect and how to implement it?**
+A: Cleanup prevents memory leaks and inconsistent behavior when the component unmounts.
+
+<br />
+**❌ Incorrect:**
+
+```tsx
+useEffect(() => {
+  const interval = setInterval(() => fetchData(), 1000);
+  // No cleanup!
+}, []);
+```
+
+<br />
+**✅ Correct:**
+
+```tsx
+useEffect(() => {
+  const interval = setInterval(() => fetchData(), 1000);
+  return () => clearInterval(interval);
+}, []);
+```
+
+<br />
+**✅ Correct (AbortController for fetch):**
+
+```tsx
+useEffect(() => {
+  const abortController = new AbortController();
+  fetchData({ signal: abortController.signal })
+    .then(setData)
+    .catch((err) => {
+      if (err.name !== "AbortError") setError(err);
+    });
+  return () => abortController.abort();
+}, []);
+```
+
+<br />
+
+<h2
+  style={{
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    marginTop: "2rem",
+    marginBottom: "0.5rem",
+  }}
+>
+  4. Golden Rules - Summary
+</h2>
+
+**Q: What are the main golden rules for React performance?**
+A:
+
+- **Parallel Queries**: With TanStack Query, start independent queries simultaneously. Use `enabled` only for necessary validation.
+- **useMemo for Transformations**: Use for calculations with array iterations, values used in multiple places, or expensive computations.
+- **useCallback for Stability**: Use when function is passed to `React.memo` or is a hook dependency.
+- **Local vs Global State**: Local: inputs, forms. Zustand: global state with selectors. TanStack Query: server state.
+- **Avoid Waterfalls**: Don't await conditionally used data. Use `Promise.all`. Start independent queries together.
+- **Early Returns**: Return loading/error before main JSX. Avoid nested ternaries.
 
 <br />
 <br />
