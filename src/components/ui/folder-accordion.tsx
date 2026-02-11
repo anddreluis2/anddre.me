@@ -23,30 +23,30 @@ export function FolderAccordion({
   const [isOpen, setIsOpen] = React.useState(defaultOpen);
   const value = React.useId();
 
-  // Calculate indentation based on level
-  const indentClass = level === 1 ? "ml-0" : level === 2 ? "ml-4" : "ml-8";
+  // Calculate indentation based on level - sem indentação no mobile
+  const indentClass = level === 1 ? "ml-0" : level === 2 ? "ml-0 sm:ml-4" : "ml-0 sm:ml-8";
   
   // Styling based on level
   const defaultStyles = {
     fontSize: "text-base font-semibold",
     iconSize: "h-4 w-4",
-    padding: "py-3 px-2",
-    spacing: "mb-3 mt-4",
+    padding: "py-2 px-1 sm:py-3 sm:px-2",
+    spacing: "mb-2 mt-2 sm:mb-3 sm:mt-4",
   };
 
   const levelStylesMap: Record<number, typeof defaultStyles> = {
     1: {
       fontSize: "text-xl font-bold",
       iconSize: "h-5 w-5",
-      padding: "py-4 px-2",
-      spacing: "mb-6 mt-8",
+      padding: "py-3 px-1 sm:py-4 sm:px-2",
+      spacing: "mb-3 mt-4 sm:mb-6 sm:mt-8",
     },
     2: defaultStyles,
     3: {
       fontSize: "text-sm font-medium",
       iconSize: "h-4 w-4",
-      padding: "py-2 px-2",
-      spacing: "mb-2 mt-2",
+      padding: "py-1.5 px-1 sm:py-2 sm:px-2",
+      spacing: "mb-1 mt-1 sm:mb-2 sm:mt-2",
     },
   };
   
@@ -58,7 +58,7 @@ export function FolderAccordion({
       collapsible
       value={isOpen ? value : ""}
       onValueChange={(val) => setIsOpen(val === value)}
-      className={cn("w-full", indentClass, levelStyles.spacing, className)}
+      className={cn("w-full overflow-hidden", indentClass, levelStyles.spacing, className)}
     >
       <AccordionPrimitive.Item value={value} className="border-none">
         <AccordionPrimitive.Header className="flex">
@@ -67,6 +67,7 @@ export function FolderAccordion({
               "flex flex-1 items-center gap-3 text-left transition-all duration-300 ease-out group outline-none rounded-md cursor-pointer",
               "hover:bg-muted/50 focus-visible:bg-muted/50",
               "hover:translate-x-0.5 active:scale-[0.99]",
+              "touch-manipulation",
               levelStyles.fontSize,
               levelStyles.padding
             )}
@@ -99,7 +100,7 @@ export function FolderAccordion({
               />
             )}
             <span className={cn(
-              "flex-1 transition-all duration-300 ease-out",
+              "flex-1 transition-all duration-300 ease-out break-words pr-1 sm:pr-2",
               "group-hover:translate-x-0.5"
             )}>
               {title}
@@ -107,14 +108,12 @@ export function FolderAccordion({
           </AccordionPrimitive.Trigger>
         </AccordionPrimitive.Header>
         <AccordionPrimitive.Content 
-          className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden"
         >
           <div className={cn(
-            "pt-2 pb-2 opacity-0 animate-fade-in overflow-visible",
+            "pt-1 pb-1 sm:pt-2 sm:pb-2 opacity-0 animate-fade-in w-full overflow-x-hidden",
             isOpen && "opacity-100",
-            level === 1 && "pl-10",
-            level === 2 && "pl-10",
-            level === 3 && "pl-8"
+            "pl-6 pr-2 sm:pl-10 sm:pr-2"
           )}>
             {children}
           </div>

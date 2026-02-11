@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50" />
-        <main className="">{children}</main>
+        <main className="pt-24 sm:pt-28">{children}</main>
         <footer className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center items-center gap-4 z-50">
           <LiveClock />
           <ThemeToggle />
