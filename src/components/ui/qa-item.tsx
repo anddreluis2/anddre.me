@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -54,7 +54,7 @@ export function QAItem({ question, children, className }: QAItemProps) {
             }}
             className="overflow-hidden"
           >
-            <div className="pl-8 sm:pl-10 pr-2 sm:pr-3 pt-2 pb-2 text-sm sm:text-base text-muted-foreground">
+            <div className="pl-0 sm:pl-10 pr-2 sm:pr-3 pt-2 pb-2 text-sm sm:text-base text-muted-foreground">
               {children}
             </div>
           </motion.div>

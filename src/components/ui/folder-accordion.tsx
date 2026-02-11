@@ -24,7 +24,14 @@ export function FolderAccordion({
   const value = React.useId();
 
   // Calculate indentation based on level - sem indentação no mobile
-  const indentClass = level === 1 ? "ml-0" : level === 2 ? "ml-0 sm:ml-4" : "ml-0 sm:ml-8";
+  const indentClass = "ml-0"; // Sem aninhamento no mobile e desktop
+  
+  // Content padding - sem indentação no mobile, com indentação no desktop
+  const contentPaddingClass = level === 1 
+    ? "pl-0 pr-2 sm:pl-0 sm:pr-2" 
+    : level === 2 
+    ? "pl-0 pr-2 sm:pl-10 sm:pr-2" 
+    : "pl-0 pr-2 sm:pl-16 sm:pr-2";
   
   // Styling based on level
   const defaultStyles = {
@@ -100,7 +107,7 @@ export function FolderAccordion({
               />
             )}
             <span className={cn(
-              "flex-1 transition-all duration-300 ease-out break-words pr-1 sm:pr-2",
+              "flex-1 transition-all duration-300 ease-out wrap-break-word pr-1 sm:pr-2",
               "group-hover:translate-x-0.5"
             )}>
               {title}
@@ -113,7 +120,7 @@ export function FolderAccordion({
           <div className={cn(
             "pt-1 pb-1 sm:pt-2 sm:pb-2 opacity-0 animate-fade-in w-full overflow-x-hidden",
             isOpen && "opacity-100",
-            "pl-6 pr-2 sm:pl-10 sm:pr-2"
+            contentPaddingClass
           )}>
             {children}
           </div>
