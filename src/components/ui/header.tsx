@@ -24,11 +24,11 @@ type HeaderProps = {
 
 const NAVIGATION_ITEMS = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/thoughts", label: "Thoughts" },
-  { href: "/social", label: "Social Media" },
+  { href: "/about", label: "about" },
+  { href: "/projects", label: "projects" },
+  { href: "/gallery", label: "gallery" },
+  { href: "/thoughts", label: "thoughts" },
+  { href: "/social", label: "social media" },
 ];
 
 export function Header({ className }: HeaderProps) {
