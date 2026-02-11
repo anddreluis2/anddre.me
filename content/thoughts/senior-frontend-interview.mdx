@@ -376,8 +376,16 @@ The React Reconciliation algorithm is the process by which React efficiently upd
 
 Code-splitting is a technique to divide your bundle into smaller chunks that can be loaded on demand, improving initial load time. React supports code-splitting via:
 
+<br />
+
 1. **React.lazy():** Allows components to be loaded only when needed
+
+<br />
+
 2. **Suspense**: Provides a loading state while components are being loaded
+
+<br />
+
 3. **Route-based splitting**: Loading components based on routes
 
 </FolderAccordion>
@@ -386,12 +394,16 @@ Code-splitting is a technique to divide your bundle into smaller chunks that can
 
 The render props pattern is a technique for sharing code between components using a prop whose value is a function. It was popular before hooks were introduced.
 
+<br />
+
 **Render Props**:
 
 - Passes functions as props to share logic
 - Can lead to "callback hell" and deeply nested components
 - More verbose than hooks
 - Still useful for certain UI composition patterns
+
+<br />
 
 **Hooks**:
 
@@ -404,16 +416,24 @@ The render props pattern is a technique for sharing code between components usin
 
 <FolderAccordion title="State Management" level={2}>
 
+<br />
+
 - **Client State**
   - UI state (modals, tabs, etc)
   - User preferences
   - Application state, not from server
   - Complex client-side logic
+
+<br />
+
 - **Server State**
   - Data fetched from APIs
   - Data that needs caching
   - Background refetching
   - Optimistic Updates - Optimistic updates are a UI pattern where the application immediately updates the interface after a user action, without waiting for server confirmation.
+
+<br />
+
 - **URL State**
   - Pros: Shareable, Favorable, State Persistence
   - Uses: Filters, Selected Tabs, Selected Items, Multi-Step Flows
@@ -429,9 +449,15 @@ We can implement a custom hook similar to useState using useReducer, creating a 
 const [state, dispatch] = useReducer(reducer, initialArg, init?)
 ```
 
+<br />
+
 **reducer**: Must be pure, must receive **state** and **action** as arguments, must return the **next state**
 
+<br />
+
 **initialArg**
+
+<br />
 
 **init**: Initializer function that should return the initial state
 
@@ -439,13 +465,19 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 
 <FolderAccordion title="useEffect Drama" level={2}>
 
+<br />
+
 **useEffect** and **useLayoutEffect** are both hooks for handling side effects, but differ in their execution timing:
+
+<br />
 
 **useEffect**
 
 - executes asynchronously after the browser has painted
 - doesn't block the browser from updating
 - side effects
+
+<br />
 
 **useLayoutEffect**
 
@@ -458,10 +490,14 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 
 <FolderAccordion title="API Calls" level={2}>
 
+<br />
+
 **useEffect Limitations**
 
 - Race Conditions: handling non-sequential order
 - No built-in features for: retry, deduplication (multiple components requesting the same data), manual loading and error states, complex to clean up and avoid memory leaks, waterfalls (Sequential data dependencies create request cascades), no background refetching
+
+<br />
 
 **Best Practices**
 
@@ -471,6 +507,8 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 </FolderAccordion>
 
 <FolderAccordion title="Refs Refs Refs" level={2}>
+
+<br />
 
 **forwardRef**: component receives a ref and forwards it to a child DOM element or component. Use cases: accessing a DOM element inside a child, imperatively triggering actions on a child component, triggering input focus via ref
 
@@ -482,6 +520,8 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 
 <FolderAccordion title="Performance Measurement & Optimization" level={2}>
 
+<br />
+
 **How to measure?**
 
 - DevTools: Record and interact, Analyze the flamegraph
@@ -490,12 +530,16 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 - `why-did-you-render` library to track unnecessary re-renders
 - when **useMemo** is useful: calculation is computationally expensive, dependencies change infrequently, calculation result is used in the rendering phase
 
+<br />
+
 **Practical Approach**:
 
 1. identify bottlenecks using tools
 2. measure impact of optimizations
 3. apply targeted optimizations
 4. measure again
+
+<br />
 
 **useCallback**: memoized version of the callback function that only changes if one of its dependencies has changed. Has a small performance cost, just part of the optimization strategy, not everywhere. Use cases: passing functions to optimized child components
 
