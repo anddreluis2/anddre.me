@@ -26,12 +26,8 @@ export function FolderAccordion({
   // Calculate indentation based on level - sem indentação no mobile
   const indentClass = "ml-0"; // Sem aninhamento no mobile e desktop
   
-  // Content padding - sem indentação no mobile, com indentação no desktop
-  const contentPaddingClass = level === 1 
-    ? "pl-0 pr-2 sm:pl-0 sm:pr-2" 
-    : level === 2 
-    ? "pl-0 pr-2 sm:pl-10 sm:pr-2" 
-    : "pl-0 pr-2 sm:pl-16 sm:pr-2";
+  // Content padding - sem indentação interna
+  const contentPaddingClass = "pl-0 pr-2 sm:pr-2";
   
   // Styling based on level
   const defaultStyles = {
@@ -65,7 +61,7 @@ export function FolderAccordion({
       collapsible
       value={isOpen ? value : ""}
       onValueChange={(val) => setIsOpen(val === value)}
-      className={cn("w-full overflow-hidden", indentClass, levelStyles.spacing, className)}
+      className={cn("w-full overflow-hidden mx-auto sm:mx-0", indentClass, levelStyles.spacing, className)}
     >
       <AccordionPrimitive.Item value={value} className="border-none">
         <AccordionPrimitive.Header className="flex">

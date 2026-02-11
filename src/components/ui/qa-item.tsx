@@ -19,13 +19,13 @@ export function QAItem({ question, children, className }: QAItemProps) {
   }, []);
 
   return (
-    <div className={cn("w-full mb-3 sm:mb-4", className)}>
+    <div className={cn("w-full mb-3 sm:mb-4 mx-auto sm:mx-0", className)}>
       <button
         onClick={toggleOpen}
         className={cn(
           "flex items-start gap-2 sm:gap-3 w-full text-left transition-all duration-300 ease-out group outline-none rounded-md cursor-pointer",
           "hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "py-2 px-2 sm:py-2.5 sm:px-3",
+          "py-2 px-1 sm:py-2.5 sm:px-2",
           "touch-manipulation"
         )}
         aria-expanded={isOpen}
@@ -54,7 +54,7 @@ export function QAItem({ question, children, className }: QAItemProps) {
             }}
             className="overflow-hidden"
           >
-            <div className="pl-0 sm:pl-10 pr-2 sm:pr-3 pt-2 pb-2 text-sm sm:text-base text-muted-foreground">
+            <div className="pl-6 sm:pl-10 pr-2 sm:pr-3 pt-2 pb-2 text-sm sm:text-base text-muted-foreground">
               {children}
             </div>
           </motion.div>
