@@ -100,7 +100,7 @@ export default async function ThoughtPage({ params }: PageProps) {
                   {metadata.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground"
+                      className="px-2.5 py-1 text-xs font-medium rounded-md bg-gradient-to-r from-muted/60 via-muted/80 to-muted/60 text-muted-foreground border border-border/30 hover:from-muted hover:via-muted hover:to-muted hover:text-foreground/80 transition-all duration-200"
                     >
                       {tag}
                     </span>

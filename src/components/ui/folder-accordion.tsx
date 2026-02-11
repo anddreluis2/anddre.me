@@ -107,13 +107,10 @@ export function FolderAccordion({
           </AccordionPrimitive.Trigger>
         </AccordionPrimitive.Header>
         <AccordionPrimitive.Content 
-          className={cn(
-            "overflow-hidden transition-all duration-300 ease-out",
-            "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-          )}
+          className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
         >
           <div className={cn(
-            "pt-2 pb-2 opacity-0 animate-fade-in",
+            "pt-2 pb-2 opacity-0 animate-fade-in overflow-visible",
             isOpen && "opacity-100",
             level === 1 && "pl-10",
             level === 2 && "pl-10",
