@@ -50,7 +50,7 @@ export const projectsData: Experience[] = [
   {
     id: 2,
     name: "Humantrack",
-    position: "Founder Engineer",
+    position: "Founding Engineer",
     url: "https://humantrack.io",
   },
   {
