@@ -63,7 +63,6 @@ export function Header({ className }: HeaderProps) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       setHasScrolled(currentScrollY > 10);
 
       if (currentScrollY < 10) {
@@ -82,54 +81,47 @@ export function Header({ className }: HeaderProps) {
   }, []);
 
   return (
-    <>
-      {/* Backdrop to prevent content from showing above header */}
-      <div
-        className={`fixed top-0 left-0 right-0 h-24 bg-background transition-opacity duration-300 pointer-events-none z-40 ${
-          hasScrolled ? "opacity-100" : "opacity-0"
-        }`}
-      />
+    <header
+      className={`${className} transition-all duration-300 ease-in-out ${
+        isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      }`}
+    >
+      {/* Background with blur */}
+      <div className="absolute inset-0 bg-background/80 backdrop-blur-lg" />
 
-      <header
-        className={`${className} transition-all duration-300 ease-in-out ${
-          isVisible
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0"
-        }`}
-      >
-        <div className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-8 relative">
-          {/* Left side - Theme Toggle */}
-          <div className="flex items-center">
-            <ThemeToggle />
-          </div>
+      <div className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-8 relative z-10">
+        {/* Left side - Theme Toggle */}
+        <div className="flex items-center">
+          <ThemeToggle />
+        </div>
 
-          {/* Center - Desktop Navigation - Hidden on mobile */}
-          <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <NavigationMenu>
-              <NavigationMenuList className="relative bg-background/95 backdrop-blur-md rounded-md px-2 py-1 shadow-lg">
-                {/* Sliding background - positioned using actual element dimensions */}
-                <div
-                  className="absolute top-1 bottom-1 bg-gradient-to-r from-white/20 via-white/30 to-white/20 dark:from-white/10 dark:via-white/20 dark:to-white/10 rounded-full transition-all duration-500 ease-in-out"
-                  style={{
-                    left: `${indicatorStyle.left}px`,
-                    width: `${indicatorStyle.width}px`,
-                  }}
-                />
+        {/* Center - Desktop Navigation - Hidden on mobile */}
+        <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <NavigationMenu>
+            <NavigationMenuList className="relative bg-background/95 backdrop-blur-md rounded-md px-2 py-1 shadow-lg">
+              {/* Sliding background */}
+              <div
+                className="absolute top-1 bottom-1 bg-gradient-to-r from-white/20 via-white/30 to-white/20 dark:from-white/10 dark:via-white/20 dark:to-white/10 rounded-full transition-all duration-500 ease-in-out"
+                style={{
+                  left: `${indicatorStyle.left}px`,
+                  width: `${indicatorStyle.width}px`,
+                }}
+              />
 
-                {NAVIGATION_ITEMS.map((item, index) => {
-                  const isActive = isActiveLink(item.href);
+              {NAVIGATION_ITEMS.map((item, index) => {
+                const isActive = isActiveLink(item.href);
 
-                  return (
-                    <NavigationMenuItem
-                      key={item.href}
-                      ref={(el) => {
-                        if (el) itemRefs.current[index] = el;
-                      }}
-                    >
-                      <NavigationMenuLink asChild>
-                        <Link
-                          href={item.href}
-                          className={`
+                return (
+                  <NavigationMenuItem
+                    key={item.href}
+                    ref={(el) => {
+                      if (el) itemRefs.current[index] = el;
+                    }}
+                  >
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={item.href}
+                        className={`
                           relative overflow-hidden transition-all duration-300 ease-in-out rounded-full px-4 py-2
                           ${
                             isActive
@@ -142,57 +134,56 @@ export function Header({ className }: HeaderProps) {
                               : ""
                           }
                         `}
-                        >
-                          {/* Shimmer effect for non-active items on hover */}
-                          {!isActive && (
-                            <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-foreground/20 to-transparent translate-x-[-100%] skew-x-12 transition-transform duration-700" />
-                          )}
-
-                          <span className="relative z-10 font-medium">
-                            {item.label}
-                          </span>
-                        </Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  );
-                })}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
-
-          {/* Right side - Mobile Dropdown - Shown only on mobile */}
-          <div className="sm:hidden ml-auto">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center justify-center w-10 h-10 rounded-md bg-background/95 backdrop-blur-md border border-border/50 hover:bg-background hover:scale-105 transition-all duration-200 active:scale-95 shadow-lg">
-                <Menu className="h-4 w-4 transition-transform duration-200" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="center"
-                sideOffset={8}
-                className="w-48 z-[100] animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:animate-out data-[side=bottom]:slide-in-from-top-2"
-              >
-                {NAVIGATION_ITEMS.map((item) => {
-                  const isActive = isActiveLink(item.href);
-                  return (
-                    <DropdownMenuItem key={item.href} asChild>
-                      <Link
-                        href={item.href}
-                        className={`w-full cursor-pointer transition-all duration-200 hover:scale-[1.02] ${
-                          isActive
-                            ? "bg-accent text-accent-foreground font-medium"
-                            : ""
-                        }`}
                       >
-                        {item.label}
+                        {/* Shimmer effect for non-active items on hover */}
+                        {!isActive && (
+                          <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-foreground/20 to-transparent translate-x-[-100%] skew-x-12 transition-transform duration-700" />
+                        )}
+
+                        <span className="relative z-10 font-medium">
+                          {item.label}
+                        </span>
                       </Link>
-                    </DropdownMenuItem>
-                  );
-                })}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                );
+              })}
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
-      </header>
-    </>
+
+        {/* Right side - Mobile Dropdown - Shown only on mobile */}
+        <div className="sm:hidden ml-auto">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center justify-center w-10 h-10 rounded-md bg-background border border-border/50 hover:bg-accent hover:scale-105 transition-all duration-200 active:scale-95 shadow-sm">
+              <Menu className="h-5 w-5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              sideOffset={12}
+              className="w-56 bg-background/95 backdrop-blur-lg border-border/50"
+            >
+              {NAVIGATION_ITEMS.map((item) => {
+                const isActive = isActiveLink(item.href);
+                return (
+                  <DropdownMenuItem key={item.href} asChild>
+                    <Link
+                      href={item.href}
+                      className={`w-full cursor-pointer ${
+                        isActive
+                          ? "bg-accent text-accent-foreground font-medium"
+                          : ""
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </DropdownMenuItem>
+                );
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
+    </header>
   );
 }
