@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col overflow-x-hidden`}
       >
         <div className="w-full max-w-[1920px] mx-auto min-h-screen flex flex-col relative">
-          <Header className="fixed top-8 left-1/2 -translate-x-1/2 w-full max-w-[1920px] z-50" />
+          <Header className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[1920px] z-[100]" />
           <main className="flex-1 px-4 sm:px-8 pt-32 pb-24 w-full">{children}</main>
           
           {/* Clock positioned at bottom right, with backdrop protection */}

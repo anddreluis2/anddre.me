@@ -82,12 +82,12 @@ export function Header({ className }: HeaderProps) {
 
   return (
     <header
-      className={`${className} transition-all duration-300 ease-in-out ${
-        isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      className={`${className} isolate transition-transform duration-300 ease-in-out will-change-transform pt-8 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       {/* Background with blur */}
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-lg" />
+      <div className="absolute inset-0 bg-background/90 backdrop-blur-xl" />
 
       <div className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-8 relative z-10">
         {/* Left side - Theme Toggle */}
