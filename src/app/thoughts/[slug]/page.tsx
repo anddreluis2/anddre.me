@@ -1,4 +1,4 @@
-import { getAllEssays, getEssayBySlug } from "@/lib/essays";
+import { getAllThoughts, getThoughtBySlug } from "@/lib/thoughts";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -20,9 +20,9 @@ const mdxComponents = {
 };
 
 export async function generateStaticParams() {
-  const essays = await getAllEssays();
-  return essays.map((essay) => ({
-    slug: essay.slug,
+  const thoughts = await getAllThoughts();
+  return thoughts.map((thought) => ({
+    slug: thought.slug,
   }));
 }
 
@@ -30,17 +30,17 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const essay = await getEssayBySlug(slug);
+  const thought = await getThoughtBySlug(slug);
 
-  if (!essay) {
+  if (!thought) {
     return {
-      title: "Essay Not Found",
+      title: "Thought Not Found",
     };
   }
 
   return {
-    title: essay.metadata.title,
-    description: essay.metadata.description,
+    title: thought.metadata.title,
+    description: thought.metadata.description,
   };
 }
 
@@ -49,26 +49,26 @@ const compileMDXContent = cache(async (content: string) => {
   return content;
 });
 
-export default async function EssayPage({ params }: PageProps) {
+export default async function ThoughtPage({ params }: PageProps) {
   const { slug } = await params;
-  const essay = await getEssayBySlug(slug);
+  const thought = await getThoughtBySlug(slug);
 
-  if (!essay) {
+  if (!thought) {
     notFound();
   }
 
-  const { metadata, content } = essay;
+  const { metadata, content } = thought;
   const cachedContent = await compileMDXContent(content);
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-4 sm:p-8 pb-20 gap-8 sm:gap-16 lg:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-6 sm:gap-8 row-start-2 items-center sm:items-start w-full max-w-3xl px-4 sm:px-0">
         <Link
-          href="/essays"
+          href="/thoughts"
           className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          <span>Back to Essays</span>
+          <span>Back to Thoughts</span>
         </Link>
 
         <article className="w-full">

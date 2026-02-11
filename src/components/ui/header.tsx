@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu } from "lucide-react";
 import {
   NavigationMenu,
@@ -26,13 +26,15 @@ const NAVIGATION_ITEMS = [
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/essays", label: "Essays" },
+  { href: "/thoughts", label: "Thoughts" },
   { href: "/social", label: "Social Media" },
 ];
 
 export function Header({ className }: HeaderProps) {
   const pathname = usePathname();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const itemRefs = useRef<(HTMLElement | null)[]>([]);
 
   const isActiveLink = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -41,22 +43,19 @@ export function Header({ className }: HeaderProps) {
 
   useEffect(() => {
     const index = NAVIGATION_ITEMS.findIndex((item) => isActiveLink(item.href));
-    setActiveIndex(index !== -1 ? index : 0);
-  }, [pathname]);
+    const activeIdx = index !== -1 ? index : 0;
+    setActiveIndex(activeIdx);
 
-  // Aproximação do tamanho de cada tab baseado no texto
-  const getTabWidth = (index: number) => {
-    const lengths = [70, 80, 95, 85, 80, 120]; // Home, About, Projects, Gallery, Essays, Social Media
-    return lengths[index] || 90;
-  };
-
-  const getTabPosition = (index: number) => {
-    let position = 8; // padding inicial
-    for (let i = 0; i < index; i++) {
-      position += getTabWidth(i) - 4; // largura com overlap menor
+    // Calculate position and width from actual DOM elements
+    const activeElement = itemRefs.current[activeIdx];
+    if (activeElement) {
+      const { offsetLeft, offsetWidth } = activeElement;
+      setIndicatorStyle({
+        left: offsetLeft,
+        width: offsetWidth,
+      });
     }
-    return position;
-  };
+  }, [pathname]);
 
   return (
     <header className={className}>
@@ -65,20 +64,25 @@ export function Header({ className }: HeaderProps) {
         <div className="hidden sm:block">
           <NavigationMenu>
             <NavigationMenuList className="relative bg-background/80 backdrop-blur-sm rounded-md px-2 py-1">
-              {/* Sliding background - updated for better light mode visibility */}
+              {/* Sliding background - positioned using actual element dimensions */}
               <div
                 className="absolute top-1 bottom-1 bg-gradient-to-r from-white/20 via-white/30 to-white/20 dark:from-white/10 dark:via-white/20 dark:to-white/10 rounded-full transition-all duration-500 ease-in-out"
                 style={{
-                  left: getTabPosition(activeIndex),
-                  width: getTabWidth(activeIndex),
+                  left: `${indicatorStyle.left}px`,
+                  width: `${indicatorStyle.width}px`,
                 }}
               />
 
-              {NAVIGATION_ITEMS.map((item) => {
+              {NAVIGATION_ITEMS.map((item, index) => {
                 const isActive = isActiveLink(item.href);
 
                 return (
-                  <NavigationMenuItem key={item.href}>
+                  <NavigationMenuItem 
+                    key={item.href}
+                    ref={(el) => {
+                      if (el) itemRefs.current[index] = el;
+                    }}
+                  >
                     <NavigationMenuLink asChild>
                       <Link
                         href={item.href}
@@ -96,7 +100,7 @@ export function Header({ className }: HeaderProps) {
                           }
                         `}
                       >
-                        {/* Shimmer effect for non-active items on hover - updated for light mode */}
+                        {/* Shimmer effect for non-active items on hover */}
                         {!isActive && (
                           <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-foreground/20 to-transparent translate-x-[-100%] skew-x-12 transition-transform duration-700" />
                         )}

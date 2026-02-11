@@ -4,9 +4,9 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 import { cache } from "react";
 
-const essaysDirectory = path.join(process.cwd(), "content/essays");
+const thoughtsDirectory = path.join(process.cwd(), "content/thoughts");
 
-export interface EssayMetadata {
+export interface ThoughtMetadata {
   title: string;
   description: string;
   publishedAt: string;
@@ -15,25 +15,25 @@ export interface EssayMetadata {
   slug: string;
 }
 
-export interface Essay {
-  metadata: EssayMetadata;
+export interface Thought {
+  metadata: ThoughtMetadata;
   content: string;
 }
 
-export const getAllEssays = cache(async function getAllEssays(): Promise<
-  EssayMetadata[]
+export const getAllThoughts = cache(async function getAllThoughts(): Promise<
+  ThoughtMetadata[]
 > {
   // Ensure directory exists
-  if (!fs.existsSync(essaysDirectory)) {
+  if (!fs.existsSync(thoughtsDirectory)) {
     return [];
   }
 
-  const fileNames = fs.readdirSync(essaysDirectory);
-  const essays = fileNames
+  const fileNames = fs.readdirSync(thoughtsDirectory);
+  const thoughts = fileNames
     .filter((fileName) => fileName.endsWith(".mdx"))
     .map((fileName) => {
       const slug = fileName.replace(/\.mdx$/, "");
-      const fullPath = path.join(essaysDirectory, fileName);
+      const fullPath = path.join(thoughtsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data, content } = matter(fileContents);
       const stats = readingTime(content);
@@ -45,7 +45,7 @@ export const getAllEssays = cache(async function getAllEssays(): Promise<
         readingTime: stats.text,
         tags: Array.isArray(data.tags) ? data.tags : [],
         slug,
-      } as EssayMetadata;
+      } as ThoughtMetadata;
     })
     .sort((a, b) => {
       // Sort by publishedAt date, newest first
@@ -55,14 +55,14 @@ export const getAllEssays = cache(async function getAllEssays(): Promise<
       return 1;
     });
 
-  return essays;
+  return thoughts;
 });
 
-export const getEssayBySlug = cache(async function getEssayBySlug(
+export const getThoughtBySlug = cache(async function getThoughtBySlug(
   slug: string
-): Promise<Essay | null> {
+): Promise<Thought | null> {
   try {
-    const fullPath = path.join(essaysDirectory, `${slug}.mdx`);
+    const fullPath = path.join(thoughtsDirectory, `${slug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
     const stats = readingTime(content);
@@ -83,9 +83,9 @@ export const getEssayBySlug = cache(async function getEssayBySlug(
   }
 });
 
-export async function getEssayMetadata(
+export async function getThoughtMetadata(
   slug: string
-): Promise<EssayMetadata | null> {
-  const essay = await getEssayBySlug(slug);
-  return essay ? essay.metadata : null;
+): Promise<ThoughtMetadata | null> {
+  const thought = await getThoughtBySlug(slug);
+  return thought ? thought.metadata : null;
 }

@@ -1,29 +1,29 @@
 import { AnimatedHoverText } from "@/components/ui/animated-hover-text";
 import type { Metadata } from "next";
-import { getAllEssays } from "@/lib/essays";
+import { getAllThoughts } from "@/lib/thoughts";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Essays",
+  title: "Thoughts",
   description:
-    "Thoughts on technology, design, and development. Technical articles and insights from a frontend engineer's perspective.",
+    "Thoughts on technology, design, and development. Personal reflections and insights from a frontend engineer's perspective.",
 };
 
-export default async function Essays() {
-  const essays = await getAllEssays();
+export default async function Thoughts() {
+  const thoughts = await getAllThoughts();
 
-  if (!essays || essays.length === 0) {
+  if (!thoughts || thoughts.length === 0) {
     return (
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-4 sm:p-8 pb-20 gap-8 sm:gap-16 lg:p-20 font-[family-name:var(--font-geist-sans)]">
         <main className="flex flex-col gap-6 sm:gap-[32px] row-start-2 items-center sm:items-start w-full max-w-4xl px-4 sm:px-0">
           <AnimatedHoverText
-            text="Essays"
+            text="Thoughts"
             element="h1"
             className="font-bold text-lg sm:text-xl lg:text-2xl text-center sm:text-left"
             startDelay={200}
           />
           <AnimatedHoverText
-            text="No articles found"
+            text="No thoughts found"
             element="p"
             className="text-muted-foreground text-sm sm:text-base text-center sm:text-left"
             startDelay={800}
@@ -44,29 +44,29 @@ export default async function Essays() {
         />
 
         <div className="flex flex-col gap-3 sm:gap-4 w-full max-w-2xl">
-          {essays.map((essay) => (
+          {thoughts.map((thought) => (
             <Link
-              key={essay.slug}
-              href={`/essays/${essay.slug}`}
+              key={thought.slug}
+              href={`/thoughts/${thought.slug}`}
               className="group cursor-pointer relative block"
             >
               <div className="flex flex-col gap-1">
                 <div className="flex items-center justify-center sm:justify-start">
                   <div className="relative inline-block">
                     <h2 className="transition-colors duration-300 group-hover:text-foreground/80 text-sm sm:text-base font-medium leading-relaxed text-center sm:text-left">
-                      {essay.title}
+                      {thought.title}
                     </h2>
                     <span className="absolute left-0 bottom-0 h-[2px] bg-current w-0 transition-all duration-500 ease-out group-hover:w-full" />
                   </div>
                 </div>
-                {essay.readingTime && essay.publishedAt && (
+                {thought.readingTime && thought.publishedAt && (
                   <p className="text-xs text-muted-foreground text-center sm:text-left">
-                    {new Date(essay.publishedAt).toLocaleDateString("en-US", {
+                    {new Date(thought.publishedAt).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
                     })}{" "}
-                    • {essay.readingTime}
+                    • {thought.readingTime}
                   </p>
                 )}
               </div>
