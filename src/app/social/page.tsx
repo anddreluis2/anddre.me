@@ -3,45 +3,38 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Social",
-  description:
-    "Connect with me across different platforms. Find my latest updates, projects, and ways to get in touch.",
+  description: "my socials and contact information",
 };
 
 const socialLinks = [
   {
     id: 1,
     platform: "GitHub",
-    description: "Open source projects and code repositories",
+    description: "something to show off",
     url: "https://github.com/anddreluis2",
   },
   {
     id: 2,
     platform: "LinkedIn",
-    description: "Professional network and career updates",
+    description: "career updates",
     url: "https://www.linkedin.com/in/andreluisdeoliveiraandrade/",
   },
   {
     id: 3,
     platform: "Twitter / X",
-    description: "Tech thoughts and quick updates",
+    description: "quick updates and shitposting",
     url: "https://x.com/anddreluis_",
   },
   {
     id: 4,
     platform: "Instagram",
-    description: "Photography and behind the scenes",
+    description: "behind the scenes",
     url: "https://www.instagram.com/anddre.me/",
-  },
-  {
-    id: 5,
-    platform: "Dev.to",
-    description: "Technical articles and tutorials",
-    url: "https://dev.to/anddreluis2",
   },
   {
     id: 6,
     platform: "Email",
-    description: "Direct contact for collaborations",
+    description: "i'll not reply tbh",
     url: "anddreluis98@gmail.com",
   },
 ];
