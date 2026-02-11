@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/ui/header";
 import { LiveClock } from "@/components/ui/live-clock";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,14 +27,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col overflow-x-hidden`}
       >
-        <Header className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50" />
-        <main className="pt-24 sm:pt-28">{children}</main>
-        <footer className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center items-center gap-4 z-50">
-          <LiveClock />
-          <ThemeToggle />
-        </footer>
+        <div className="w-full max-w-[1920px] mx-auto min-h-screen flex flex-col relative">
+          <Header className="fixed top-8 left-1/2 -translate-x-1/2 w-full max-w-[1920px] z-50" />
+          <main className="flex-1 px-4 sm:px-8 pt-32 pb-24 w-full">{children}</main>
+          
+          {/* Clock positioned at bottom right, with backdrop protection */}
+          <div className="fixed bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-30" />
+          <div className="fixed bottom-8 right-8 z-40">
+            <LiveClock />
+          </div>
+        </div>
       </body>
     </html>
   );

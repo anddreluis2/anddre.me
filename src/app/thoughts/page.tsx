@@ -43,7 +43,7 @@ export default async function Thoughts() {
           startDelay={200}
         />
 
-        <div className="flex flex-col gap-3 sm:gap-4 w-full max-w-2xl">
+        <div className="flex flex-col gap-2 sm:gap-2.5 w-full max-w-2xl">
           {thoughts.map((thought) => (
             <Link
               key={thought.slug}

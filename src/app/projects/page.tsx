@@ -17,7 +17,7 @@ const ExperienceSection = ({
   items: Experience[];
   startDelay?: number;
 }) => (
-  <div className="flex flex-col gap-4 sm:gap-6">
+  <div className="flex flex-col gap-3 sm:gap-4">
     <AnimatedHoverText
       text={title}
       element="h2"
@@ -25,7 +25,7 @@ const ExperienceSection = ({
       startDelay={startDelay}
     />
 
-    <div className="flex flex-col gap-3 sm:gap-4">
+    <div className="flex flex-col gap-2 sm:gap-2.5">
       {items.map((item, index) => (
         <a
           key={item.id}
@@ -70,7 +70,7 @@ export default function Projects() {
           startDelay={200}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 w-full max-w-3xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-16 w-full max-w-3xl">
           <ExperienceSection
             title="Professional Experience"
             items={jobsData}

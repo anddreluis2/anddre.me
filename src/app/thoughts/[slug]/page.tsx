@@ -1,8 +1,6 @@
 import { getAllThoughts, getThoughtBySlug } from "@/lib/thoughts";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
@@ -65,14 +63,6 @@ export default async function ThoughtPage({ params }: PageProps) {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-2 sm:p-8 pb-20 gap-4 sm:gap-8 lg:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-6 sm:gap-8 row-start-2 items-center w-full max-w-3xl px-0 sm:px-4">
-        <Link
-          href="/thoughts"
-          className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 px-2 sm:px-0 w-full sm:w-auto justify-center sm:justify-start"
-        >
-          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          <span>Back to Thoughts</span>
-        </Link>
-
         <article className="w-full px-2 sm:px-0 flex flex-col items-center sm:items-start">
           <header className="mb-8 sm:mb-12 w-full">
             <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4 text-center sm:text-left">
