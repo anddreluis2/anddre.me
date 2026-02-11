@@ -64,8 +64,9 @@ export function FolderAccordion({
         <AccordionPrimitive.Header className="flex">
           <AccordionPrimitive.Trigger
             className={cn(
-              "flex flex-1 items-center gap-3 text-left transition-all duration-200 group outline-none rounded-md",
+              "flex flex-1 items-center gap-3 text-left transition-all duration-300 ease-out group outline-none rounded-md cursor-pointer",
               "hover:bg-muted/50 focus-visible:bg-muted/50",
+              "hover:translate-x-0.5 active:scale-[0.99]",
               levelStyles.fontSize,
               levelStyles.padding
             )}
@@ -73,33 +74,47 @@ export function FolderAccordion({
             <ChevronRight
               className={cn(
                 levelStyles.iconSize,
-                "shrink-0 text-muted-foreground transition-transform duration-200",
-                isOpen && "rotate-90"
+                "shrink-0 text-muted-foreground transition-all duration-300 ease-out",
+                "group-hover:text-foreground",
+                isOpen && "rotate-90 text-foreground"
               )}
             />
             {isOpen ? (
               <FolderOpen 
                 className={cn(
                   levelStyles.iconSize,
-                  "shrink-0 text-yellow-500 dark:text-yellow-400"
+                  "shrink-0 text-yellow-500 dark:text-yellow-400",
+                  "transition-all duration-300 ease-out",
+                  "group-hover:scale-110"
                 )} 
               />
             ) : (
               <Folder 
                 className={cn(
                   levelStyles.iconSize,
-                  "shrink-0 text-muted-foreground group-hover:text-yellow-500 dark:group-hover:text-yellow-400 transition-colors duration-200"
+                  "shrink-0 text-muted-foreground transition-all duration-300 ease-out",
+                  "group-hover:text-yellow-500 dark:group-hover:text-yellow-400",
+                  "group-hover:scale-105"
                 )} 
               />
             )}
-            <span className="flex-1">
+            <span className={cn(
+              "flex-1 transition-all duration-300 ease-out",
+              "group-hover:translate-x-0.5"
+            )}>
               {title}
             </span>
           </AccordionPrimitive.Trigger>
         </AccordionPrimitive.Header>
-        <AccordionPrimitive.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+        <AccordionPrimitive.Content 
+          className={cn(
+            "overflow-hidden transition-all duration-300 ease-out",
+            "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          )}
+        >
           <div className={cn(
-            "pt-2 pb-2",
+            "pt-2 pb-2 opacity-0 animate-fade-in",
+            isOpen && "opacity-100",
             level === 1 && "pl-10",
             level === 2 && "pl-10",
             level === 3 && "pl-8"
