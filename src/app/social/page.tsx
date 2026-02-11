@@ -9,31 +9,31 @@ export const metadata: Metadata = {
 const socialLinks = [
   {
     id: 1,
-    platform: "GitHub",
+    platform: "github",
     description: "something to show off",
     url: "https://github.com/anddreluis2",
   },
   {
     id: 2,
-    platform: "LinkedIn",
+    platform: "linkedin",
     description: "career updates",
     url: "https://www.linkedin.com/in/andreluisdeoliveiraandrade/",
   },
   {
     id: 3,
-    platform: "Twitter / X",
+    platform: "twitter / x",
     description: "quick updates and shitposting",
     url: "https://x.com/anddreluis_",
   },
   {
     id: 4,
-    platform: "Instagram",
+    platform: "instagram",
     description: "behind the scenes",
     url: "https://www.instagram.com/anddre.me/",
   },
   {
     id: 6,
-    platform: "Email",
+    platform: "email",
     description: "i'll not reply tbh",
     url: "anddreluis98@gmail.com",
   },

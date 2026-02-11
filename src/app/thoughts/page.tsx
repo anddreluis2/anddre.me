@@ -17,13 +17,13 @@ export default async function Thoughts() {
       <div className="flex items-center justify-center min-h-[calc(100vh-16rem)] font-[family-name:var(--font-geist-sans)]">
         <main className="flex flex-col gap-6 sm:gap-8 items-center sm:items-start w-full max-w-4xl mx-auto px-4 sm:px-0">
           <AnimatedHoverText
-            text="Thoughts"
+            text="thoughts"
             element="h1"
             className="font-bold text-lg sm:text-xl lg:text-2xl text-center sm:text-left"
             startDelay={200}
           />
           <AnimatedHoverText
-            text="No thoughts found"
+            text="no thoughts found"
             element="p"
             className="text-muted-foreground text-sm sm:text-base text-center sm:text-left"
             startDelay={800}
@@ -37,7 +37,7 @@ export default async function Thoughts() {
     <div className="flex items-center justify-center min-h-[calc(100vh-16rem)] font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-6 sm:gap-8 items-center sm:items-start w-full max-w-4xl mx-auto px-4 sm:px-0">
         <AnimatedHoverText
-          text="Thoughts on technology, design, and development"
+          text="thoughts on technology, design, development, life"
           element="h1"
           className="font-bold text-lg sm:text-xl lg:text-2xl text-center sm:text-left max-w-2xl"
           startDelay={200}
