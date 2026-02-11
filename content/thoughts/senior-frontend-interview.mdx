@@ -254,28 +254,34 @@ A: A monolith is a single large application. Micro frontends split the UI into m
 
 <br />
 
-**Advantages of micro frontends:**
+<QAItem question="What are the advantages of micro frontends?">
+A:
 
 - Allow independent teams to develop, deploy, and scale parts of the application separately
 - Enable incremental adoption of new technologies
 - Reduce the impact of failures by isolating problems in smaller parts
+</QAItem>
 
 <br />
 
-**Challenges of micro frontends:**
+<QAItem question="What are the challenges of micro frontends?">
+A:
 
 - Complexity of integration between different micro frontends
 - Possible increase in bundle size due to duplicated dependencies
 - Managing communication and state sharing between micro frontends
+</QAItem>
 
 <br />
 
-**Best practices for micro frontends:**
+<QAItem question="What are the best practices for micro frontends?">
+A:
 
 - Define clear communication contracts (events, APIs)
 - Use a shared design system to maintain visual consistency
 - Automate deployments and continuous integration for each micro frontend
 - Monitor performance and end-user experience across the entire application
+</QAItem>
 
 </FolderAccordion>
 
@@ -363,18 +369,21 @@ _Here we can see some theoretical things that you will probably face in an inter
 
 <FolderAccordion title="Reconciliation Algorithm and Performance" level={2}>
 
-The React Reconciliation algorithm is the process by which React efficiently updates the DOM. When a component's state or props change, React creates a new virtual DOM tree and compares it with the previous one (diffing).
+<QAItem question="How does the React Reconciliation algorithm work?">
+A: The React Reconciliation algorithm is the process by which React efficiently updates the DOM. When a component's state or props change, React creates a new virtual DOM tree and compares it with the previous one (diffing).
 
 - React uses a heuristic O(n) algorithm instead of traditional O(n³) tree diffing
 - First compares elements of the same type
 - Uses keys to identify which children were changed, added, or removed
 - Updates only the parts of the DOM that changed
+</QAItem>
 
 </FolderAccordion>
 
 <FolderAccordion title="Code-splitting in React" level={2}>
 
-Code-splitting is a technique to divide your bundle into smaller chunks that can be loaded on demand, improving initial load time. React supports code-splitting via:
+<QAItem question="What is code-splitting and how does React support it?">
+A: Code-splitting is a technique to divide your bundle into smaller chunks that can be loaded on demand, improving initial load time. React supports code-splitting via:
 
 <br />
 
@@ -387,12 +396,14 @@ Code-splitting is a technique to divide your bundle into smaller chunks that can
 <br />
 
 3. **Route-based splitting**: Loading components based on routes
+</QAItem>
 
 </FolderAccordion>
 
 <FolderAccordion title="Render Props Pattern vs Hooks" level={2}>
 
-The render props pattern is a technique for sharing code between components using a prop whose value is a function. It was popular before hooks were introduced.
+<QAItem question="What is the render props pattern and how does it compare to Hooks?">
+A: The render props pattern is a technique for sharing code between components using a prop whose value is a function. It was popular before hooks were introduced.
 
 <br />
 
@@ -411,10 +422,14 @@ The render props pattern is a technique for sharing code between components usin
 - Easier to compose multiple pieces of logic
 - Cannot be used conditionally (must follow hook rules)
 - Sometimes less flexible for complex UI composition
+</QAItem>
 
 </FolderAccordion>
 
 <FolderAccordion title="State Management" level={2}>
+
+<QAItem question="What are the different types of state in React applications?">
+A:
 
 <br />
 
@@ -438,12 +453,14 @@ The render props pattern is a technique for sharing code between components usin
   - Pros: Shareable, Favorable, State Persistence
   - Uses: Filters, Selected Tabs, Selected Items, Multi-Step Flows
   - When not to use: Sensitive Information, High-frequency changes, Large Data Structures
+</QAItem>
 
 </FolderAccordion>
 
 <FolderAccordion title="useReducer and useState" level={2}>
 
-We can implement a custom hook similar to useState using useReducer, creating a simple reducer that replaces the state with what is dispatched to it. Returns a tuple with the state and dispatch function.
+<QAItem question="How does useReducer work and what are its parameters?">
+A: We can implement a custom hook similar to useState using useReducer, creating a simple reducer that replaces the state with what is dispatched to it. Returns a tuple with the state and dispatch function.
 
 ```tsx
 const [state, dispatch] = useReducer(reducer, initialArg, init?)
@@ -460,10 +477,14 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 <br />
 
 **init**: Initializer function that should return the initial state
+</QAItem>
 
 </FolderAccordion>
 
 <FolderAccordion title="useEffect Drama" level={2}>
+
+<QAItem question="What are the differences between useEffect and useLayoutEffect?">
+A:
 
 <br />
 
@@ -485,10 +506,14 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 - but **before** browser painting
 - blocks the browser from painting until the effect is completed
 - modifies the DOM and wants to avoid visual flickering
+</QAItem>
 
 </FolderAccordion>
 
 <FolderAccordion title="API Calls" level={2}>
+
+<QAItem question="What are the limitations of using useEffect for API calls?">
+A:
 
 <br />
 
@@ -496,6 +521,12 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 
 - Race Conditions: handling non-sequential order
 - No built-in features for: retry, deduplication (multiple components requesting the same data), manual loading and error states, complex to clean up and avoid memory leaks, waterfalls (Sequential data dependencies create request cascades), no background refetching
+</QAItem>
+
+<br />
+
+<QAItem question="What are the best practices for making API calls in React?">
+A:
 
 <br />
 
@@ -503,22 +534,36 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 
 - Custom Hook with AbortController: Create a new AbortController for this request, pass the signal to the request, if the signal is not aborted set the data. Cleanup: abort the request if component is unmounted or URL changes
 - Custom Hook with AbortController and Request Deduplication: Create a cache key based on URL and options, check if there's already a pending request for this URL, if not create a new promise and store it in the cache (local), remove from cache when completed
+</QAItem>
 
 </FolderAccordion>
 
 <FolderAccordion title="Refs Refs Refs" level={2}>
 
+<QAItem question="What is forwardRef and when should you use it?">
+A:
+
 <br />
 
 **forwardRef**: component receives a ref and forwards it to a child DOM element or component. Use cases: accessing a DOM element inside a child, imperatively triggering actions on a child component, triggering input focus via ref
+</QAItem>
+
+<br />
+
+<QAItem question="What is useImperativeHandle and when should you use it?">
+A:
 
 <br />
 
 **useImperativeHandle**: customizes the instance exposed when using a reference, allows a child to expose specific functions or properties to the parent. Use cases: wanting to limit which parts of a component are accessible via ref, exposing and customizing imperative methods. Example: modal triggering API on close
+</QAItem>
 
 </FolderAccordion>
 
 <FolderAccordion title="Performance Measurement & Optimization" level={2}>
+
+<QAItem question="How do you measure React component performance?">
+A:
 
 <br />
 
@@ -529,6 +574,12 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 - Custom hook with `performance.now()`
 - `why-did-you-render` library to track unnecessary re-renders
 - when **useMemo** is useful: calculation is computationally expensive, dependencies change infrequently, calculation result is used in the rendering phase
+</QAItem>
+
+<br />
+
+<QAItem question="What is the practical approach to performance optimization?">
+A:
 
 <br />
 
@@ -538,10 +589,17 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 2. measure impact of optimizations
 3. apply targeted optimizations
 4. measure again
+</QAItem>
+
+<br />
+
+<QAItem question="When should you use useCallback?">
+A:
 
 <br />
 
 **useCallback**: memoized version of the callback function that only changes if one of its dependencies has changed. Has a small performance cost, just part of the optimization strategy, not everywhere. Use cases: passing functions to optimized child components
+</QAItem>
 
 </FolderAccordion>
 
