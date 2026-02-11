@@ -23,6 +23,21 @@ _Some questions about frontend development that might be in your next JavaScript
 
 <QAItem question="What is a closure and how does it work?">
 A: A closure is a function that returns another function, by using a closure you can access the function of an inner scope calling one after the other
+
+```javascript
+function outer() {
+  const message = "Hello";
+  
+  function inner() {
+    console.log(message); // Can access outer's variable
+  }
+  
+  return inner;
+}
+
+const myFunction = outer();
+myFunction(); // Logs: "Hello"
+```
 </QAItem>
 
 </FolderAccordion>
@@ -33,6 +48,29 @@ A: A closure is a function that returns another function, by using a closure you
 A: A promise is a future, is a function that usually involves calling external resources and can take a while to finish
 Callbacks are functions passed to promises, to be invoked when it finishes (see: Call me maybe)
 Async/await is a modern syntax for promises in JavaScript, they have builtin error handling and are easier to understand, but they are not compatible with older versions
+
+```javascript
+// Callback
+fetchData(id, (error, data) => {
+  if (error) console.error(error);
+  else console.log(data);
+});
+
+// Promise
+fetchData(id)
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
+// Async/Await
+async function getData() {
+  try {
+    const data = await fetchData(id);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+```
 </QAItem>
 
 <br />
@@ -1223,6 +1261,19 @@ A:
 - With maps you can use keys of any type, not only strings as in javascript objects
 - Provides an iterator for easy for-of usage
 - Support millions of items
+
+```javascript
+// Map with different key types
+const map = new Map();
+map.set('string', 'value1');
+map.set(1, 'value2');
+map.set({}, 'value3');
+
+// Easy iteration
+for (const [key, value] of map) {
+  console.log(key, value);
+}
+```
 </QAItem>
 
 <br />
@@ -1241,18 +1292,59 @@ A: One function that has a function inside, and return it. This technique is use
 
 <QAItem question="What is hoisting?">
 A: Elevate functions and variables declarations to the "top scope". This allows you to use a function or a variable before it is defined in your .js file.
+
+```javascript
+// Function hoisting
+console.log(add(2, 3)); // Works! Returns 5
+function add(a, b) {
+  return a + b;
+}
+
+// Variable hoisting (var)
+console.log(x); // undefined (not an error)
+var x = 5;
+
+// Let/const are NOT hoisted the same way
+console.log(y); // ReferenceError!
+let y = 10;
+```
 </QAItem>
 
 <br />
 
 <QAItem question="How does equality work in JS? What is the difference between using === and Object.is()?">
 A: Object.is considers NaN equals to NaN and -0 different than +0.
+
+```javascript
+// === behavior
+NaN === NaN;        // false
+-0 === +0;          // true
+
+// Object.is behavior
+Object.is(NaN, NaN);  // true
+Object.is(-0, +0);    // false
+
+// Same for other values
+Object.is(1, 1);      // true
+Object.is({}, {});    // false
+```
 </QAItem>
 
 <br />
 
 <QAItem question="What is the purpose of Object.freeze()?">
 A: Makes an object immutable, preventing it to have its value changed.
+
+```javascript
+const obj = { name: 'John', age: 30 };
+Object.freeze(obj);
+
+obj.age = 31;        // Ignored (or throws in strict mode)
+obj.city = 'NYC';    // Ignored
+delete obj.name;     // Ignored
+
+console.log(obj);    // { name: 'John', age: 30 }
+```
 </QAItem>
 
 <br />
@@ -1265,6 +1357,21 @@ A: Callback hell
 
 <QAItem question="How do generators work?">
 A: Generators are on-demand functions, they can be paused and resumed, and the state is maintained along these "pauses and resumes". They return a generator object, each key of this object is the result of and yield operation, the last key is the return result.
+
+```javascript
+function* numberGenerator() {
+  yield 1;
+  yield 2;
+  yield 3;
+  return 'done';
+}
+
+const gen = numberGenerator();
+console.log(gen.next()); // { value: 1, done: false }
+console.log(gen.next()); // { value: 2, done: false }
+console.log(gen.next()); // { value: 3, done: false }
+console.log(gen.next()); // { value: 'done', done: true }
+```
 </QAItem>
 
 </FolderAccordion>
@@ -1297,12 +1404,47 @@ A: It's being discussed lately, it's very recent and will be implemented in the 
 
 <QAItem question="What are container queries?">
 A: A way to apply styles based on the container size, instead of the window view size It makes the styles more responsive.
+
+```css
+/* Container query */
+.card-container {
+  container-type: inline-size;
+}
+
+@container (min-width: 400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+/* Traditional media query (window-based) */
+@media (min-width: 400px) {
+  .card {
+    display: grid;
+  }
+}
+```
 </QAItem>
 
 <br />
 
 <QAItem question="How does the CSS grid subgrid work?">
 A: The CSS Grid subgrid feature is an extension of the CSS Grid Layout Module that allows a nested grid to inherit its parent grid's rows or columns. This is especially useful when you want to align the content of nested grid items with the parent grid's structure, without having to duplicate row and column definitions or manage complex positioning with margins or padding.
+
+```css
+.parent-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 1rem;
+}
+
+.child-grid {
+  display: grid;
+  grid-column: span 3;
+  grid-template-columns: subgrid; /* Inherits parent columns */
+}
+```
 </QAItem>
 
 </FolderAccordion>
@@ -1321,12 +1463,31 @@ A:
 
 <QAItem question="Explain why the useState hook accepts a function as an initial value">
 A: To allow the initial value to be calculated only once, instead of every time
+
+```jsx
+// Without function: expensive calculation runs on every render
+const [value, setValue] = useState(calculateExpensiveValue());
+
+// With function: calculation runs only once on mount
+const [value, setValue] = useState(() => calculateExpensiveValue());
+```
 </QAItem>
 
 <br />
 
 <QAItem question="What is the difference between the hooks useState and useReducer?">
 A: useState is better for simple state management, without too much logic involved, and useReducer was designed to handle complex state logics, and states that requires transition and dispatch actions.
+
+```jsx
+// useState - simple
+const [count, setCount] = useState(0);
+setCount(count + 1);
+
+// useReducer - complex state logic
+const [state, dispatch] = useReducer(reducer, { count: 0, step: 1 });
+dispatch({ type: 'increment' });
+dispatch({ type: 'changeStep', payload: 5 });
+```
 </QAItem>
 
 <br />
@@ -1349,6 +1510,23 @@ A:
 - React.memo
 - Use the hook dependencies correctly in useCallback, useEffect and useMemo to avoid re-renders
 - For big forms, prefer useRef over useState
+
+```jsx
+// React.memo prevents re-render if props don't change
+const MemoizedComponent = React.memo(({ data }) => {
+  return <div>{data.name}</div>;
+});
+
+// useCallback stabilizes function reference
+const handleClick = useCallback(() => {
+  console.log('clicked');
+}, []);
+
+// useMemo caches computed value
+const expensiveValue = useMemo(() => {
+  return computeExpensiveValue(data);
+}, [data]);
+```
 </QAItem>
 
 <br />
@@ -1383,6 +1561,22 @@ A: The useEffect hook is used to perform side effects in functional components, 
 
 <QAItem question="How can we do event cleanup in useEffect?">
 A: By returning a "cleanup function" in the end of the useEffect A cleanup function is a function with a removeEventListener call inside it. As you are returning this cleanup function, the cleanup will happen every time the effect happens (it will vary on the dependencies array of your useEffect)
+
+```jsx
+useEffect(() => {
+  const handleResize = () => {
+    console.log('Window resized');
+  };
+  
+  // Add event listener
+  window.addEventListener('resize', handleResize);
+  
+  // Cleanup function
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
+```
 </QAItem>
 
 <br />
@@ -1435,12 +1629,44 @@ A:
 
 - getStaticProps - used to get de component props and then render it into a static HTML page at build time
 - getServerSideProps - used to get the component props and then render it into a static HTML page at run time
+
+```jsx
+// getStaticProps - runs at build time
+export async function getStaticProps() {
+  const data = await fetchData();
+  return { props: { data } };
+}
+
+// getServerSideProps - runs on every request
+export async function getServerSideProps(context) {
+  const data = await fetchData(context.params.id);
+  return { props: { data } };
+}
+```
 </QAItem>
 
 <br />
 
 <QAItem question="What is the purpose of the getStaticPaths function?">
 A: Is used when your dynamic page has the getStaticProps. Nextjs needs to know what are the possible paths for your dynamic route, so you map them on the getStaticProps function. You can use getStaticProps without getStaticPaths; getStaticPaths is only a complement in case of dynamic routes
+
+```jsx
+// For dynamic routes like /posts/[id]
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  
+  const paths = posts.map(post => ({
+    params: { id: post.id }
+  }));
+  
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const post = await getPost(params.id);
+  return { props: { post } };
+}
+```
 </QAItem>
 
 <br />
@@ -1462,6 +1688,19 @@ A: You can deploy a Next.js application on any platform that supports Node.js, t
 
 <QAItem question="How do API routes work?">
 A: Next.js API routes provide a built-in solution for creating API endpoints within a Next.js application. They are server-side functions that run when a request is made to their corresponding URL. To create an API route, simply create a new file with a .js extension inside the pages/api folder, and export a default request handler function.
+
+```jsx
+// pages/api/hello.js
+export default function handler(req, res) {
+  if (req.method === 'GET') {
+    res.status(200).json({ message: 'Hello World' });
+  } else {
+    res.status(405).json({ error: 'Method not allowed' });
+  }
+}
+
+// Usage: fetch('/api/hello')
+```
 </QAItem>
 
 <br />
