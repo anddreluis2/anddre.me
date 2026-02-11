@@ -19,7 +19,7 @@ export default async function Gallery() {
   );
 
   return (
-    <div className="min-h-screen w-full pt-56">
+    <div className="min-h-screen w-full">
       {imageBlobs.length === 0 ? (
         <div className="flex items-center justify-center min-h-screen">
           <p className="text-muted-foreground">No images uploaded yet.</p>

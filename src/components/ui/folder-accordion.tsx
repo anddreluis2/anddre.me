@@ -42,14 +42,14 @@ export function FolderAccordion({
       fontSize: "text-xl font-bold",
       iconSize: "h-5 w-5",
       padding: "py-3 px-1 sm:py-4 sm:px-2",
-      spacing: "mb-3 mt-4 sm:mb-6 sm:mt-8",
+      spacing: "mb-1 mt-1 sm:mb-2 sm:mt-2",
     },
     2: defaultStyles,
     3: {
       fontSize: "text-sm font-medium",
       iconSize: "h-4 w-4",
       padding: "py-1.5 px-1 sm:py-2 sm:px-2",
-      spacing: "mb-1 mt-1 sm:mb-2 sm:mt-2",
+      spacing: "mb-1 mt-1 sm:mb-1.5 sm:mt-1.5",
     },
   };
   

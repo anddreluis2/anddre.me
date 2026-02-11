@@ -61,10 +61,10 @@ export default async function ThoughtPage({ params }: PageProps) {
   const cachedContent = await compileMDXContent(content);
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-2 sm:p-8 pb-20 gap-4 sm:gap-8 lg:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-6 sm:gap-8 row-start-2 items-center w-full max-w-3xl px-0 sm:px-4">
+    <div className="min-h-screen p-2 sm:p-8 pb-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col items-center w-full max-w-3xl mx-auto px-0 sm:px-4">
         <article className="w-full px-2 sm:px-0 flex flex-col items-center sm:items-start">
-          <header className="mb-8 sm:mb-12 w-full">
+          <header className="mb-6 sm:mb-8 w-full">
             <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4 text-center sm:text-left">
               {metadata.title}
             </h1>
