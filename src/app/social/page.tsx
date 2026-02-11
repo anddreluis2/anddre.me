@@ -48,7 +48,7 @@ const socialLinks = [
 
 export default function Social() {
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+    <div className="flex items-center justify-center min-h-[calc(100vh-16rem)] font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col items-center sm:items-start w-full max-w-4xl mx-auto px-4 sm:px-0">
         <div className="flex flex-col gap-3 sm:gap-4 w-full max-w-2xl">
           {socialLinks.map((social, index) => (

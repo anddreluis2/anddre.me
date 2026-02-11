@@ -14,7 +14,7 @@ export default async function Thoughts() {
 
   if (!thoughts || thoughts.length === 0) {
     return (
-      <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+      <div className="flex items-center justify-center min-h-[calc(100vh-16rem)] font-[family-name:var(--font-geist-sans)]">
         <main className="flex flex-col gap-6 sm:gap-8 items-center sm:items-start w-full max-w-4xl mx-auto px-4 sm:px-0">
           <AnimatedHoverText
             text="Thoughts"
@@ -34,7 +34,7 @@ export default async function Thoughts() {
   }
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+    <div className="flex items-center justify-center min-h-[calc(100vh-16rem)] font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-6 sm:gap-8 items-center sm:items-start w-full max-w-4xl mx-auto px-4 sm:px-0">
         <AnimatedHoverText
           text="Thoughts on technology, design, and development"
