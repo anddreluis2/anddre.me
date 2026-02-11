@@ -8,6 +8,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import { cache } from "react";
 import { FolderAccordion } from "@/components/ui/folder-accordion";
+import { QAItem } from "@/components/ui/qa-item";
 
 interface PageProps {
   params: Promise<{
@@ -17,6 +18,7 @@ interface PageProps {
 
 const mdxComponents = {
   FolderAccordion,
+  QAItem,
 };
 
 export async function generateStaticParams() {
