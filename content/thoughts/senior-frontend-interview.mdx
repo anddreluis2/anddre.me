@@ -22,7 +22,7 @@ _Some questions about frontend development that might be in your next JavaScript
 <FolderAccordion title="Closure and Scope" level={2}>
 
 <QAItem question="What is a closure and how does it work?">
-A: A closure is a function that returns another function, by using a closure you can access the function of an inner scope calling one after the other
+A closure is a function that returns another function, by using a closure you can access the function of an inner scope calling one after the other
 
 ```javascript
 function outer() {
@@ -45,7 +45,7 @@ myFunction(); // Logs: "Hello"
 <FolderAccordion title="Asynchronous Programming" level={2}>
 
 <QAItem question="What are the differences between callbacks, promises, and async/await?">
-A: A promise is a future, is a function that usually involves calling external resources and can take a while to finish
+A promise is a future, is a function that usually involves calling external resources and can take a while to finish
 Callbacks are functions passed to promises, to be invoked when it finishes (see: Call me maybe)
 Async/await is a modern syntax for promises in JavaScript, they have builtin error handling and are easier to understand, but they are not compatible with older versions
 
@@ -76,7 +76,7 @@ async function getData() {
 <br />
 
 <QAItem question="When would you use each?">
-A: Async/await whenever is possible, to ensure code quality
+Async/await whenever is possible, to ensure code quality
 </QAItem>
 
 </FolderAccordion>
@@ -84,13 +84,56 @@ A: Async/await whenever is possible, to ensure code quality
 <FolderAccordion title="Event Loop and Concurrency Model" level={2}>
 
 <QAItem question="How does the JavaScript event loop work?">
-A: (No answer provided - you'll need to research this topic on your own)
+The event loop is JavaScript's mechanism for handling asynchronous operations despite being single-threaded. It continuously monitors the call stack and task queues, executing tasks in a specific order:
+
+1. Executes synchronous code in the call stack
+2. When the stack is empty, processes microtasks (promises, queueMicrotask)
+3. Processes one macrotask (setTimeout, setInterval, I/O)
+4. Renders if needed (in browsers)
+5. Repeats the cycle
+
+```javascript
+console.log('1'); // Synchronous
+
+setTimeout(() => console.log('2'), 0); // Macrotask
+
+Promise.resolve().then(() => console.log('3')); // Microtask
+
+console.log('4'); // Synchronous
+
+// Output: 1, 4, 3, 2
+```
 </QAItem>
 
 <br />
 
 <QAItem question="Explain the concept of the call stack and task queue.">
-A: (No answer provided - you'll need to research this topic on your own)
+**Call Stack**: A LIFO (Last In, First Out) data structure that keeps track of function execution. When a function is called, it's pushed onto the stack; when it returns, it's popped off.
+
+<br />
+
+**Task Queue** (also called Callback Queue): Holds callbacks from async operations waiting to be executed. The event loop moves tasks from the queue to the call stack when the stack is empty.
+
+<br />
+
+There are two types of queues:
+- **Microtask Queue**: Higher priority (Promises, MutationObserver)
+- **Macrotask Queue**: Lower priority (setTimeout, setInterval, I/O operations)
+
+```javascript
+function first() {
+  second();
+  console.log('First');
+}
+
+function second() {
+  console.log('Second');
+}
+
+first();
+// Call stack: first() → second() → console.log → (pop) → console.log → (pop)
+// Output: Second, First
+```
 </QAItem>
 
 </FolderAccordion>
@@ -98,7 +141,48 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Prototype Inheritance vs. Classical Inheritance" level={2}>
 
 <QAItem question="How does prototypal inheritance differ from classical inheritance?">
-A: (No answer provided - you'll need to research this topic on your own)
+**Prototypal Inheritance (JavaScript)**:
+- Objects inherit directly from other objects
+- Uses prototype chain for property lookup
+- More flexible and dynamic
+- No classes needed (though class syntax is sugar over prototypes)
+
+<br />
+
+**Classical Inheritance (Java, C++)**:
+- Classes inherit from classes
+- Creates instances from class blueprints
+- More rigid structure
+- Requires explicit class definitions
+
+```javascript
+// Prototypal inheritance
+const animal = {
+  speak() {
+    console.log(`${this.name} makes a sound`);
+  }
+};
+
+const dog = Object.create(animal);
+dog.name = 'Rex';
+dog.speak(); // Rex makes a sound
+
+// Class syntax (still prototypal under the hood)
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+  speak() {
+    console.log(`${this.name} makes a sound`);
+  }
+}
+
+class Dog extends Animal {
+  bark() {
+    console.log(`${this.name} barks`);
+  }
+}
+```
 </QAItem>
 
 </FolderAccordion>
@@ -106,7 +190,46 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Higher-Order Functions" level={2}>
 
 <QAItem question="Can you explain what a higher-order function is in JavaScript and provide an example?">
-A: (No answer provided - you'll need to research this topic on your own)
+A higher-order function is a function that either:
+1. Takes one or more functions as arguments, OR
+2. Returns a function as its result
+
+<br />
+
+Higher-order functions enable functional programming patterns like composition, currying, and callbacks.
+
+```javascript
+// Example 1: Function that takes a function as argument
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2); // map is a higher-order function
+
+// Example 2: Function that returns a function
+function multiplier(factor) {
+  return function(number) {
+    return number * factor;
+  };
+}
+
+const double = multiplier(2);
+const triple = multiplier(3);
+
+console.log(double(5)); // 10
+console.log(triple(5)); // 15
+
+// Example 3: Both
+function withLogging(fn) {
+  return function(...args) {
+    console.log(`Calling with args: ${args}`);
+    const result = fn(...args);
+    console.log(`Result: ${result}`);
+    return result;
+  };
+}
+
+const add = (a, b) => a + b;
+const addWithLogging = withLogging(add);
+addWithLogging(2, 3); // Logs: Calling with args: 2,3 → Result: 5
+```
 </QAItem>
 
 </FolderAccordion>
@@ -114,13 +237,82 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="DOM Manipulation and Event Handling" level={2}>
 
 <QAItem question="How would you add an event listener in vanilla JavaScript?">
-A: (No answer provided - you'll need to research this topic on your own)
+Use the `addEventListener` method on any DOM element. It takes three parameters: event type, callback function, and optional options object.
+
+<br />
+
+```javascript
+// Basic usage
+const button = document.querySelector('#myButton');
+button.addEventListener('click', function(event) {
+  console.log('Button clicked!');
+});
+
+// With arrow function
+button.addEventListener('click', (event) => {
+  console.log('Clicked at:', event.clientX, event.clientY);
+});
+
+// With options
+button.addEventListener('click', handleClick, {
+  once: true,      // Fires only once
+  passive: true,   // Won't call preventDefault
+  capture: false   // Use bubbling phase (default)
+});
+
+// Removing event listener (function must be named)
+function handleClick(event) {
+  console.log('Clicked!');
+}
+button.addEventListener('click', handleClick);
+button.removeEventListener('click', handleClick);
+```
 </QAItem>
 
 <br />
 
 <QAItem question="What are the differences between event capturing and bubbling?">
-A: (No answer provided - you'll need to research this topic on your own)
+Event propagation in the DOM happens in three phases:
+
+1. **Capturing Phase** (top-down): Event travels from window down to the target element
+2. **Target Phase**: Event reaches the target element
+3. **Bubbling Phase** (bottom-up): Event bubbles up from target to window
+
+<br />
+
+**Event Bubbling** (default):
+- Events propagate from child to parent elements
+- Most commonly used
+- `addEventListener(event, callback)` or `addEventListener(event, callback, false)`
+
+<br />
+
+**Event Capturing**:
+- Events propagate from parent to child elements
+- Less common
+- `addEventListener(event, callback, true)` or `addEventListener(event, callback, { capture: true })`
+
+```javascript
+<div id="parent">
+  <button id="child">Click me</button>
+</div>
+
+// Bubbling (default)
+parent.addEventListener('click', () => console.log('Parent clicked'));
+child.addEventListener('click', () => console.log('Child clicked'));
+// Output when clicking button: Child clicked → Parent clicked
+
+// Capturing
+parent.addEventListener('click', () => console.log('Parent clicked'), true);
+child.addEventListener('click', () => console.log('Child clicked'), true);
+// Output when clicking button: Parent clicked → Child clicked
+
+// Stop propagation
+child.addEventListener('click', (e) => {
+  e.stopPropagation(); // Prevents bubbling
+  console.log('Child clicked');
+});
+```
 </QAItem>
 
 </FolderAccordion>
@@ -128,7 +320,95 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="ES6 and Beyond Features" level={2}>
 
 <QAItem question="Discuss arrow functions, template literals, destructuring, spread/rest operators, etc.">
-A: (No answer provided - you'll need to research this topic on your own)
+**Arrow Functions**:
+- Concise syntax for functions
+- Lexical `this` binding (inherits from parent scope)
+- Cannot be used as constructors
+
+<br />
+
+```javascript
+// Traditional vs Arrow
+function add(a, b) { return a + b; }
+const add = (a, b) => a + b;
+
+// Lexical this
+const obj = {
+  name: 'John',
+  sayHi: function() {
+    setTimeout(() => {
+      console.log(`Hi, I'm ${this.name}`); // 'this' refers to obj
+    }, 100);
+  }
+};
+```
+
+<br />
+
+**Template Literals**:
+- String interpolation with backticks
+- Multi-line strings
+- Tagged templates
+
+```javascript
+const name = 'Alice';
+const age = 25;
+const greeting = `Hello, ${name}! You are ${age} years old.`;
+
+const multiLine = `
+  This is a
+  multi-line string
+`;
+```
+
+<br />
+
+**Destructuring**:
+- Extract values from arrays/objects into variables
+
+```javascript
+// Object destructuring
+const user = { name: 'Bob', age: 30, city: 'NYC' };
+const { name, age } = user;
+
+// Array destructuring
+const [first, second, ...rest] = [1, 2, 3, 4, 5];
+
+// Nested destructuring
+const { address: { street } } = { address: { street: '5th Ave' } };
+```
+
+<br />
+
+**Spread Operator**:
+- Expands iterables into individual elements
+
+```javascript
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5]; // [1, 2, 3, 4, 5]
+
+const obj1 = { a: 1, b: 2 };
+const obj2 = { ...obj1, c: 3 }; // { a: 1, b: 2, c: 3 }
+
+// Copy arrays/objects (shallow)
+const copy = [...arr1];
+```
+
+<br />
+
+**Rest Parameters**:
+- Collects remaining elements into an array
+
+```javascript
+function sum(...numbers) {
+  return numbers.reduce((acc, n) => acc + n, 0);
+}
+
+sum(1, 2, 3, 4); // 10
+
+const { a, ...others } = { a: 1, b: 2, c: 3 };
+// a = 1, others = { b: 2, c: 3 }
+```
 </QAItem>
 
 </FolderAccordion>
@@ -136,13 +416,112 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="'this' Keyword" level={2}>
 
 <QAItem question="How does the 'this' keyword work in JavaScript?">
-A: (No answer provided - you'll need to research this topic on your own)
+The `this` keyword refers to the object that is executing the current function. Its value depends on how the function is called:
+
+1. **Global context**: `this` refers to the global object (window in browsers, global in Node.js)
+2. **Object method**: `this` refers to the object the method belongs to
+3. **Constructor function**: `this` refers to the newly created instance
+4. **Arrow functions**: `this` is lexically inherited from the enclosing scope
+5. **Event handlers**: `this` refers to the element that received the event
+
+<br />
+
+```javascript
+// Global context
+console.log(this); // window (in browsers)
+
+// Object method
+const person = {
+  name: 'Alice',
+  greet() {
+    console.log(`Hi, I'm ${this.name}`); // this = person
+  }
+};
+
+// Constructor
+function Person(name) {
+  this.name = name; // this = new instance
+}
+
+// Arrow function (lexical this)
+const obj = {
+  name: 'Bob',
+  delayedGreet() {
+    setTimeout(() => {
+      console.log(this.name); // this = obj (inherited)
+    }, 100);
+  }
+};
+
+// Explicit binding
+function greet() {
+  console.log(this.name);
+}
+greet.call({ name: 'Charlie' }); // Charlie
+```
 </QAItem>
 
 <br />
 
 <QAItem question="What are the different ways to bind 'this' in a function?">
-A: (No answer provided - you'll need to research this topic on your own)
+There are four main ways to explicitly bind `this`:
+
+<br />
+
+**1. call()**: Invokes function with specific `this` and individual arguments
+```javascript
+function greet(greeting) {
+  console.log(`${greeting}, ${this.name}`);
+}
+greet.call({ name: 'Alice' }, 'Hello'); // Hello, Alice
+```
+
+<br />
+
+**2. apply()**: Like call(), but accepts arguments as an array
+```javascript
+greet.apply({ name: 'Bob' }, ['Hi']); // Hi, Bob
+```
+
+<br />
+
+**3. bind()**: Returns a new function with permanently bound `this`
+```javascript
+const person = { name: 'Charlie' };
+const boundGreet = greet.bind(person);
+boundGreet('Hey'); // Hey, Charlie
+```
+
+<br />
+
+**4. Arrow functions**: Lexically bind `this` from enclosing scope
+```javascript
+const obj = {
+  name: 'Dave',
+  greet: function() {
+    const arrow = () => console.log(this.name);
+    arrow(); // Dave (inherits this from greet)
+  }
+};
+```
+
+<br />
+
+**Common use cases**:
+```javascript
+// Preserving context in callbacks
+class Component {
+  constructor() {
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    console.log(this); // Component instance
+  }
+}
+
+// Event handlers
+button.addEventListener('click', handleClick.bind(this));
+```
 </QAItem>
 
 </FolderAccordion>
@@ -150,7 +529,100 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Memory Management" level={2}>
 
 <QAItem question="Discuss garbage collection and memory leaks in JavaScript.">
-A: (No answer provided - you'll need to research this topic on your own)
+**Garbage Collection**:
+JavaScript uses automatic garbage collection to free memory occupied by objects that are no longer reachable. The most common algorithm is **Mark-and-Sweep**:
+
+1. GC marks all reachable objects (starting from roots: global variables, call stack)
+2. Sweeps through memory and frees unmarked objects
+3. Runs periodically and automatically
+
+<br />
+
+```javascript
+// Object becomes unreachable and will be garbage collected
+let obj = { data: 'large data' };
+obj = null; // Original object is now unreachable
+```
+
+<br />
+
+**Common Memory Leak Patterns**:
+
+<br />
+
+**1. Forgotten timers**:
+```javascript
+// ❌ Leak
+const data = fetchHugeData();
+setInterval(() => {
+  processData(data); // data never released
+}, 1000);
+
+// ✅ Clear timers
+const interval = setInterval(() => { /* ... */ }, 1000);
+clearInterval(interval);
+```
+
+<br />
+
+**2. Event listeners not removed**:
+```javascript
+// ❌ Leak
+element.addEventListener('click', handler);
+// element removed but listener still in memory
+
+// ✅ Clean up
+element.removeEventListener('click', handler);
+```
+
+<br />
+
+**3. Closures holding references**:
+```javascript
+// ❌ Leak
+function createClosure() {
+  const largeData = new Array(1000000);
+  return function() {
+    console.log(largeData[0]); // Keeps entire array in memory
+  };
+}
+
+// ✅ Release unnecessary data
+function createClosure() {
+  const largeData = new Array(1000000);
+  const needed = largeData[0];
+  return function() {
+    console.log(needed); // Only keeps what's needed
+  };
+}
+```
+
+<br />
+
+**4. Global variables**:
+```javascript
+// ❌ Leak
+window.cache = {}; // Never cleaned up
+
+// ✅ Use limited scope
+function useCache() {
+  const cache = {};
+  // cache is cleaned when function scope ends
+}
+```
+
+<br />
+
+**5. Detached DOM nodes**:
+```javascript
+// ❌ Leak
+const button = document.getElementById('button');
+document.body.removeChild(button);
+// button still referenced, can't be GC'd
+
+// ✅ Remove reference
+button = null;
+```
 </QAItem>
 
 </FolderAccordion>
@@ -158,7 +630,110 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Design Patterns and Best Practices" level={2}>
 
 <QAItem question="Discuss various design patterns (like Module, Observer, Singleton) and best practices in code organization and performance optimization.">
-A: (No answer provided - you'll need to research this topic on your own)
+**Module Pattern**: Encapsulates private and public members
+
+<br />
+
+```javascript
+const UserModule = (function() {
+  // Private
+  let users = [];
+  
+  // Public API
+  return {
+    addUser(user) {
+      users.push(user);
+    },
+    getUsers() {
+      return [...users];
+    }
+  };
+})();
+```
+
+<br />
+
+**Observer Pattern**: Subjects notify observers of changes
+
+<br />
+
+```javascript
+class EventEmitter {
+  constructor() {
+    this.events = {};
+  }
+  
+  on(event, callback) {
+    if (!this.events[event]) this.events[event] = [];
+    this.events[event].push(callback);
+  }
+  
+  emit(event, data) {
+    if (this.events[event]) {
+      this.events[event].forEach(cb => cb(data));
+    }
+  }
+}
+
+const emitter = new EventEmitter();
+emitter.on('userLogin', (user) => console.log(`${user} logged in`));
+emitter.emit('userLogin', 'Alice');
+```
+
+<br />
+
+**Singleton Pattern**: Ensures only one instance exists
+
+<br />
+
+```javascript
+class Database {
+  constructor() {
+    if (Database.instance) {
+      return Database.instance;
+    }
+    this.connection = this.connect();
+    Database.instance = this;
+  }
+  
+  connect() {
+    return 'Connected';
+  }
+}
+
+const db1 = new Database();
+const db2 = new Database();
+console.log(db1 === db2); // true
+```
+
+<br />
+
+**Factory Pattern**: Creates objects without specifying exact class
+
+<br />
+
+```javascript
+class ButtonFactory {
+  createButton(type) {
+    switch(type) {
+      case 'primary': return new PrimaryButton();
+      case 'secondary': return new SecondaryButton();
+      default: return new DefaultButton();
+    }
+  }
+}
+```
+
+<br />
+
+**Best Practices**:
+- **SOLID principles**: Single responsibility, Open/closed, Liskov substitution
+- **DRY**: Don't repeat yourself
+- **Separation of concerns**: Divide code into distinct modules
+- **Code splitting**: Load code on demand
+- **Lazy loading**: Defer loading of non-critical resources
+- **Memoization**: Cache expensive function results
+- **Debouncing/Throttling**: Limit function execution frequency
 </QAItem>
 
 </FolderAccordion>
@@ -166,7 +741,123 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Testing and Debugging" level={2}>
 
 <QAItem question="Discuss unit testing, integration testing, and debugging practices in JavaScript.">
-A: (No answer provided - you'll need to research this topic on your own)
+**Unit Testing**: Tests individual functions/components in isolation
+
+<br />
+
+```javascript
+// Using Jest
+describe('add function', () => {
+  test('adds 1 + 2 to equal 3', () => {
+    expect(add(1, 2)).toBe(3);
+  });
+  
+  test('handles negative numbers', () => {
+    expect(add(-1, -2)).toBe(-3);
+  });
+});
+
+// Testing React components
+import { render, screen } from '@testing-library/react';
+
+test('renders button with text', () => {
+  render(<Button>Click me</Button>);
+  expect(screen.getByText('Click me')).toBeInTheDocument();
+});
+```
+
+<br />
+
+**Integration Testing**: Tests how multiple units work together
+
+<br />
+
+```javascript
+// Testing API integration
+test('fetches user data', async () => {
+  const user = await fetchUser(1);
+  expect(user.name).toBe('Alice');
+  expect(user.email).toBeDefined();
+});
+
+// Testing component interaction
+test('form submission', async () => {
+  render(<LoginForm />);
+  fireEvent.change(screen.getByLabelText('Email'), {
+    target: { value: 'user@example.com' }
+  });
+  fireEvent.click(screen.getByText('Submit'));
+  
+  await waitFor(() => {
+    expect(screen.getByText('Success')).toBeInTheDocument();
+  });
+});
+```
+
+<br />
+
+**E2E Testing**: Tests entire user flows
+
+<br />
+
+```javascript
+// Using Cypress
+describe('Login flow', () => {
+  it('logs in successfully', () => {
+    cy.visit('/login');
+    cy.get('[data-testid="email"]').type('user@example.com');
+    cy.get('[data-testid="password"]').type('password123');
+    cy.get('[data-testid="submit"]').click();
+    cy.url().should('include', '/dashboard');
+  });
+});
+```
+
+<br />
+
+**Debugging Practices**:
+
+<br />
+
+1. **Console methods**:
+```javascript
+console.log('value:', value);
+console.table(arrayOfObjects);
+console.trace(); // Stack trace
+console.time('operation');
+// ... code
+console.timeEnd('operation');
+```
+
+<br />
+
+2. **Debugger statement**:
+```javascript
+function complexFunction(data) {
+  debugger; // Pauses execution in DevTools
+  const result = processData(data);
+  return result;
+}
+```
+
+<br />
+
+3. **Source maps**: Enable debugging of transpiled code
+4. **React DevTools**: Inspect component hierarchy and props
+5. **Network tab**: Monitor API calls and responses
+6. **Performance profiling**: Identify bottlenecks
+7. **Error boundaries**: Catch React errors gracefully
+
+<br />
+
+**Testing Best Practices**:
+- Follow AAA pattern (Arrange, Act, Assert)
+- Test behavior, not implementation
+- Keep tests independent and isolated
+- Use descriptive test names
+- Mock external dependencies
+- Aim for high coverage on critical paths
+- Run tests in CI/CD pipeline
 </QAItem>
 
 </FolderAccordion>
@@ -174,7 +865,65 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Frameworks and Libraries" level={2}>
 
 <QAItem question="Be prepared for questions related to specific frameworks (like React, Angular, or Node.js).">
-A: (No answer provided - you'll need to research this topic on your own)
+**React**:
+- Component lifecycle and hooks (useState, useEffect, useContext)
+- Virtual DOM and reconciliation
+- State management (Context API, Redux, Zustand)
+- Performance optimization (React.memo, useMemo, useCallback)
+- Server components and RSC (React Server Components)
+
+<br />
+
+**Angular**:
+- Dependency injection and services
+- RxJS and observables for reactive programming
+- Change detection strategies (Default vs OnPush)
+- Modules, components, directives, and pipes
+- Two-way data binding with [(ngModel)]
+
+<br />
+
+**Vue**:
+- Reactivity system (ref, reactive, computed)
+- Composition API vs Options API
+- Template syntax and directives (v-if, v-for, v-model)
+- Component communication (props, events, provide/inject)
+- Pinia for state management
+
+<br />
+
+**Node.js**:
+- Event-driven, non-blocking I/O model
+- Event loop and async operations
+- Streams and buffers
+- Express.js for web servers
+- Middleware pattern
+- Error handling and logging
+
+<br />
+
+**Common Framework Questions**:
+```javascript
+// React: How to prevent unnecessary re-renders?
+const MemoizedComponent = React.memo(Component);
+
+// Angular: How to share data between components?
+// Service with dependency injection
+@Injectable({ providedIn: 'root' })
+export class DataService {
+  private data$ = new BehaviorSubject<any>(null);
+  getData() { return this.data$.asObservable(); }
+}
+
+// Node.js: How to handle async errors?
+app.use(async (req, res, next) => {
+  try {
+    await someAsyncOperation();
+  } catch (error) {
+    next(error); // Pass to error middleware
+  }
+});
+```
 </QAItem>
 
 </FolderAccordion>
@@ -182,7 +931,72 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Event Delegation" level={2}>
 
 <QAItem question="Can you explain event delegation and why it's useful?">
-A: (No answer provided - you'll need to research this topic on your own)
+Event delegation is a pattern where you attach a single event listener to a parent element instead of multiple listeners to child elements. It leverages event bubbling to handle events from child elements.
+
+<br />
+
+**Why it's useful**:
+- **Performance**: Fewer event listeners = less memory usage
+- **Dynamic elements**: Works with elements added after page load
+- **Simpler code**: One listener instead of many
+
+<br />
+
+```javascript
+// ❌ Without delegation (inefficient)
+const buttons = document.querySelectorAll('.button');
+buttons.forEach(button => {
+  button.addEventListener('click', handleClick);
+});
+
+// ✅ With delegation (efficient)
+document.querySelector('.button-container').addEventListener('click', (e) => {
+  if (e.target.matches('.button')) {
+    handleClick(e);
+  }
+});
+
+// Real-world example: Todo list
+document.querySelector('#todo-list').addEventListener('click', (e) => {
+  // Delete button
+  if (e.target.matches('.delete-btn')) {
+    const todoId = e.target.dataset.id;
+    deleteTodo(todoId);
+  }
+  
+  // Edit button
+  if (e.target.matches('.edit-btn')) {
+    const todoId = e.target.dataset.id;
+    editTodo(todoId);
+  }
+  
+  // Checkbox
+  if (e.target.matches('.todo-checkbox')) {
+    const todoId = e.target.dataset.id;
+    toggleTodo(todoId);
+  }
+});
+
+// Works even for dynamically added todos!
+function addTodo(text) {
+  const li = document.createElement('li');
+  li.innerHTML = `
+    <input type="checkbox" class="todo-checkbox" data-id="${id}">
+    <span>${text}</span>
+    <button class="edit-btn" data-id="${id}">Edit</button>
+    <button class="delete-btn" data-id="${id}">Delete</button>
+  `;
+  document.querySelector('#todo-list').appendChild(li);
+}
+```
+
+<br />
+
+**Key points**:
+- Use `e.target` to identify the clicked element
+- Use `matches()` or `closest()` to check element type
+- Works because of event bubbling
+- Particularly useful for lists, tables, and dynamic content
 </QAItem>
 
 </FolderAccordion>
@@ -190,7 +1004,90 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="JavaScript Engines" level={2}>
 
 <QAItem question="How does a JavaScript engine like V8 execute code?">
-A: (No answer provided - you'll need to research this topic on your own)
+V8 (used in Chrome and Node.js) executes JavaScript through multiple stages:
+
+<br />
+
+**1. Parsing**:
+- Source code → Abstract Syntax Tree (AST)
+- Lexical analysis (tokenization)
+- Syntax analysis (parsing tokens)
+
+<br />
+
+**2. Compilation**:
+V8 uses **Just-In-Time (JIT) compilation** with two compilers:
+
+<br />
+
+**Ignition (Interpreter)**:
+- Quickly generates bytecode from AST
+- Starts executing immediately (fast startup)
+- Collects profiling data about code execution
+
+<br />
+
+**TurboFan (Optimizing Compiler)**:
+- Takes "hot" code (frequently executed)
+- Compiles bytecode to highly optimized machine code
+- Uses profiling data to make assumptions and optimizations
+
+```
+Source Code → Parser → AST → Ignition → Bytecode → Execution
+                                    ↓
+                               Profiling data
+                                    ↓
+                              TurboFan → Optimized Machine Code
+```
+
+<br />
+
+**3. Execution**:
+- Initially runs interpreted bytecode (Ignition)
+- Hot functions get compiled to optimized code (TurboFan)
+- If assumptions fail (e.g., type changes), deoptimizes back to bytecode
+
+<br />
+
+**Key Optimizations**:
+
+<br />
+
+**Hidden Classes**: V8 creates internal classes for objects
+```javascript
+// Good: Same structure
+function Point(x, y) {
+  this.x = x; // Always in same order
+  this.y = y;
+}
+
+// Bad: Different structures
+const p1 = { x: 1, y: 2 };
+const p2 = { y: 2, x: 1 }; // Different order = different hidden class
+```
+
+<br />
+
+**Inline Caching**: Caches property access locations
+```javascript
+function getX(point) {
+  return point.x; // V8 remembers where x is
+}
+```
+
+<br />
+
+**4. Garbage Collection**:
+- **Minor GC** (Scavenger): Collects young generation (new objects)
+- **Major GC** (Mark-Sweep-Compact): Collects old generation
+
+<br />
+
+**Performance Tips**:
+- Keep object shapes consistent
+- Avoid deleting object properties
+- Use monomorphic functions (same types)
+- Avoid sparse arrays
 </QAItem>
 
 </FolderAccordion>
@@ -198,7 +1095,123 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Hoisting" level={2}>
 
 <QAItem question="What is hoisting in JavaScript and how does it affect variable and function declarations?">
-A: (No answer provided - you'll need to research this topic on your own)
+Hoisting is JavaScript's behavior of moving declarations to the top of their scope before code execution. Only declarations are hoisted, not initializations.
+
+<br />
+
+**Function Hoisting**:
+```javascript
+// ✅ Works - function declaration is hoisted
+greet(); // "Hello!"
+
+function greet() {
+  console.log("Hello!");
+}
+
+// ❌ Doesn't work - function expression is not hoisted
+sayHi(); // TypeError: sayHi is not a function
+
+const sayHi = function() {
+  console.log("Hi!");
+};
+```
+
+<br />
+
+**Variable Hoisting with `var`**:
+```javascript
+console.log(x); // undefined (not ReferenceError)
+var x = 5;
+console.log(x); // 5
+
+// What actually happens:
+var x; // Declaration hoisted
+console.log(x); // undefined
+x = 5; // Initialization stays in place
+console.log(x); // 5
+```
+
+<br />
+
+**`let` and `const` Hoisting (Temporal Dead Zone)**:
+```javascript
+// ❌ ReferenceError: Cannot access before initialization
+console.log(y); // TDZ
+let y = 10;
+
+// ❌ Same for const
+console.log(z); // TDZ
+const z = 20;
+
+// The TDZ exists from the start of the block until initialization
+{
+  // TDZ starts
+  console.log(value); // ReferenceError
+  let value = 5; // TDZ ends
+  console.log(value); // 5
+}
+```
+
+<br />
+
+**Class Hoisting**:
+```javascript
+// ❌ ReferenceError
+const instance = new MyClass();
+
+class MyClass {
+  constructor() {
+    this.name = "Class";
+  }
+}
+
+// ✅ Works
+class MyClass {
+  constructor() {
+    this.name = "Class";
+  }
+}
+const instance = new MyClass();
+```
+
+<br />
+
+**Practical implications**:
+```javascript
+// Confusing behavior with var
+var name = "Global";
+
+function showName() {
+  console.log(name); // undefined (not "Global")
+  var name = "Local";
+  console.log(name); // "Local"
+}
+
+// What happens:
+function showName() {
+  var name; // Hoisted
+  console.log(name); // undefined
+  name = "Local";
+  console.log(name); // "Local"
+}
+
+// ✅ Better with let/const
+let name = "Global";
+
+function showName() {
+  console.log(name); // "Global"
+  let localName = "Local";
+  console.log(localName); // "Local"
+}
+```
+
+<br />
+
+**Best practices**:
+- Prefer `let` and `const` over `var`
+- Declare variables at the top of their scope
+- Use function declarations for functions you want hoisted
+- Use function expressions/arrow functions for better control
 </QAItem>
 
 </FolderAccordion>
@@ -206,7 +1219,170 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Immutability" level={2}>
 
 <QAItem question="What is immutability and how can it be achieved in JavaScript?">
-A: (No answer provided - you'll need to research this topic on your own)
+Immutability means data cannot be changed after creation. Instead of modifying existing data, you create new copies with the desired changes.
+
+<br />
+
+**Why Immutability Matters**:
+- Predictable state changes
+- Easier debugging and testing
+- Enables time-travel debugging
+- Required for React performance optimizations (React.memo)
+- Prevents unintended side effects
+
+<br />
+
+**Achieving Immutability**:
+
+<br />
+
+**1. Object.freeze()** (shallow freeze):
+```javascript
+const obj = Object.freeze({ name: 'Alice', age: 25 });
+obj.age = 30; // Ignored in strict mode, throws error
+console.log(obj.age); // 25
+
+// Doesn't freeze nested objects
+const user = Object.freeze({
+  name: 'Bob',
+  address: { city: 'NYC' }
+});
+user.address.city = 'LA'; // Works! (nested object not frozen)
+```
+
+<br />
+
+**2. Spread Operator** (shallow copy):
+```javascript
+// Objects
+const original = { name: 'Alice', age: 25 };
+const updated = { ...original, age: 26 }; // New object
+
+// Arrays
+const arr = [1, 2, 3];
+const newArr = [...arr, 4]; // [1, 2, 3, 4]
+
+// Nested updates require multiple spreads
+const user = {
+  name: 'Bob',
+  address: { city: 'NYC', zip: '10001' }
+};
+
+const updatedUser = {
+  ...user,
+  address: {
+    ...user.address,
+    city: 'LA'
+  }
+};
+```
+
+<br />
+
+**3. Array methods that return new arrays**:
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+
+// ✅ Immutable (return new arrays)
+const doubled = numbers.map(n => n * 2);
+const filtered = numbers.filter(n => n > 2);
+const sliced = numbers.slice(1, 3);
+const concatenated = numbers.concat([6, 7]);
+
+// ❌ Mutable (modify original)
+numbers.push(6); // Modifies original
+numbers.sort(); // Modifies original
+numbers.splice(0, 1); // Modifies original
+```
+
+<br />
+
+**4. Libraries for deep immutability**:
+
+<br />
+
+**Immer**:
+```javascript
+import produce from 'immer';
+
+const state = {
+  user: { name: 'Alice', todos: ['Task 1', 'Task 2'] }
+};
+
+const nextState = produce(state, draft => {
+  draft.user.todos.push('Task 3'); // Mutate draft, get immutable result
+});
+```
+
+<br />
+
+**Immutable.js**:
+```javascript
+import { Map } from 'immutable';
+
+const map1 = Map({ a: 1, b: 2 });
+const map2 = map1.set('b', 50);
+
+console.log(map1.get('b')); // 2
+console.log(map2.get('b')); // 50
+```
+
+<br />
+
+**5. Deep freeze (recursive)**:
+```javascript
+function deepFreeze(obj) {
+  Object.freeze(obj);
+  Object.keys(obj).forEach(key => {
+    if (typeof obj[key] === 'object' && obj[key] !== null) {
+      deepFreeze(obj[key]);
+    }
+  });
+  return obj;
+}
+
+const user = deepFreeze({
+  name: 'Alice',
+  address: { city: 'NYC' }
+});
+
+user.address.city = 'LA'; // Throws error in strict mode
+```
+
+<br />
+
+**React Example**:
+```javascript
+// ❌ Mutating state
+setState(prevState => {
+  prevState.count += 1; // Direct mutation
+  return prevState;
+});
+
+// ✅ Immutable update
+setState(prevState => ({
+  ...prevState,
+  count: prevState.count + 1
+}));
+
+// ✅ Array immutable updates
+setState(prevState => ({
+  ...prevState,
+  items: [...prevState.items, newItem] // Add
+}));
+
+setState(prevState => ({
+  ...prevState,
+  items: prevState.items.filter(item => item.id !== id) // Remove
+}));
+
+setState(prevState => ({
+  ...prevState,
+  items: prevState.items.map(item =>
+    item.id === id ? { ...item, done: true } : item // Update
+  )
+}));
+```
 </QAItem>
 
 </FolderAccordion>
@@ -214,7 +1390,201 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Cross-Browser Compatibility Issues" level={2}>
 
 <QAItem question="How do you ensure your JavaScript code works across different browsers?">
-A: (No answer provided - you'll need to research this topic on your own)
+**1. Use transpilers and polyfills**:
+
+**Babel**: Transpiles modern JavaScript to older versions
+```javascript
+// package.json
+{
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
+
+// .babelrc
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "useBuiltIns": "usage",
+      "corejs": 3
+    }]
+  ]
+}
+
+// Modern code
+const data = await fetch('/api/data');
+const items = [...array];
+
+// Gets transpiled for older browsers
+```
+
+**Core-js**: Polyfills for modern JavaScript features
+```javascript
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+```
+
+**2. Feature detection**:
+```javascript
+// ✅ Check before using
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(callback);
+} else {
+  // Fallback or polyfill
+  import('intersection-observer').then(() => {
+    const observer = new IntersectionObserver(callback);
+  });
+}
+
+// Check for API support
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+
+// Check for CSS features
+if (CSS.supports('display', 'grid')) {
+  // Use grid
+} else {
+  // Fallback layout
+}
+```
+
+**3. Use modern tools with automatic compatibility**:
+
+**PostCSS with Autoprefixer**:
+```css
+/* You write: */
+.box {
+  display: flex;
+  transition: transform 0.3s;
+}
+
+/* Autoprefixer outputs: */
+.box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+```
+
+**4. Cross-browser testing**:
+- **BrowserStack**: Test on real devices
+- **Sauce Labs**: Automated testing across browsers
+- **LambdaTest**: Cloud-based testing
+- **Playwright**: Automated testing framework
+- **Manual testing**: Test on Chrome, Firefox, Safari, Edge
+
+**5. Use well-supported libraries**:
+```javascript
+// Instead of direct DOM manipulation
+document.querySelector('#app').classList.add('active');
+
+// Use libraries that handle compatibility
+import { addClass } from 'some-library';
+addClass('#app', 'active');
+
+// Or modern frameworks that handle it
+<div className={isActive ? 'active' : ''}>
+```
+
+**6. Avoid bleeding-edge features**:
+```javascript
+// ❌ Very new API (limited support)
+const entries = Object.fromEntries(map);
+
+// ✅ Check caniuse.com first
+// ✅ Or use with polyfill
+import 'core-js/features/object/from-entries';
+
+// ❌ Experimental CSS
+.box {
+  container-type: inline-size; /* Limited support */
+}
+
+// ✅ Use with @supports
+@supports (container-type: inline-size) {
+  .box {
+    container-type: inline-size;
+  }
+}
+```
+
+**7. Set up linting**:
+```javascript
+// .eslintrc
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:compat/recommended"
+  ],
+  "plugins": ["compat"],
+  "settings": {
+    "browserslist": ["last 2 versions", "> 1%"]
+  }
+}
+```
+
+**8. Use progressive enhancement**:
+```javascript
+// Base functionality works everywhere
+const form = document.querySelector('form');
+form.addEventListener('submit', handleSubmit);
+
+// Enhanced features for modern browsers
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(() => {
+    // Non-critical enhancements
+    loadAnalytics();
+  });
+} else {
+  setTimeout(() => loadAnalytics(), 1);
+}
+```
+
+**9. Vendor prefixes**:
+```javascript
+// JavaScript
+element.style.webkitTransform = 'rotate(45deg)';
+element.style.transform = 'rotate(45deg)';
+
+// CSS (use Autoprefixer instead of manual)
+.box {
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+```
+
+**10. Monitor real-world usage**:
+```javascript
+// Error tracking
+window.addEventListener('error', (event) => {
+  // Log to error tracking service
+  logError({
+    message: event.message,
+    browser: navigator.userAgent,
+    stack: event.error.stack
+  });
+});
+
+// Feature usage tracking
+if (!window.fetch) {
+  trackFeatureUsage('fetch-polyfill-needed');
+}
+```
+
+**Resources**:
+- caniuse.com - Browser support tables
+- MDN Web Docs - Compatibility info
+- Browserslist - Target browsers configuration
 </QAItem>
 
 </FolderAccordion>
@@ -222,7 +1592,240 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Web Performance Optimization" level={2}>
 
 <QAItem question="What are some ways to improve the performance of a JavaScript application?">
-A: (No answer provided - you'll need to research this topic on your own)
+**1. Code Splitting and Lazy Loading**:
+```javascript
+// React lazy loading
+const Dashboard = React.lazy(() => import('./Dashboard'));
+
+function App() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Dashboard />
+    </Suspense>
+  );
+}
+
+// Dynamic imports
+button.addEventListener('click', async () => {
+  const module = await import('./heavy-module.js');
+  module.init();
+});
+
+// Route-based splitting (Next.js does this automatically)
+// pages/dashboard.js → Separate bundle
+```
+
+**2. Minimize Bundle Size**:
+```javascript
+// Tree shaking - import only what you need
+import { debounce } from 'lodash'; // ❌ Imports entire library
+import debounce from 'lodash/debounce'; // ✅ Imports only debounce
+
+// Analyze bundle
+// npm run build -- --analyze
+
+// Remove unused code
+// Configure webpack/vite for tree shaking
+```
+
+**3. Optimize Images and Assets**:
+```javascript
+// Use Next.js Image component
+import Image from 'next/image';
+
+<Image
+  src="/photo.jpg"
+  width={500}
+  height={300}
+  loading="lazy"
+  placeholder="blur"
+/>
+
+// Or native lazy loading
+<img src="photo.jpg" loading="lazy" alt="Photo" />
+
+// Use modern formats (WebP, AVIF)
+// Compress images
+// Use CDN for static assets
+```
+
+**4. Debounce and Throttle**:
+```javascript
+// Debounce - wait until user stops typing
+const debouncedSearch = debounce((query) => {
+  searchAPI(query);
+}, 300);
+
+input.addEventListener('input', (e) => {
+  debouncedSearch(e.target.value);
+});
+
+// Throttle - limit execution rate
+const throttledScroll = throttle(() => {
+  updateScrollPosition();
+}, 100);
+
+window.addEventListener('scroll', throttledScroll);
+```
+
+**5. Virtualization for Long Lists**:
+```javascript
+// react-window
+import { FixedSizeList } from 'react-window';
+
+<FixedSizeList
+  height={600}
+  itemCount={10000}
+  itemSize={50}
+  width="100%"
+>
+  {({ index, style }) => (
+    <div style={style}>Item {index}</div>
+  )}
+</FixedSizeList>
+
+// Only renders visible items instead of all 10,000
+```
+
+**6. Memoization**:
+```javascript
+// React
+const expensiveValue = useMemo(() => {
+  return computeExpensiveValue(data);
+}, [data]);
+
+// JavaScript
+const memoize = (fn) => {
+  const cache = new Map();
+  return (...args) => {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) return cache.get(key);
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  };
+};
+
+const fibonacci = memoize((n) => {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+});
+```
+
+**7. Web Workers for Heavy Computations**:
+```javascript
+// main.js
+const worker = new Worker('worker.js');
+
+worker.postMessage({ data: largeDataset });
+
+worker.onmessage = (e) => {
+  console.log('Result:', e.data);
+};
+
+// worker.js
+self.onmessage = (e) => {
+  const result = processLargeDataset(e.data);
+  self.postMessage(result);
+};
+```
+
+**8. Optimize Network Requests**:
+```javascript
+// Parallel requests
+const [users, posts, comments] = await Promise.all([
+  fetch('/api/users'),
+  fetch('/api/posts'),
+  fetch('/api/comments')
+]);
+
+// Request deduplication (React Query does this)
+// Caching with stale-while-revalidate
+// Compression (gzip, brotli)
+// HTTP/2 multiplexing
+```
+
+**9. Code Optimization**:
+```javascript
+// ❌ Slow - creates function every render
+onClick={() => handleClick(item.id)}
+
+// ✅ Fast - stable function reference
+const handleClick = useCallback((id) => { /*...*/ }, []);
+onClick={handleClick}
+
+// ❌ Slow - array methods in loop
+for (let i = 0; i < items.length; i++) {
+  filtered.push(...items.filter(predicate));
+}
+
+// ✅ Fast - single pass
+const filtered = items.filter(predicate);
+```
+
+**10. Service Workers and Caching**:
+```javascript
+// service-worker.js
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+// Cache static assets
+const CACHE_NAME = 'v1';
+const urlsToCache = ['/styles.css', '/script.js', '/logo.png'];
+```
+
+**11. Reduce JavaScript Execution Time**:
+```javascript
+// Use requestIdleCallback for non-critical work
+requestIdleCallback(() => {
+  // Analytics, logging, etc.
+  sendAnalytics();
+});
+
+// Use requestAnimationFrame for animations
+function animate() {
+  element.style.transform = `translateX(${position}px)`;
+  requestAnimationFrame(animate);
+}
+
+// Avoid forced synchronous layout
+// ❌ Bad
+element.style.width = '100px';
+const height = element.offsetHeight; // Forces layout
+
+// ✅ Good
+const height = element.offsetHeight; // Read
+element.style.width = '100px'; // Write
+```
+
+**12. Monitor Performance**:
+```javascript
+// Lighthouse
+// Chrome DevTools Performance tab
+// Web Vitals
+
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
+
+getCLS(console.log);
+getFID(console.log);
+getLCP(console.log);
+
+// Performance API
+const perfData = performance.getEntriesByType('navigation')[0];
+console.log('DOM load time:', perfData.domContentLoadedEventEnd);
+```
+
+**Key Metrics to Optimize**:
+- **LCP** (Largest Contentful Paint): < 2.5s
+- **FID/INP** (First Input Delay/Interaction to Next Paint): < 100ms / < 200ms
+- **CLS** (Cumulative Layout Shift): < 0.1
+- **TTFB** (Time to First Byte): < 600ms
+- **TBT** (Total Blocking Time): < 200ms
 </QAItem>
 
 </FolderAccordion>
@@ -230,7 +1833,275 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Security Concerns" level={2}>
 
 <QAItem question="What are common security threats in JavaScript and how do you prevent them?">
-A: (No answer provided - you'll need to research this topic on your own)
+**1. Cross-Site Scripting (XSS)**:
+Attackers inject malicious scripts into web pages viewed by other users.
+
+**Prevention**:
+```javascript
+// ❌ Dangerous - allows script injection
+element.innerHTML = userInput;
+
+// ✅ Safe - escapes HTML
+element.textContent = userInput;
+
+// ✅ React automatically escapes
+<div>{userInput}</div>
+
+// ❌ Dangerous in React
+<div dangerouslySetInnerHTML={{ __html: userInput }} />
+
+// ✅ If you must use HTML, sanitize it
+import DOMPurify from 'dompurify';
+const clean = DOMPurify.sanitize(userInput);
+<div dangerouslySetInnerHTML={{ __html: clean }} />
+
+// Set Content Security Policy headers
+// Content-Security-Policy: script-src 'self'
+```
+
+**2. Cross-Site Request Forgery (CSRF)**:
+Attackers trick users into performing unwanted actions.
+
+**Prevention**:
+```javascript
+// Use CSRF tokens
+fetch('/api/delete-account', {
+  method: 'POST',
+  headers: {
+    'CSRF-Token': getCsrfToken(),
+    'Content-Type': 'application/json'
+  },
+  credentials: 'include'
+});
+
+// SameSite cookies
+// Set-Cookie: sessionId=abc123; SameSite=Strict; Secure; HttpOnly
+
+// Verify Origin/Referer headers (server-side)
+```
+
+**3. Injection Attacks (SQL, NoSQL)**:
+Attackers inject malicious code into database queries.
+
+**Prevention**:
+```javascript
+// ❌ Vulnerable to SQL injection
+const query = `SELECT * FROM users WHERE id = ${userId}`;
+
+// ✅ Use parameterized queries
+const query = 'SELECT * FROM users WHERE id = ?';
+db.execute(query, [userId]);
+
+// ✅ Use ORMs that escape input
+const user = await User.findOne({ where: { id: userId } });
+
+// ✅ Validate and sanitize input
+const userId = parseInt(req.params.id, 10);
+if (isNaN(userId)) throw new Error('Invalid ID');
+```
+
+**4. Sensitive Data Exposure**:
+Accidentally exposing API keys, tokens, or user data.
+
+**Prevention**:
+```javascript
+// ❌ Never store secrets in frontend code
+const API_KEY = 'sk_live_abc123'; // Visible in bundle!
+
+// ✅ Use environment variables (server-side only)
+// .env.local (add to .gitignore)
+NEXT_PUBLIC_API_URL=https://api.example.com
+API_SECRET=abc123 // NOT prefixed with NEXT_PUBLIC_
+
+// ✅ Make API calls from server
+// app/api/data/route.ts
+export async function GET() {
+  const data = await fetch('https://api.example.com', {
+    headers: { Authorization: `Bearer ${process.env.API_SECRET}` }
+  });
+  return Response.json(data);
+}
+
+// ❌ Don't log sensitive data
+console.log('User password:', password);
+
+// ✅ Sanitize logs
+console.log('User logged in:', { id: user.id, email: user.email });
+```
+
+**5. Dependency Vulnerabilities**:
+Using packages with known security issues.
+
+**Prevention**:
+```bash
+# Audit dependencies
+npm audit
+npm audit fix
+
+# Use tools
+npm install -g snyk
+snyk test
+
+# Keep dependencies updated
+npm outdated
+npm update
+
+# Use lock files
+# package-lock.json or yarn.lock
+
+# Check before installing
+npx npm-check-updates
+```
+
+**6. Prototype Pollution**:
+Modifying Object.prototype can affect all objects.
+
+**Prevention**:
+```javascript
+// ❌ Vulnerable
+function merge(target, source) {
+  for (let key in source) {
+    target[key] = source[key];
+  }
+}
+
+const malicious = JSON.parse('{"__proto__": {"isAdmin": true}}');
+merge({}, malicious);
+
+// ✅ Use Object.create(null) or hasOwnProperty
+function merge(target, source) {
+  for (let key in source) {
+    if (source.hasOwnProperty(key) && key !== '__proto__') {
+      target[key] = source[key];
+    }
+  }
+}
+
+// ✅ Use Object.assign or spread (safer)
+const merged = { ...target, ...source };
+```
+
+**7. Insecure Authentication**:
+Weak authentication mechanisms.
+
+**Prevention**:
+```javascript
+// ✅ Use strong password requirements
+const isStrongPassword = (password) => {
+  return password.length >= 12 &&
+         /[A-Z]/.test(password) &&
+         /[a-z]/.test(password) &&
+         /[0-9]/.test(password) &&
+         /[^A-Za-z0-9]/.test(password);
+};
+
+// ✅ Hash passwords (server-side)
+import bcrypt from 'bcrypt';
+const hashedPassword = await bcrypt.hash(password, 10);
+
+// ✅ Use HTTPS only
+// ✅ Implement rate limiting
+// ✅ Use JWT with short expiration
+const token = jwt.sign({ userId }, SECRET, { expiresIn: '15m' });
+
+// ✅ Implement refresh tokens
+// ✅ Enable MFA when possible
+```
+
+**8. Clickjacking**:
+Attackers overlay invisible elements to trick users into clicking.
+
+**Prevention**:
+```javascript
+// Set X-Frame-Options header
+// X-Frame-Options: DENY
+// or
+// X-Frame-Options: SAMEORIGIN
+
+// Use CSP frame-ancestors directive
+// Content-Security-Policy: frame-ancestors 'none'
+```
+
+**9. Open Redirects**:
+Attackers redirect users to malicious sites.
+
+**Prevention**:
+```javascript
+// ❌ Vulnerable
+const redirect = req.query.redirect;
+res.redirect(redirect);
+
+// ✅ Whitelist allowed domains
+const allowedDomains = ['example.com', 'app.example.com'];
+const url = new URL(redirect);
+if (allowedDomains.includes(url.hostname)) {
+  res.redirect(redirect);
+} else {
+  res.redirect('/');
+}
+
+// ✅ Use relative URLs only
+if (redirect.startsWith('/')) {
+  res.redirect(redirect);
+}
+```
+
+**10. Insecure Direct Object References (IDOR)**:
+Accessing resources without authorization.
+
+**Prevention**:
+```javascript
+// ❌ Vulnerable
+app.get('/api/user/:id', async (req, res) => {
+  const user = await User.findById(req.params.id);
+  res.json(user); // Anyone can access any user!
+});
+
+// ✅ Verify authorization
+app.get('/api/user/:id', authenticateUser, async (req, res) => {
+  if (req.user.id !== req.params.id && !req.user.isAdmin) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  const user = await User.findById(req.params.id);
+  res.json(user);
+});
+```
+
+**Security Headers**:
+```javascript
+// Set security headers (Next.js next.config.js)
+module.exports = {
+  async headers() {
+    return [{
+      source: '/:path*',
+      headers: [
+        { key: 'X-DNS-Prefetch-Control', value: 'on' },
+        { key: 'Strict-Transport-Security', value: 'max-age=63072000' },
+        { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+        { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'X-XSS-Protection', value: '1; mode=block' },
+        { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
+        { 
+          key: 'Content-Security-Policy',
+          value: "default-src 'self'; script-src 'self' 'unsafe-inline'"
+        }
+      ]
+    }];
+  }
+};
+```
+
+**Best Practices**:
+- Never trust user input
+- Validate and sanitize all data
+- Use HTTPS everywhere
+- Keep dependencies updated
+- Follow principle of least privilege
+- Implement proper authentication/authorization
+- Use security linters (ESLint security plugins)
+- Regular security audits
+- Enable security headers
+- Monitor for suspicious activity
 </QAItem>
 
 </FolderAccordion>
@@ -238,7 +2109,251 @@ A: (No answer provided - you'll need to research this topic on your own)
 <FolderAccordion title="Templating Engines and Server-Side Rendering" level={2}>
 
 <QAItem question="If the role involves full-stack development, questions about server-side rendering and templating engines might come up.">
-A: (No answer provided - you'll need to research this topic on your own)
+**Server-Side Rendering (SSR)**:
+
+**What is SSR?**
+Server renders HTML on each request and sends fully-formed HTML to the client, improving SEO and initial load time.
+
+**SSR Frameworks**:
+
+**Next.js (React)**:
+```javascript
+// pages/product/[id].js
+export async function getServerSideProps(context) {
+  const { id } = context.params;
+  const product = await fetchProduct(id);
+  
+  return {
+    props: { product } // Passed to component
+  };
+}
+
+export default function Product({ product }) {
+  return <div>{product.name}</div>;
+}
+
+// App Router (newer)
+// app/product/[id]/page.js
+async function getProduct(id) {
+  const res = await fetch(`https://api.example.com/products/${id}`);
+  return res.json();
+}
+
+export default async function Product({ params }) {
+  const product = await getProduct(params.id);
+  return <div>{product.name}</div>;
+}
+```
+
+**Nuxt.js (Vue)**:
+```javascript
+// pages/product/_id.vue
+<script>
+export default {
+  async asyncData({ params, $axios }) {
+    const product = await $axios.$get(`/api/products/${params.id}`);
+    return { product };
+  }
+}
+</script>
+
+<template>
+  <div>{{ product.name }}</div>
+</template>
+```
+
+**SvelteKit**:
+```javascript
+// routes/product/[id]/+page.server.js
+export async function load({ params }) {
+  const product = await fetchProduct(params.id);
+  return { product };
+}
+```
+
+**Templating Engines**:
+
+**EJS (Embedded JavaScript)**:
+```html
+<!-- views/product.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= product.name %></title>
+</head>
+<body>
+  <h1><%= product.name %></h1>
+  <p>Price: $<%= product.price %></p>
+  
+  <% if (product.inStock) { %>
+    <button>Add to Cart</button>
+  <% } else { %>
+    <p>Out of Stock</p>
+  <% } %>
+  
+  <ul>
+    <% product.features.forEach(feature => { %>
+      <li><%= feature %></li>
+    <% }); %>
+  </ul>
+</body>
+</html>
+```
+
+```javascript
+// Express server
+app.get('/product/:id', async (req, res) => {
+  const product = await fetchProduct(req.params.id);
+  res.render('product', { product });
+});
+```
+
+**Pug (formerly Jade)**:
+```pug
+//- views/product.pug
+doctype html
+html
+  head
+    title= product.name
+  body
+    h1= product.name
+    p Price: $#{product.price}
+    
+    if product.inStock
+      button Add to Cart
+    else
+      p Out of Stock
+    
+    ul
+      each feature in product.features
+        li= feature
+```
+
+**Handlebars**:
+```html
+<!-- views/product.hbs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{product.name}}</title>
+</head>
+<body>
+  <h1>{{product.name}}</h1>
+  <p>Price: ${{product.price}}</p>
+  
+  {{#if product.inStock}}
+    <button>Add to Cart</button>
+  {{else}}
+    <p>Out of Stock</p>
+  {{/if}}
+  
+  <ul>
+    {{#each product.features}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</body>
+</html>
+```
+
+**Nunjucks**:
+```html
+<!-- views/product.njk -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ product.name }}</title>
+</head>
+<body>
+  <h1>{{ product.name }}</h1>
+  <p>Price: ${{ product.price }}</p>
+  
+  {% if product.inStock %}
+    <button>Add to Cart</button>
+  {% else %}
+    <p>Out of Stock</p>
+  {% endif %}
+  
+  <ul>
+    {% for feature in product.features %}
+      <li>{{ feature }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
+```
+
+**SSR vs CSR vs SSG**:
+
+| Feature | SSR | CSR | SSG |
+|---------|-----|-----|-----|
+| SEO | ✅ Excellent | ❌ Poor | ✅ Excellent |
+| Initial Load | ✅ Fast | ❌ Slow | ✅ Fastest |
+| Interactivity | Good | ✅ Excellent | Good |
+| Server Load | ❌ High | ✅ Low | ✅ Low |
+| Hosting | ❌ Needs server | ✅ CDN | ✅ CDN |
+| Dynamic Data | ✅ Real-time | ✅ Real-time | ❌ Build-time |
+
+**When to use**:
+- **SSR**: E-commerce, dashboards, personalized content
+- **CSR**: SPAs, admin panels, apps behind login
+- **SSG**: Blogs, documentation, marketing sites
+
+**Hybrid Approach (Next.js)**:
+```javascript
+// SSG for static pages
+export async function getStaticProps() {
+  return { props: { data }, revalidate: 60 };
+}
+
+// SSR for dynamic pages
+export async function getServerSideProps() {
+  return { props: { data } };
+}
+
+// CSR for client-only features
+function Dashboard() {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    fetchData().then(setData);
+  }, []);
+  
+  return <div>{data?.content}</div>;
+}
+```
+
+**Modern Approaches**:
+- **React Server Components**: Mix server and client components
+- **Streaming SSR**: Send HTML progressively
+- **Partial Hydration**: Hydrate only interactive parts
+- **Islands Architecture**: Ship minimal JavaScript (Astro)
+
+```javascript
+// React Server Component
+async function ProductPage({ id }) {
+  const product = await db.product.findUnique({ where: { id } });
+  
+  return (
+    <div>
+      <h1>{product.name}</h1>
+      {/* Client component for interactivity */}
+      <AddToCartButton productId={id} />
+    </div>
+  );
+}
+
+// 'use client'
+function AddToCartButton({ productId }) {
+  const [loading, setLoading] = useState(false);
+  
+  return (
+    <button onClick={() => addToCart(productId)}>
+      Add to Cart
+    </button>
+  );
+}
+```
 </QAItem>
 
 </FolderAccordion>
@@ -252,14 +2367,14 @@ _This section contains common questions about frontend application architecture,
 <FolderAccordion title="Fundamentals" level={2}>
 
 <QAItem question="What are the main architectural patterns in modern frontend applications?">
-A: MVC (Model-View-Controller), MVVM (Model-View-ViewModel), and Component-Driven
+MVC (Model-View-Controller), MVVM (Model-View-ViewModel), and Component-Driven
 Architecture (CDA). CDA is the most common in modern frameworks like React.
 </QAItem>
 
 <br />
 
 <QAItem question="What is separation of concerns?">
-A: It is dividing the application into distinct modules with unique responsibilities. Example: separating UI, state logic, and API calls.
+It is dividing the application into distinct modules with unique responsibilities. Example: separating UI, state logic, and API calls.
 </QAItem>
 
 </FolderAccordion>
@@ -267,19 +2382,19 @@ A: It is dividing the application into distinct modules with unique responsibili
 <FolderAccordion title="Componentization" level={2}>
 
 <QAItem question="What are reusable components?">
-A: UI blocks that can be used in different contexts, following principles like DRY (Don't Repeat Yourself).
+UI blocks that can be used in different contexts, following principles like DRY (Don't Repeat Yourself).
 </QAItem>
 
 <br />
 
 <QAItem question="What should you consider when designing a scalable component architecture?">
-A: Clear naming, composition, state isolation, and well-defined responsibilities.
+Clear naming, composition, state isolation, and well-defined responsibilities.
 </QAItem>
 
 <br />
 
 <QAItem question="When to use Context API, Redux, or other global state solutions?">
-A: Context API for simple and local data. Redux or other libraries for complex state shared among many components.
+Context API for simple and local data. Redux or other libraries for complex state shared among many components.
 </QAItem>
 
 </FolderAccordion>
@@ -287,14 +2402,12 @@ A: Context API for simple and local data. Redux or other libraries for complex s
 <FolderAccordion title="Micro Frontends" level={2}>
 
 <QAItem question="What is a frontend monolith? And a micro frontend?">
-A: A monolith is a single large application. Micro frontends split the UI into multiple independent apps that coexist.
+A monolith is a single large application. Micro frontends split the UI into multiple independent apps that coexist.
 </QAItem>
 
 <br />
 
 <QAItem question="What are the advantages of micro frontends?">
-A:
-
 - Allow independent teams to develop, deploy, and scale parts of the application separately
 - Enable incremental adoption of new technologies
 - Reduce the impact of failures by isolating problems in smaller parts
@@ -303,8 +2416,6 @@ A:
 <br />
 
 <QAItem question="What are the challenges of micro frontends?">
-A:
-
 - Complexity of integration between different micro frontends
 - Possible increase in bundle size due to duplicated dependencies
 - Managing communication and state sharing between micro frontends
@@ -313,8 +2424,6 @@ A:
 <br />
 
 <QAItem question="What are the best practices for micro frontends?">
-A:
-
 - Define clear communication contracts (events, APIs)
 - Use a shared design system to maintain visual consistency
 - Automate deployments and continuous integration for each micro frontend
@@ -326,13 +2435,13 @@ A:
 <FolderAccordion title="Folder Structure" level={2}>
 
 <QAItem question="How do you structure folders in a large React application?">
-A: By domain (`features/user`, `features/orders`) or by type (`components/`, `pages/`, `hooks/`), depending on the team and project scale.
+By domain (`features/user`, `features/orders`) or by type (`components/`, `pages/`, `hooks/`), depending on the team and project scale.
 </QAItem>
 
 <br />
 
 <QAItem question="Domain-driven folders vs. file type?">
-A: Domain-based structure makes scalability and maintainability easier in large systems. By type is simpler for small teams.
+Domain-based structure makes scalability and maintainability easier in large systems. By type is simpler for small teams.
 </QAItem>
 
 </FolderAccordion>
@@ -340,19 +2449,19 @@ A: Domain-based structure makes scalability and maintainability easier in large 
 <FolderAccordion title="Performance and Scalability" level={2}>
 
 <QAItem question="How does architecture influence application performance?">
-A: Modularity and lazy loading reduce load time and make the bundle smaller.
+Modularity and lazy loading reduce load time and make the bundle smaller.
 </QAItem>
 
 <br />
 
 <QAItem question="Strategies for lazy loading and bundle optimization?">
-A: `React.lazy`, `Suspense`, dynamic imports, route splitting, and bundle analysis with tools like Webpack Bundle Analyzer.
+`React.lazy`, `Suspense`, dynamic imports, route splitting, and bundle analysis with tools like Webpack Bundle Analyzer.
 </QAItem>
 
 <br />
 
 <QAItem question="When to use Server Components or SSR (Next.js)?">
-A: SSR improves SEO and TTFB. Server Components help avoid unnecessary client-side renders.
+SSR improves SEO and TTFB. Server Components help avoid unnecessary client-side renders.
 </QAItem>
 
 </FolderAccordion>
@@ -360,19 +2469,19 @@ A: SSR improves SEO and TTFB. Server Components help avoid unnecessary client-si
 <FolderAccordion title="Tools and Patterns" level={2}>
 
 <QAItem question="How does using TypeScript impact architecture?">
-A: It helps prevent errors during development and makes code more predictable and documented.
+It helps prevent errors during development and makes code more predictable and documented.
 </QAItem>
 
 <br />
 
 <QAItem question="Best practices with Tailwind, Styled Components, or CSS Modules?">
-A: Separate visual responsibilities, avoid logic in styles, and prefer consistent patterns throughout the project.
+Separate visual responsibilities, avoid logic in styles, and prefer consistent patterns throughout the project.
 </QAItem>
 
 <br />
 
 <QAItem question="What is the importance of linting, testing, and CI/CD?">
-A: Linting prevents style/code issues. Testing ensures stability. CI/CD automates delivery and reduces errors.
+Linting prevents style/code issues. Testing ensures stability. CI/CD automates delivery and reduces errors.
 </QAItem>
 
 </FolderAccordion>
@@ -380,13 +2489,13 @@ A: Linting prevents style/code issues. Testing ensures stability. CI/CD automate
 <FolderAccordion title="Security" level={2}>
 
 <QAItem question="Architectural security concerns in the frontend?">
-A: Input sanitization, correct use of tokens and headers, avoid exposing sensitive data in the bundle.
+Input sanitization, correct use of tokens and headers, avoid exposing sensitive data in the bundle.
 </QAItem>
 
 <br />
 
 <QAItem question="How to protect sensitive information in the frontend?">
-A: Do not put secrets in client code. Use environment variables on the backend and expose only what is necessary via a secure API.
+Do not put secrets in client code. Use environment variables on the backend and expose only what is necessary via a secure API.
 </QAItem>
 
 </FolderAccordion>
@@ -408,7 +2517,7 @@ _Here we can see some theoretical things that you will probably face in an inter
 <FolderAccordion title="Reconciliation Algorithm and Performance" level={2}>
 
 <QAItem question="How does the React Reconciliation algorithm work?">
-A: The React Reconciliation algorithm is the process by which React efficiently updates the DOM. When a component's state or props change, React creates a new virtual DOM tree and compares it with the previous one (diffing).
+The React Reconciliation algorithm is the process by which React efficiently updates the DOM. When a component's state or props change, React creates a new virtual DOM tree and compares it with the previous one (diffing).
 
 - React uses a heuristic O(n) algorithm instead of traditional O(n³) tree diffing
 - First compares elements of the same type
@@ -421,7 +2530,7 @@ A: The React Reconciliation algorithm is the process by which React efficiently 
 <FolderAccordion title="Code-splitting in React" level={2}>
 
 <QAItem question="What is code-splitting and how does React support it?">
-A: Code-splitting is a technique to divide your bundle into smaller chunks that can be loaded on demand, improving initial load time. React supports code-splitting via:
+Code-splitting is a technique to divide your bundle into smaller chunks that can be loaded on demand, improving initial load time. React supports code-splitting via:
 
 <br />
 
@@ -441,7 +2550,7 @@ A: Code-splitting is a technique to divide your bundle into smaller chunks that 
 <FolderAccordion title="Render Props Pattern vs Hooks" level={2}>
 
 <QAItem question="What is the render props pattern and how does it compare to Hooks?">
-A: The render props pattern is a technique for sharing code between components using a prop whose value is a function. It was popular before hooks were introduced.
+The render props pattern is a technique for sharing code between components using a prop whose value is a function. It was popular before hooks were introduced.
 
 <br />
 
@@ -467,10 +2576,6 @@ A: The render props pattern is a technique for sharing code between components u
 <FolderAccordion title="State Management" level={2}>
 
 <QAItem question="What are the different types of state in React applications?">
-A:
-
-<br />
-
 - **Client State**
   - UI state (modals, tabs, etc)
   - User preferences
@@ -498,7 +2603,7 @@ A:
 <FolderAccordion title="useReducer and useState" level={2}>
 
 <QAItem question="How does useReducer work and what are its parameters?">
-A: We can implement a custom hook similar to useState using useReducer, creating a simple reducer that replaces the state with what is dispatched to it. Returns a tuple with the state and dispatch function.
+We can implement a custom hook similar to useState using useReducer, creating a simple reducer that replaces the state with what is dispatched to it. Returns a tuple with the state and dispatch function.
 
 ```tsx
 const [state, dispatch] = useReducer(reducer, initialArg, init?)
@@ -522,10 +2627,6 @@ const [state, dispatch] = useReducer(reducer, initialArg, init?)
 <FolderAccordion title="useEffect Drama" level={2}>
 
 <QAItem question="What are the differences between useEffect and useLayoutEffect?">
-A:
-
-<br />
-
 **useEffect** and **useLayoutEffect** are both hooks for handling side effects, but differ in their execution timing:
 
 <br />
@@ -551,10 +2652,6 @@ A:
 <FolderAccordion title="API Calls" level={2}>
 
 <QAItem question="What are the limitations of using useEffect for API calls?">
-A:
-
-<br />
-
 **useEffect Limitations**
 
 - Race Conditions: handling non-sequential order
@@ -564,10 +2661,6 @@ A:
 <br />
 
 <QAItem question="What are the best practices for making API calls in React?">
-A:
-
-<br />
-
 **Best Practices**
 
 - Custom Hook with AbortController: Create a new AbortController for this request, pass the signal to the request, if the signal is not aborted set the data. Cleanup: abort the request if component is unmounted or URL changes
@@ -579,20 +2672,12 @@ A:
 <FolderAccordion title="Refs Refs Refs" level={2}>
 
 <QAItem question="What is forwardRef and when should you use it?">
-A:
-
-<br />
-
 **forwardRef**: component receives a ref and forwards it to a child DOM element or component. Use cases: accessing a DOM element inside a child, imperatively triggering actions on a child component, triggering input focus via ref
 </QAItem>
 
 <br />
 
 <QAItem question="What is useImperativeHandle and when should you use it?">
-A:
-
-<br />
-
 **useImperativeHandle**: customizes the instance exposed when using a reference, allows a child to expose specific functions or properties to the parent. Use cases: wanting to limit which parts of a component are accessible via ref, exposing and customizing imperative methods. Example: modal triggering API on close
 </QAItem>
 
@@ -601,10 +2686,6 @@ A:
 <FolderAccordion title="Performance Measurement & Optimization" level={2}>
 
 <QAItem question="How do you measure React component performance?">
-A:
-
-<br />
-
 **How to measure?**
 
 - DevTools: Record and interact, Analyze the flamegraph
@@ -617,10 +2698,6 @@ A:
 <br />
 
 <QAItem question="What is the practical approach to performance optimization?">
-A:
-
-<br />
-
 **Practical Approach**:
 
 1. identify bottlenecks using tools
@@ -632,10 +2709,6 @@ A:
 <br />
 
 <QAItem question="When should you use useCallback?">
-A:
-
-<br />
-
 **useCallback**: memoized version of the callback function that only changes if one of its dependencies has changed. Has a small performance cost, just part of the optimization strategy, not everywhere. Use cases: passing functions to optimized child components
 </QAItem>
 
@@ -644,7 +2717,7 @@ A:
 <FolderAccordion title="INP Optimization" level={2}>
 
 <QAItem question="What is INP and how would you optimize it in a React application?">
-A: INP (Interaction to Next Paint) is a Core Web Vital that measures responsiveness to user interactions such as clicks, taps, and keyboard inputs. It became an official Google ranking factor in March 2024, with a "good" threshold below 200ms. To optimize INP in a React application:
+INP (Interaction to Next Paint) is a Core Web Vital that measures responsiveness to user interactions such as clicks, taps, and keyboard inputs. It became an official Google ranking factor in March 2024, with a "good" threshold below 200ms. To optimize INP in a React application:
 
 1. Profile performance using Chrome DevTools Performance panel
 2. Implement code-splitting and lazy loading with React.lazy() and Suspense
@@ -661,7 +2734,7 @@ As seen in the Vio case study, these optimizations can improve INP from poor sco
 <FolderAccordion title="Migrating to Next.js" level={2}>
 
 <QAItem question="How would you approach migrating a client-rendered React application to Next.js for better performance?">
-A: Based on DoorDash's migration strategy:
+Based on DoorDash's migration strategy:
 
 1. Implement an incremental approach - migrate page by page
 2. Create a bridge between environments with shared context and isSSR flag
@@ -674,7 +2747,7 @@ A: Based on DoorDash's migration strategy:
 <br />
 
 <QAItem question="What challenges might you face when migrating to Next.js App Router and how would you address them?">
-A: Based on Inngest's experience:
+Based on Inngest's experience:
 
 1. **Understanding the new caching behavior**: Start by disabling cache for dynamic data (export const dynamic = "force-dynamic")
 2. **Managing global state across layouts**: Move global state to URL parameters
@@ -687,7 +2760,7 @@ A: Based on Inngest's experience:
 <FolderAccordion title="SSR, CSR, and Hybrid Approaches" level={2}>
 
 <QAItem question="How would you decide between SSR, CSR, and hybrid approaches in a Next.js application?">
-A: **Use SSR for**: Entry points and landing pages that need SEO, content-heavy pages, pages indexable by search engines, initial application shell. **Use CSR for**: Highly interactive parts after initial load, internal dashboards, features requiring frequent updates, components dependent on client-side APIs. **Hybrid (recommended)**: SSR for initial shell and critical content, CSR for subsequent interactions, progressive hydration, streaming SSR.
+**Use SSR for**: Entry points and landing pages that need SEO, content-heavy pages, pages indexable by search engines, initial application shell. **Use CSR for**: Highly interactive parts after initial load, internal dashboards, features requiring frequent updates, components dependent on client-side APIs. **Hybrid (recommended)**: SSR for initial shell and critical content, CSR for subsequent interactions, progressive hydration, streaming SSR.
 </QAItem>
 
 </FolderAccordion>
@@ -695,8 +2768,6 @@ A: **Use SSR for**: Entry points and landing pages that need SEO, content-heavy 
 <FolderAccordion title="Caching Strategies" level={2}>
 
 <QAItem question="What caching strategies would you implement in a Next.js application to balance performance and data freshness?">
-A:
-
 1. **CDN/Edge**: Configure cache headers, use ISR with revalidation, stale-while-revalidate
 2. **App Router caching**: cache: 'no-store' for dynamic data, time-based revalidation with next.revalidate, on-demand revalidation
 3. **Client-side**: React Query or SWR with staleness times
@@ -708,7 +2779,7 @@ A:
 <FolderAccordion title="State Management Evolution" level={2}>
 
 <QAItem question="How has state management in React applications evolved, and what approach would you recommend for a large-scale application?">
-A: **Current best practices**:
+**Current best practices**:
 
 1. Keep state local when possible
 2. React Context for shared state
@@ -724,8 +2795,6 @@ A: **Current best practices**:
 <FolderAccordion title="Accessibility in React/Next.js" level={2}>
 
 <QAItem question="How would you ensure accessibility in a React/Next.js application?">
-A:
-
 1. **Semantic HTML and ARIA**: Appropriate elements, ARIA when needed, follow ARIA Authoring Practices
 2. **Keyboard navigation**: All interactive elements keyboard accessible, manage focus for modals, expected shortcuts
 3. **Test with assistive technologies**: Screen readers, keyboard-only testing, axe-core or Lighthouse
@@ -744,7 +2813,7 @@ _Some best practices to keep the performance on top_
 <FolderAccordion title="1. Eliminating Async Waterfalls" level={2}>
 
 <QAItem question="What are 'async waterfalls' and why are they problematic?">
-A: Async waterfalls occur when asynchronous operations are executed sequentially, one waiting for the other to complete, even when there's no real dependency between them. This is problematic because:
+Async waterfalls occur when asynchronous operations are executed sequentially, one waiting for the other to complete, even when there's no real dependency between them. This is problematic because:
 
 - Significantly increases total loading time
 - Unnecessarily blocks the UI
@@ -778,7 +2847,7 @@ async function load(id: string, skip: boolean) {
 <br />
 
 <QAItem question="How to use Promise.all to avoid waterfalls in multiple async calls?">
-A: When there are multiple independent async calls, use `Promise.all()` or start the promises simultaneously before awaiting.
+When there are multiple independent async calls, use `Promise.all()` or start the promises simultaneously before awaiting.
 </QAItem>
 
 <br />
@@ -816,7 +2885,7 @@ const comments = await commentsPromise;
 <br />
 
 <QAItem question="How to avoid waterfalls with TanStack Query?">
-A: With TanStack Query, use `enabled` only for necessary validation, not to create cascades. Independent queries should start simultaneously.
+With TanStack Query, use `enabled` only for necessary validation, not to create cascades. Independent queries should start simultaneously.
 </QAItem>
 
 <br />
@@ -873,7 +2942,7 @@ const { data: posts } = useQuery({
 <br />
 
 <QAItem question="What is 'data proximity' and how to apply this concept?">
-A: Data proximity means fetching data as close as possible to where it will be consumed, avoiding "prop drilling" of pending states.
+Data proximity means fetching data as close as possible to where it will be consumed, avoiding "prop drilling" of pending states.
 </QAItem>
 
 <br />
@@ -923,7 +2992,7 @@ function PostsSection({ userId }) {
 <FolderAccordion title="2. Render Optimization and Re-renders" level={2}>
 
 <QAItem question="When and how to use useMemo to optimize render calculations?">
-A: Use `useMemo` to avoid unnecessary recalculations of complex logic or array transformations that don't need to be redone on every render.
+Use `useMemo` to avoid unnecessary recalculations of complex logic or array transformations that don't need to be redone on every render.
 </QAItem>
 
 <br />
@@ -973,7 +3042,7 @@ function ProductList({ products, filter, sortBy }) {
 <br />
 
 <QAItem question="When to use useCallback and what's its impact on function stability?">
-A: Use `useCallback` for functions passed as props to child components that use `React.memo`, or when the function is a dependency of another hook.
+Use `useCallback` for functions passed as props to child components that use `React.memo`, or when the function is a dependency of another hook.
 </QAItem>
 
 <br />
@@ -1015,7 +3084,7 @@ function Parent({ items }) {
 <br />
 
 <QAItem question="Why shouldn't we put high-frequency states in React Context?">
-A: High-frequency states (like text inputs) in global Contexts cause re-renders in all components consuming that context.
+High-frequency states (like text inputs) in global Contexts cause re-renders in all components consuming that context.
 </QAItem>
 
 <br />
@@ -1072,7 +3141,7 @@ function SearchInput() {
 <FolderAccordion title="3. JavaScript Performance and Structures" level={2}>
 
 <QAItem question="How to avoid multiple iterations over the same list?">
-A: Combine operations like `filter`, `map`, and `reduce` into a single pass.
+Combine operations like `filter`, `map`, and `reduce` into a single pass.
 </QAItem>
 
 <br />
@@ -1106,7 +3175,7 @@ function processProducts(products: Product[]) {
 <br />
 
 <QAItem question="What is the 'early return' pattern and how does it improve readability?">
-A: Early return means returning early for error or loading states, avoiding excessive nesting.
+Early return means returning early for error or loading states, avoiding excessive nesting.
 </QAItem>
 
 <br />
@@ -1161,7 +3230,7 @@ function ProductPage({ productId }) {
 <br />
 
 <QAItem question="Why is it important to cleanup in useEffect and how to implement it?">
-A: Cleanup prevents memory leaks and inconsistent behavior when the component unmounts.
+Cleanup prevents memory leaks and inconsistent behavior when the component unmounts.
 </QAItem>
 
 <br />
@@ -1207,8 +3276,6 @@ useEffect(() => {
 <FolderAccordion title="4. Golden Rules - Summary" level={2}>
 
 <QAItem question="What are the main golden rules for React performance?">
-A:
-
 - **Parallel Queries**: With TanStack Query, start independent queries simultaneously. Use `enabled` only for necessary validation.
 - **useMemo for Transformations**: Use for calculations with array iterations, values used in multiple places, or expensive computations.
 - **useCallback for Stability**: Use when function is passed to `React.memo` or is a hook dependency.
@@ -1224,13 +3291,13 @@ A:
 <FolderAccordion title="Another Common Questions" level={1}>
 
 <QAItem question="What are the strategies we can use to optimize the performance of web applications?">
-A: CDNs, GraphQL (maybe) to reduce overfetching, improve backend performance, use SSR and/or SSG, lazy loading for loading assets only when it's needed, minimize and compress HTML, CSS and JS files, and optimize images by compressing and resizing them.
+CDNs, GraphQL (maybe) to reduce overfetching, improve backend performance, use SSR and/or SSG, lazy loading for loading assets only when it's needed, minimize and compress HTML, CSS and JS files, and optimize images by compressing and resizing them.
 </QAItem>
 
 <br />
 
 <QAItem question="What are Web Vitals (LCP, FID, CLS)? And how are they applied in the real world?">
-A: Web Vitals are standardized metrics to measure the quality of the navigation inside a website:
+Web Vitals are standardized metrics to measure the quality of the navigation inside a website:
 
 - LCP (Largest Contentful Paint) - LCP measures the time it takes for the largest visible content element to be fully loaded and rendered. A LCP is considered good when it takes less than 2.5 seconds.
 - FID (First Input Delay) - FID measures the time it takes for the browser to respond to the user's first interaction. A FID is considered good when it takes less than 100 milliseconds.
@@ -1240,14 +3307,12 @@ A: Web Vitals are standardized metrics to measure the quality of the navigation 
 <br />
 
 <QAItem question="What is the WAI-ARIA standard?">
-A: Web Accessibility Initiative - Accessible Rich Internet Applications, is a technical specification developed by the World Wide Web Consortium (W3C). The purpose of WAI-ARIA is to improve the accessibility of web content and applications, especially for users with disabilities who rely on assistive technologies, such as screen readers or alternative input devices.
+Web Accessibility Initiative - Accessible Rich Internet Applications, is a technical specification developed by the World Wide Web Consortium (W3C). The purpose of WAI-ARIA is to improve the accessibility of web content and applications, especially for users with disabilities who rely on assistive technologies, such as screen readers or alternative input devices.
 </QAItem>
 
 <br />
 
 <QAItem question="In which cases is it worth building an SPA?">
-A:
-
 - Mobile app-like experience and PWA
 - Complex state management, because they are able to maintain persistent state and handle real-time updates
 - Highly interactive user interfaces, because there's no reload, so transitions between views are faster
@@ -1256,8 +3321,6 @@ A:
 <FolderAccordion title="JavaScript" level={2}>
 
 <QAItem question="What is the advantage of using a Map instead of an object?">
-A:
-
 - With maps you can use keys of any type, not only strings as in javascript objects
 - Provides an iterator for easy for-of usage
 - Support millions of items
@@ -1279,19 +3342,19 @@ for (const [key, value] of map) {
 <br />
 
 <QAItem question="What is the difference between Map and WeakMap?">
-A: WeakMaps keys must be objects. Besides that, WeakMaps have weak references to the keys, so unused keys can be easily removed by the garbage collector
+WeakMaps keys must be objects. Besides that, WeakMaps have weak references to the keys, so unused keys can be easily removed by the garbage collector
 </QAItem>
 
 <br />
 
 <QAItem question="What are closures? (a very common question)">
-A: One function that has a function inside, and return it. This technique is used to capture the scope on which they were defined, so you can use variables of that scope outside it.
+One function that has a function inside, and return it. This technique is used to capture the scope on which they were defined, so you can use variables of that scope outside it.
 </QAItem>
 
 <br />
 
 <QAItem question="What is hoisting?">
-A: Elevate functions and variables declarations to the "top scope". This allows you to use a function or a variable before it is defined in your .js file.
+Elevate functions and variables declarations to the "top scope". This allows you to use a function or a variable before it is defined in your .js file.
 
 ```javascript
 // Function hoisting
@@ -1313,7 +3376,7 @@ let y = 10;
 <br />
 
 <QAItem question="How does equality work in JS? What is the difference between using === and Object.is()?">
-A: Object.is considers NaN equals to NaN and -0 different than +0.
+Object.is considers NaN equals to NaN and -0 different than +0.
 
 ```javascript
 // === behavior
@@ -1333,7 +3396,7 @@ Object.is({}, {});    // false
 <br />
 
 <QAItem question="What is the purpose of Object.freeze()?">
-A: Makes an object immutable, preventing it to have its value changed.
+Makes an object immutable, preventing it to have its value changed.
 
 ```javascript
 const obj = { name: 'John', age: 30 };
@@ -1350,13 +3413,13 @@ console.log(obj);    // { name: 'John', age: 30 }
 <br />
 
 <QAItem question="What is the difference between an async-await function and using a chain of .then?">
-A: Callback hell
+Callback hell
 </QAItem>
 
 <br />
 
 <QAItem question="How do generators work?">
-A: Generators are on-demand functions, they can be paused and resumed, and the state is maintained along these "pauses and resumes". They return a generator object, each key of this object is the result of and yield operation, the last key is the return result.
+Generators are on-demand functions, they can be paused and resumed, and the state is maintained along these "pauses and resumes". They return a generator object, each key of this object is the result of and yield operation, the last key is the return result.
 
 ```javascript
 function* numberGenerator() {
@@ -1379,31 +3442,31 @@ console.log(gen.next()); // { value: 'done', done: true }
 <FolderAccordion title="CSS" level={2}>
 
 <QAItem question="How does CSS-in-JS work?">
-A: It is an approach that allows writing CSS directly within JavaScript files, making code maintenance and modularization easier.
+It is an approach that allows writing CSS directly within JavaScript files, making code maintenance and modularization easier.
 </QAItem>
 
 <br />
 
 <QAItem question="Why does Facebook no longer want to follow the same direction as CSS-in-JS?">
-A: Doesn't generate a static CSS file, it generates a JS file and set all the styles through it, and then the styles interact with the browser through the CSSStyleSheet API. Generating a static CSS file would be more performatic.
+Doesn't generate a static CSS file, it generates a JS file and set all the styles through it, and then the styles interact with the browser through the CSSStyleSheet API. Generating a static CSS file would be more performatic.
 </QAItem>
 
 <br />
 
 <QAItem question="What is the proposal of the Stylex library?">
-A: It's a library to manage CSS styles in an efficient and modular way.
+It's a library to manage CSS styles in an efficient and modular way.
 </QAItem>
 
 <br />
 
 <QAItem question="How to use nesting with pure CSS only?">
-A: It's being discussed lately, it's very recent and will be implemented in the next versions. But, so far it's only possible by using CSS preprocessors.
+It's being discussed lately, it's very recent and will be implemented in the next versions. But, so far it's only possible by using CSS preprocessors.
 </QAItem>
 
 <br />
 
 <QAItem question="What are container queries?">
-A: A way to apply styles based on the container size, instead of the window view size It makes the styles more responsive.
+A way to apply styles based on the container size, instead of the window view size It makes the styles more responsive.
 
 ```css
 /* Container query */
@@ -1430,7 +3493,7 @@ A: A way to apply styles based on the container size, instead of the window view
 <br />
 
 <QAItem question="How does the CSS grid subgrid work?">
-A: The CSS Grid subgrid feature is an extension of the CSS Grid Layout Module that allows a nested grid to inherit its parent grid's rows or columns. This is especially useful when you want to align the content of nested grid items with the parent grid's structure, without having to duplicate row and column definitions or manage complex positioning with margins or padding.
+The CSS Grid subgrid feature is an extension of the CSS Grid Layout Module that allows a nested grid to inherit its parent grid's rows or columns. This is especially useful when you want to align the content of nested grid items with the parent grid's structure, without having to duplicate row and column definitions or manage complex positioning with margins or padding.
 
 ```css
 .parent-grid {
@@ -1452,8 +3515,6 @@ A: The CSS Grid subgrid feature is an extension of the CSS Grid Layout Module th
 <FolderAccordion title="React" level={2}>
 
 <QAItem question="What is the Virtual DOM? And why is it often more performant than manipulating the 'real' DOM?">
-A:
-
 - Virtual DOM is a JavaScript object containing a replica to the real DOM, it is capable of making comparisons with the real DOM, and then apply patches avoiding a full re-render in the DOM, rerendering only what have changed.
 - Virtual DOM is a programming concept where a virtual representation of a UI is kept in memory synced with "Real DOM" by a library such as ReactDOM and this process is called reconciliation
 - Virtual DOM makes the performance faster, not because the processing itself is done in less time. The reason is the amount of changed information – rather than wasting time on updating the entire page, you can dissect it into small elements and interactions
@@ -1462,7 +3523,7 @@ A:
 <br />
 
 <QAItem question="Explain why the useState hook accepts a function as an initial value">
-A: To allow the initial value to be calculated only once, instead of every time
+To allow the initial value to be calculated only once, instead of every time
 
 ```jsx
 // Without function: expensive calculation runs on every render
@@ -1476,7 +3537,7 @@ const [value, setValue] = useState(() => calculateExpensiveValue());
 <br />
 
 <QAItem question="What is the difference between the hooks useState and useReducer?">
-A: useState is better for simple state management, without too much logic involved, and useReducer was designed to handle complex state logics, and states that requires transition and dispatch actions.
+useState is better for simple state management, without too much logic involved, and useReducer was designed to handle complex state logics, and states that requires transition and dispatch actions.
 
 ```jsx
 // useState - simple
@@ -1493,8 +3554,6 @@ dispatch({ type: 'changeStep', payload: 5 });
 <br />
 
 <QAItem question="Under what circumstances does a component re-render in React?">
-A:
-
 - Changes in props: When a component receives new props, it triggers a re-render. This happens even if the new props are the same as the old ones.
 - Changes in state: When a component's state is updated, a re-render is triggered.
 - Parent component re-renders: When a parent component re-renders, by default, its child components also re-render.
@@ -1505,8 +3564,6 @@ A:
 <br />
 
 <QAItem question="How can we prevent unnecessary rerenders?">
-A:
-
 - React.memo
 - Use the hook dependencies correctly in useCallback, useEffect and useMemo to avoid re-renders
 - For big forms, prefer useRef over useState
@@ -1532,14 +3589,12 @@ const expensiveValue = useMemo(() => {
 <br />
 
 <QAItem question="What is the advantage of using the React.memo API?">
-A: Prevents unnecessary renders when the component's props haven't changed, improving performance
+Prevents unnecessary renders when the component's props haven't changed, improving performance
 </QAItem>
 
 <br />
 
 <QAItem question="What are the purposes of the hooks useRef, useMemo, and useCallback?">
-A:
-
 - useRef: Allows you to create a mutable reference object that persists across renders. It is commonly used to store references to DOM elements, but can also be used to store values that should persist without triggering a rerender (input values for example).
 - useMemo: Memoizes a computed value, preventing unnecessary recomputations when dependencies haven't changed. This can improve performance when working with expensive computations that depend on specific prop or state values.
 - useCallback: Memoizes a callback function, ensuring that the same instance of the function is reused across renders unless its dependencies change. This is useful for preventing unnecessary rerenders in child components that receive the callback as a prop.
@@ -1548,19 +3603,19 @@ A:
 <br />
 
 <QAItem question="What is virtualization? And what is it for?">
-A: Virtualization is a technique used to optimize the rendering of large lists or grids by only rendering the visible items on the screen. It improves performance by reducing the number of DOM elements created and updated, minimizing memory usage, and reducing layout calculations.
+Virtualization is a technique used to optimize the rendering of large lists or grids by only rendering the visible items on the screen. It improves performance by reducing the number of DOM elements created and updated, minimizing memory usage, and reducing layout calculations.
 </QAItem>
 
 <br />
 
 <QAItem question="Explain how the useEffect hook works">
-A: The useEffect hook is used to perform side effects in functional components, such as fetching data, updating the DOM, or subscribing to events. It takes two arguments: a function that contains the side effect, and an optional dependency array. The effect function runs after the component renders and updates. If the dependency array is provided, the effect will only run when one of the listed dependencies changes. If the array is empty, the effect will run only on mount and unmount.
+The useEffect hook is used to perform side effects in functional components, such as fetching data, updating the DOM, or subscribing to events. It takes two arguments: a function that contains the side effect, and an optional dependency array. The effect function runs after the component renders and updates. If the dependency array is provided, the effect will only run when one of the listed dependencies changes. If the array is empty, the effect will run only on mount and unmount.
 </QAItem>
 
 <br />
 
 <QAItem question="How can we do event cleanup in useEffect?">
-A: By returning a "cleanup function" in the end of the useEffect A cleanup function is a function with a removeEventListener call inside it. As you are returning this cleanup function, the cleanup will happen every time the effect happens (it will vary on the dependencies array of your useEffect)
+By returning a "cleanup function" in the end of the useEffect A cleanup function is a function with a removeEventListener call inside it. As you are returning this cleanup function, the cleanup will happen every time the effect happens (it will vary on the dependencies array of your useEffect)
 
 ```jsx
 useEffect(() => {
@@ -1582,7 +3637,7 @@ useEffect(() => {
 <br />
 
 <QAItem question="What is the recommended way to consume external data in React?">
-A: useEffect hook to fetch data when the component mounts or when relevant dependencies change. The fetched data can then be stored in the component's state using the useState or useReducer hooks.
+useEffect hook to fetch data when the component mounts or when relevant dependencies change. The fetched data can then be stored in the component's state using the useState or useReducer hooks.
 You can use axios or fetch for consuming REST APIs, and apollo-client, relay or urql if you are consuming a GraphQL API. You can also consume other types of APIs, for example gRPC and SOAP, although these API patterns are not that common in frontend applications.
 tRPC (t3-app) and server-components (next.js) are a very recent way to consume external data.
 </QAItem>
@@ -1590,8 +3645,6 @@ tRPC (t3-app) and server-components (next.js) are a very recent way to consume e
 <br />
 
 <QAItem question="What is the difference between server state and application state?">
-A:
-
 - Server state refers to the data stored on the server or external services, typically fetched via APIs.
 - Application state refers to the data that is specific to a user's interaction with the application, such as user preferences, UI state, context or data that is temporarily cached on the client-side.
 </QAItem>
@@ -1599,8 +3652,6 @@ A:
 <br />
 
 <QAItem question="How can a React application be deployed without any meta-framework?">
-A:
-
 - Write a build script in the package.json, and also a start build script
 - Choose a provider that supports a SPA.
 - Deploy the application through CLI, FTP or git remote repository.
@@ -1611,8 +3662,6 @@ A:
 <br />
 
 <QAItem question="What is a meta-framework in the context of web development?">
-A:
-
 - Framework built on top of other frameworks or libraries
 - Next.js --> React.js
 - Nuxtjs --> Vue.js
@@ -1625,8 +3674,6 @@ A:
 <FolderAccordion title="Next.js" level={2}>
 
 <QAItem question="What is the difference between getServerSideProps and getStaticProps?">
-A:
-
 - getStaticProps - used to get de component props and then render it into a static HTML page at build time
 - getServerSideProps - used to get the component props and then render it into a static HTML page at run time
 
@@ -1648,7 +3695,7 @@ export async function getServerSideProps(context) {
 <br />
 
 <QAItem question="What is the purpose of the getStaticPaths function?">
-A: Is used when your dynamic page has the getStaticProps. Nextjs needs to know what are the possible paths for your dynamic route, so you map them on the getStaticProps function. You can use getStaticProps without getStaticPaths; getStaticPaths is only a complement in case of dynamic routes
+Is used when your dynamic page has the getStaticProps. Nextjs needs to know what are the possible paths for your dynamic route, so you map them on the getStaticProps function. You can use getStaticProps without getStaticPaths; getStaticPaths is only a complement in case of dynamic routes
 
 ```jsx
 // For dynamic routes like /posts/[id]
@@ -1672,8 +3719,6 @@ export async function getStaticProps({ params }) {
 <br />
 
 <QAItem question="How does the next/image API work? And why does it improve the app's performance?">
-A:
-
 - The image is optimized by the Next.js server, or an external image optimization service. The optimization includes resizing, format conversion (to WEBP), and compression.
 - The optimized image is served to the client with cache headers to enable caching by the browser or a CDN, which can improve performance on subsequent requests.
 </QAItem>
@@ -1681,13 +3726,13 @@ A:
 <br />
 
 <QAItem question="Explain how you would deploy a Next application without hosting it on Vercel">
-A: You can deploy a Next.js application on any platform that supports Node.js, the only difference is that on Vercel this process is automated, is hidden by a great DX.
+You can deploy a Next.js application on any platform that supports Node.js, the only difference is that on Vercel this process is automated, is hidden by a great DX.
 </QAItem>
 
 <br />
 
 <QAItem question="How do API routes work?">
-A: Next.js API routes provide a built-in solution for creating API endpoints within a Next.js application. They are server-side functions that run when a request is made to their corresponding URL. To create an API route, simply create a new file with a .js extension inside the pages/api folder, and export a default request handler function.
+Next.js API routes provide a built-in solution for creating API endpoints within a Next.js application. They are server-side functions that run when a request is made to their corresponding URL. To create an API route, simply create a new file with a .js extension inside the pages/api folder, and export a default request handler function.
 
 ```jsx
 // pages/api/hello.js
@@ -1706,20 +3751,18 @@ export default function handler(req, res) {
 <br />
 
 <QAItem question="Is it possible to API Routes if the app is not hosted on Vercel?">
-A: Yes, you can use Next.js API routes even if your app is not hosted on Vercel. API routes work on any platform that supports Node.js, including custom deployments or other hosting providers.
+Yes, you can use Next.js API routes even if your app is not hosted on Vercel. API routes work on any platform that supports Node.js, including custom deployments or other hosting providers.
 </QAItem>
 
 <br />
 
 <QAItem question="How can we integrate AMP with Next?">
-A: You'll need to import the withAmp higher-order component from next/amp and wrap your page component with it.
+You'll need to import the withAmp higher-order component from next/amp and wrap your page component with it.
 </QAItem>
 
 <br />
 
 <QAItem question="What is the advantage of using Serverless mode?">
-A:
-
 - Improved scalability, as serverless functions can automatically scale based on demand.
 - Cost efficiency, as you only pay for the compute resources you actually use.
 - Easier deployment and management, as you don't need to manage your own servers or infrastructure.
@@ -1729,7 +3772,7 @@ A:
 <br />
 
 <QAItem question="Is it possible to use a static CDN with Next?">
-A: Yes, you can use a static CDN with Next.js by configuring the assetPrefix option in your next.config.js file. The assetPrefix should be set to the URL of your CDN.
+Yes, you can use a static CDN with Next.js by configuring the assetPrefix option in your next.config.js file. The assetPrefix should be set to the URL of your CDN.
 </QAItem>
 
 </FolderAccordion>
