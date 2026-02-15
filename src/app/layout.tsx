@@ -17,6 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "André Luis Andrade",
   description: "Frontend Engineering / Design Engineering",
+  icons: {
+    icon: "/profile.jpeg",
+    apple: "/profile.jpeg",
+  },
 };
 
 export default function RootLayout({
