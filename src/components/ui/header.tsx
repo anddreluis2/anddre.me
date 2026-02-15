@@ -98,7 +98,7 @@ export function Header({ className }: HeaderProps) {
         {/* Center - Desktop Navigation - Hidden on mobile */}
         <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <NavigationMenu>
-            <NavigationMenuList className="relative bg-background/95 backdrop-blur-md rounded-md px-2 py-1 shadow-lg">
+            <NavigationMenuList className="relative rounded-md px-2 py-1">
               {/* Sliding background */}
               <div
                 className="absolute top-1 bottom-1 bg-gradient-to-r from-white/20 via-white/30 to-white/20 dark:from-white/10 dark:via-white/20 dark:to-white/10 rounded-full transition-all duration-500 ease-in-out"

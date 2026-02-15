@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export type OrderBy = "default" | "location" | "date";
@@ -20,21 +21,44 @@ export function GalleryFilters({
   orderBy,
   onOrderByChange,
 }: GalleryFiltersProps) {
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  useEffect(() => {
+    const index = OPTIONS.findIndex((opt) => opt.value === orderBy);
+    const activeIdx = index !== -1 ? index : 0;
+    const activeElement = itemRefs.current[activeIdx];
+    if (activeElement) {
+      const { offsetLeft, offsetWidth } = activeElement;
+      setIndicatorStyle({ left: offsetLeft, width: offsetWidth });
+    }
+  }, [orderBy]);
+
   return (
-    <div className="flex flex-wrap items-center gap-1 mb-8">
-      {/* Pill-style buttons: selected gets solid bg, unselected stays subtle until hover. */}
-      {OPTIONS.map(({ value, label }) => {
+    <div className="relative flex flex-wrap items-center gap-1 mb-8 px-2 py-1 w-fit">
+      {/* Sliding background – same as header */}
+      <div
+        className="absolute top-1 bottom-1 bg-gradient-to-r from-white/20 via-white/30 to-white/20 dark:from-white/10 dark:via-white/20 dark:to-white/10 rounded-full transition-all duration-500 ease-in-out"
+        style={{
+          left: `${indicatorStyle.left}px`,
+          width: `${indicatorStyle.width}px`,
+        }}
+      />
+      {OPTIONS.map(({ value, label }, index) => {
         const isSelected = orderBy === value;
         return (
           <button
             key={value}
+            ref={(el) => {
+              itemRefs.current[index] = el;
+            }}
             type="button"
             onClick={() => onOrderByChange(value)}
             className={cn(
-              "flex items-center gap-2 cursor-pointer ease-out px-4 py-2 rounded-full text-sm font-medium transition-all",
+              "relative z-10 flex items-center gap-2 cursor-pointer ease-out px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
               isSelected
-                ? "text-foreground bg-white dark:bg-white/15 shadow-sm"
-                : "text-muted-foreground hover:text-foreground/90 hover:bg-white/50 dark:hover:bg-white/5",
+                ? "text-foreground font-medium"
+                : "text-muted-foreground hover:text-foreground/90",
             )}
           >
             {label}
