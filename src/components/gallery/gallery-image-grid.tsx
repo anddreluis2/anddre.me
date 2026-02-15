@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
-import { cn } from "@/lib/utils";
 
 export interface GalleryImage {
   id: number;
@@ -30,19 +29,6 @@ const LAYOUT = {
   mass: 0.8,
 };
 
-/** Discriminated union so we can safely narrow in the map without type assertions. */
-type GridItem =
-  | { type: "label"; label: string }
-  | { type: "image"; image: GalleryImage };
-
-/** Flattens groups into a single list of labels + images for a single-pass render. */
-function flattenGroups(groups: Group[]): GridItem[] {
-  return groups.flatMap((group) => [
-    ...(group.label ? [{ type: "label" as const, label: group.label }] : []),
-    ...group.images.map((image) => ({ type: "image" as const, image })),
-  ]);
-}
-
 function formatDate(dateStr?: string): string {
   if (!dateStr) return "";
   const [month, year] = dateStr.split("-").map(Number);
@@ -54,20 +40,13 @@ function formatDate(dateStr?: string): string {
 
 export function GalleryImageGrid({ groups }: GalleryImageGridProps) {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
-  const items = useMemo(() => flattenGroups(groups), [groups]);
   /** First 8 images get priority loading to improve LCP; Set for O(1) lookup per image. */
   const priorityIds = useMemo(
     () =>
       new Set(
-        items
-          .filter(
-            (i): i is { type: "image"; image: GalleryImage } =>
-              i.type === "image",
-          )
-          .slice(0, 8)
-          .map((i) => i.image.id),
+        groups.flatMap((g) => g.images).slice(0, 8).map((img) => img.id),
       ),
-    [items],
+    [groups],
   );
 
   const closeLightbox = useCallback(() => setSelectedImage(null), []);
@@ -84,33 +63,29 @@ export function GalleryImageGrid({ groups }: GalleryImageGridProps) {
     <>
       <LayoutGroup>
         <div className="w-full">
-          <motion.div
-            className="grid grid-cols-4 sm:grid-cols-5 gap-2 w-full"
-            layout
-            transition={LAYOUT}
-          >
-            {items.map((item) =>
-              item.type === "label" ? (
-                <motion.div
-                  key={`label-${item.label}`}
-                  className="col-span-full mt-6 first:mt-0"
+          {groups.map((group, groupIndex) => (
+            <div key={group.label ?? `group-${groupIndex}`} className="mb-8">
+              {group.label && (
+                <motion.h2
+                  className="text-xs font-medium text-muted-foreground lowercase tracking-wider mb-3"
                   layout
                   transition={LAYOUT}
                 >
-                  <h2 className="text-xs font-medium text-muted-foreground lowercase tracking-wider">
-                    {item.label}
-                  </h2>
-                </motion.div>
-              ) : (
-                <GridImage
-                  key={item.image.id}
-                  image={item.image}
-                  priorityIds={priorityIds}
-                  onSelect={() => setSelectedImage(item.image)}
-                />
-              ),
-            )}
-          </motion.div>
+                  {group.label}
+                </motion.h2>
+              )}
+              <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">
+                {group.images.map((image) => (
+                  <MasonryImage
+                    key={image.id}
+                    image={image}
+                    priorityIds={priorityIds}
+                    onSelect={() => setSelectedImage(image)}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </LayoutGroup>
 
@@ -167,8 +142,8 @@ function Lightbox({
   );
 }
 
-/** Extracted so the grid map stays readable; layoutId enables smooth reorder animations. */
-function GridImage({
+/** Masonry item: natural height, full photo visible, no cropping. */
+function MasonryImage({
   image,
   priorityIds,
   onSelect,
@@ -178,35 +153,29 @@ function GridImage({
   onSelect: () => void;
 }) {
   const isLandscape = image.format === "landscape";
+  const width = isLandscape ? 1200 : 800;
+  const height = isLandscape ? 800 : 1000; /* 3:2 and 4:5 */
   return (
     <motion.div
       layout
       layoutId={`gallery-${image.id}`}
       transition={LAYOUT}
-      className={cn(
-        "overflow-hidden rounded-lg cursor-pointer group",
-        isLandscape ? "col-span-2 aspect-[16/9]" : "col-span-1 aspect-[4/5]",
-      )}
+      className="break-inside-avoid mb-2 cursor-pointer group"
       onClick={onSelect}
     >
-      <div className="relative h-full w-full overflow-hidden">
-        <div className="h-full w-full overflow-hidden group-hover:scale-[1.03] transition-transform duration-300">
+      <div className="relative overflow-hidden rounded-lg">
+        <div className="overflow-hidden rounded-lg group-hover:scale-[1.02] transition-transform duration-300">
           <Image
             src={image.path}
             alt={image.location}
-            width={isLandscape ? 1600 : 400}
-            height={isLandscape ? 900 : 500}
-            className="w-full h-full object-cover object-center"
-            sizes={
-              isLandscape
-                ? "(max-width: 768px) 100vw, 50vw"
-                : "(max-width: 768px) 50vw, 25vw"
-            }
+            width={width}
+            height={height}
+            className="w-full h-auto"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             priority={priorityIds.has(image.id)}
           />
         </div>
-        {/* Hover overlay with location */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 rounded-lg pointer-events-none">
           <span className="text-white text-sm font-medium drop-shadow-sm">
             {image.location}
           </span>
