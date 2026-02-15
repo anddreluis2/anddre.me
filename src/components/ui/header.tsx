@@ -16,7 +16,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
-import { ThemeToggle } from "./theme-toggle";
 
 type HeaderProps = {
   className?: string;
@@ -90,10 +89,8 @@ export function Header({ className }: HeaderProps) {
       <div className="absolute inset-0 bg-background/90 backdrop-blur-xl" />
 
       <div className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-8 relative z-10">
-        {/* Left side - Theme Toggle */}
-        <div className="flex items-center">
-          <ThemeToggle />
-        </div>
+        {/* Spacer for layout balance on desktop */}
+        <div className="w-10 sm:w-10" />
 
         {/* Center - Desktop Navigation - Hidden on mobile */}
         <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
