@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { AnimatePresence, LayoutGroup } from "motion/react";
 import { GalleryLightbox } from "./gallery-lightbox";
 import { GalleryMasonryGroup } from "./gallery-masonry-group";
@@ -12,28 +12,24 @@ interface GalleryImageGridProps {
   groups: GalleryGroup[];
 }
 
-/** Orchestrates gallery layout, lightbox state, and keyboard handling. */
+/** Orchestrates gallery layout and lightbox. */
 export function GalleryImageGrid({ groups }: GalleryImageGridProps) {
-  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(
-    null,
-  );
-  const priorityIds = useMemo(
-    () =>
-      new Set(
-        groups.flatMap((g) => g.images).slice(0, 8).map((img) => img.id),
-      ),
+  const images = useMemo(
+    () => groups.flatMap((g) => g.images),
     [groups],
   );
+  const priorityIds = useMemo(
+    () => new Set(images.slice(0, 8).map((img) => img.id)),
+    [images],
+  );
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const closeLightbox = useCallback(() => setSelectedImage(null), []);
+  const closeLightbox = useCallback(() => setSelectedIndex(null), []);
 
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeLightbox();
-    };
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, [closeLightbox]);
+  const openLightbox = useCallback((image: GalleryImage) => {
+    const index = images.findIndex((img) => img.id === image.id);
+    setSelectedIndex(index >= 0 ? index : 0);
+  }, [images]);
 
   return (
     <>
@@ -44,15 +40,20 @@ export function GalleryImageGrid({ groups }: GalleryImageGridProps) {
               key={group.label ?? `group-${index}`}
               group={group}
               priorityIds={priorityIds}
-              onSelectImage={setSelectedImage}
+              onSelectImage={openLightbox}
             />
           ))}
         </div>
       </LayoutGroup>
 
       <AnimatePresence>
-        {selectedImage && (
-          <GalleryLightbox image={selectedImage} onClose={closeLightbox} />
+        {selectedIndex !== null && (
+          <GalleryLightbox
+            images={images}
+            currentIndex={selectedIndex}
+            onClose={closeLightbox}
+            onNavigate={setSelectedIndex}
+          />
         )}
       </AnimatePresence>
     </>

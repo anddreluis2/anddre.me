@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { GalleryMasonryImage } from "./gallery-masonry-image";
-import type { GalleryGroup, GalleryImage } from "./gallery-types";
+import type { GalleryGroup } from "./gallery-types";
 
 const LAYOUT = {
   type: "spring" as const,
@@ -14,7 +14,7 @@ const LAYOUT = {
 interface GalleryMasonryGroupProps {
   group: GalleryGroup;
   priorityIds: Set<number>;
-  onSelectImage: (image: GalleryImage) => void;
+  onSelectImage: (image: import("./gallery-types").GalleryImage) => void;
 }
 
 /** Renders a labeled group of images in a masonry column layout. */
