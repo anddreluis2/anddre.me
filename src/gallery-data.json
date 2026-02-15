@@ -1,159 +1,170 @@
 [
     {
         "id": 1,
-        "name": "travel",
-        "images": [
-            {
-                "id": 1,
-                "location": "Amsterdam",
-                "path": "/gallery/amsterdam-at-night.jpg",
-                "format": "portrait",
-                "date": "03-2025"
-            },
-            {
-                "id": 2,
-                "location": "Paris",
-                "path": "/gallery/arc-of-triomph.jpg",
-                "format": "portrait",
-                "date": "03-2025"
-            },
-            {
-                "id": 3,
-                "location": "Home",
-                "path": "/gallery/bituca.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 4,
-                "location": "Home",
-                "path": "/gallery/center-curitiba.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 5,
-                "location": "Rome",
-                "path": "/gallery/church-at-rome.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 6,
-                "location": "Rome",
-                "path": "/gallery/colosseo.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 7,
-                "location": "Home",
-                "path": "/gallery/cozy-home.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 8,
-                "location": "Paris",
-                "path": "/gallery/eiffel-tower-from-arc.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 9,
-                "location": "Home",
-                "path": "/gallery/flower-shop-curitiba.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 10,
-                "location": "Home",
-                "path": "/gallery/fruit-market-curitiba.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 11,
-                "location": "Ilha do Mel",
-                "path": "/gallery/honey-island-church.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 12,
-                "location": "Ilha do Mel",
-                "path": "/gallery/honey-island-fort.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 13,
-                "location": "Paris",
-                "path": "/gallery/monmartre.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 14,
-                "location": "Paris",
-                "path": "/gallery/nortedame.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 15,
-                "location": "Home",
-                "path": "/gallery/old-setup.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 16,
-                "location": "Paris",
-                "path": "/gallery/paris-boulangerie.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 17,
-                "location": "Paris",
-                "path": "/gallery/paris-street.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 18,
-                "location": "Home",
-                "path": "/gallery/rainy-day-at-home.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 19,
-                "location": "Paris",
-                "path": "/gallery/rainy-paris.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 20,
-                "location": "Rome",
-                "path": "/gallery/roman-foro.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 21,
-                "location": "Home",
-                "path": "/gallery/shawarma-shop.jpg",
-                "format": "portrait"
-            },
-            {
-                "id": 22,
-                "location": "Home",
-                "path": "/gallery/bakery-with-bituca.jpeg",
-                "format": "landscape"
-            },
-            {
-                "id": 23,
-                "location": "Rio de Janeiro",
-                "path": "/gallery/forte-duque-de-caxias.jpeg",
-                "format": "landscape"
-            },
-            {
-                "id": 24,
-                "location": "Rio de Janeiro",
-                "path": "/gallery/sunset-rio.jpeg",
-                "format": "landscape"
-            }
-        ]
+        "location": "Amsterdam",
+        "path": "/gallery/amsterdam-at-night.jpg",
+        "format": "portrait",
+        "date": "03-2025"
     },
     {
         "id": 2,
-        "name": "home",
-        "images": []
+        "location": "Paris",
+        "path": "/gallery/arc-of-triomph.jpg",
+        "format": "portrait",
+        "date": "03-2025"
+    },
+    {
+        "id": 3,
+        "location": "Curitiba",
+        "path": "/gallery/bituca.jpg",
+        "format": "portrait",
+        "date": "05-2025"
+    },
+    {
+        "id": 4,
+        "location": "Curitiba",
+        "path": "/gallery/center-curitiba.jpg",
+        "format": "portrait",
+        "date": "05-2025"
+    },
+    {
+        "id": 5,
+        "location": "Rome",
+        "path": "/gallery/church-at-rome.jpg",
+        "format": "portrait",
+        "date": "04-2025"
+    },
+    {
+        "id": 6,
+        "location": "Rome",
+        "path": "/gallery/colosseo.jpg",
+        "format": "portrait",
+        "date": "04-2025"
+    },
+    {
+        "id": 7,
+        "location": "Curitiba",
+        "path": "/gallery/cozy-home.jpg",
+        "format": "portrait",
+        "date": "08-2025"
+    },
+    {
+        "id": 8,
+        "location": "Paris",
+        "path": "/gallery/eiffel-tower-from-arc.jpg",
+        "format": "portrait",
+        "date": "03-2025"
+    },
+    {
+        "id": 9,
+        "location": "Curitiba",
+        "path": "/gallery/flower-shop-curitiba.jpg",
+        "format": "portrait",
+        "date": "08-2025"
+    },
+    {
+        "id": 10,
+        "location": "Curitiba",
+        "path": "/gallery/fruit-market-curitiba.jpg",
+        "format": "portrait",
+        "date": "08-2025"
+    },
+    {
+        "id": 11,
+        "location": "Ilha do Mel",
+        "path": "/gallery/honey-island-church.jpg",
+        "format": "portrait",
+        "date": "11-2024"
+    },
+    {
+        "id": 12,
+        "location": "Ilha do Mel",
+        "path": "/gallery/honey-island-fort.jpg",
+        "format": "portrait",
+        "date": "11-2024"
+    },
+    {
+        "id": 13,
+        "location": "Paris",
+        "path": "/gallery/monmartre.jpg",
+        "format": "portrait",
+        "date": "03-2025"
+    },
+    {
+        "id": 14,
+        "location": "Paris",
+        "path": "/gallery/nortedame.jpg",
+        "format": "portrait",
+        "date": "03-2025"
+    },
+    {
+        "id": 15,
+        "location": "Curitiba",
+        "path": "/gallery/old-setup.jpg",
+        "format": "portrait",
+        "date": "06-2024"
+    },
+    {
+        "id": 16,
+        "location": "Paris",
+        "path": "/gallery/paris-boulangerie.jpg",
+        "format": "portrait",
+        "date": "03-2025"
+    },
+    {
+        "id": 17,
+        "location": "Paris",
+        "path": "/gallery/paris-street.jpg",
+        "format": "portrait",
+        "date": "03-2025"
+    },
+    {
+        "id": 18,
+        "location": "Curitiba",
+        "path": "/gallery/rainy-day-at-home.jpg",
+        "format": "portrait",
+        "date": "08-2025"
+    },
+    {
+        "id": 19,
+        "location": "Paris",
+        "path": "/gallery/rainy-paris.jpg",
+        "format": "portrait",
+        "date": "03-2025"
+    },
+    {
+        "id": 20,
+        "location": "Rome",
+        "path": "/gallery/roman-foro.jpg",
+        "format": "portrait",
+        "date": "04-2025"
+    },
+    {
+        "id": 21,
+        "location": "Curitiba",
+        "path": "/gallery/shawarma-shop.jpg",
+        "format": "portrait",
+        "date": "08-2025"
+    },
+    {
+        "id": 22,
+        "location": "Curitiba",
+        "path": "/gallery/bakery-with-bituca.jpeg",
+        "format": "landscape",
+        "date": "09-2025"
+    },
+    {
+        "id": 23,
+        "location": "Rio de Janeiro",
+        "path": "/gallery/forte-duque-de-caxias.jpeg",
+        "format": "landscape",
+        "date": "01-2026"
+    },
+    {
+        "id": 24,
+        "location": "Rio de Janeiro",
+        "path": "/gallery/sunset-rio.jpeg",
+        "format": "landscape",
+        "date": "01-2026"
     }
 ]
