@@ -7,23 +7,25 @@
                 "id": 1,
                 "location": "Amsterdam",
                 "path": "/gallery/amsterdam-at-night.jpg",
-                "format": "portrait"
+                "format": "portrait",
+                "date": "03-2025"
             },
             {
                 "id": 2,
                 "location": "Paris",
                 "path": "/gallery/arc-of-triomph.jpg",
-                "format": "portrait"
+                "format": "portrait",
+                "date": "03-2025"
             },
             {
                 "id": 3,
-                "location": "Curitiba",
+                "location": "Home",
                 "path": "/gallery/bituca.jpg",
                 "format": "portrait"
             },
             {
                 "id": 4,
-                "location": "Curitiba",
+                "location": "Home",
                 "path": "/gallery/center-curitiba.jpg",
                 "format": "portrait"
             },
@@ -53,13 +55,13 @@
             },
             {
                 "id": 9,
-                "location": "Curitiba",
+                "location": "Home",
                 "path": "/gallery/flower-shop-curitiba.jpg",
                 "format": "portrait"
             },
             {
                 "id": 10,
-                "location": "Curitiba",
+                "location": "Home",
                 "path": "/gallery/fruit-market-curitiba.jpg",
                 "format": "portrait"
             },
@@ -89,7 +91,7 @@
             },
             {
                 "id": 15,
-                "location": "Curitiba",
+                "location": "Home",
                 "path": "/gallery/old-setup.jpg",
                 "format": "portrait"
             },
@@ -125,10 +127,33 @@
             },
             {
                 "id": 21,
-                "location": "Curitiba",
+                "location": "Home",
                 "path": "/gallery/shawarma-shop.jpg",
                 "format": "portrait"
+            },
+            {
+                "id": 22,
+                "location": "Home",
+                "path": "/gallery/bakery-with-bituca.jpeg",
+                "format": "landscape"
+            },
+            {
+                "id": 23,
+                "location": "Rio de Janeiro",
+                "path": "/gallery/forte-duque-de-caxias.jpeg",
+                "format": "landscape"
+            },
+            {
+                "id": 24,
+                "location": "Rio de Janeiro",
+                "path": "/gallery/sunset-rio.jpeg",
+                "format": "landscape"
             }
         ]
+    },
+    {
+        "id": 2,
+        "name": "home",
+        "images": []
     }
 ]
