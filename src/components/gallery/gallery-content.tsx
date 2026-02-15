@@ -2,13 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { GalleryFilters, type OrderBy } from "./gallery-filters";
-import { GalleryImageGrid, type GalleryImage } from "./gallery-image-grid";
+import { GalleryImageGrid } from "./gallery-image-grid";
+import type { GalleryImage } from "./gallery-types";
 
 interface GalleryContentProps {
   images: GalleryImage[];
 }
 
-type Group = { label: string; images: GalleryImage[] };
+type Group = { label: string | null; images: GalleryImage[] };
 
 /** Groups by getKey; sortKey optional for custom order (e.g. date needs YYYY-MM, not MM-YYYY). */
 function groupBy(
@@ -55,11 +56,9 @@ export function GalleryContent({ images }: GalleryContentProps) {
           const [m, y] = d.split("-").map(Number);
           return `${y}-${String(m).padStart(2, "0")}`; /* MM-YYYY → YYYY-MM for chronological sort */
         },
-      ).map((g) => ({ ...g, label: formatDate(g.label) }));
+      ).map((g) => ({ ...g, label: formatDate(g.label ?? "") }));
     return [{ label: null, images }]; /* Default: no labels, single group */
   }, [images, orderBy]);
-
-  console.log(groups);
 
   return (
     <div className="flex flex-col w-full min-h-screen">
