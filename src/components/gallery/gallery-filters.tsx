@@ -36,9 +36,8 @@ export function GalleryFilters({
 
   return (
     <div className="relative flex flex-wrap items-center gap-1 mb-8 px-2 py-1 w-fit">
-      {/* Sliding background – same as header */}
       <div
-        className="absolute top-1 bottom-1 bg-gradient-to-r from-white/20 via-white/30 to-white/20 dark:from-white/10 dark:via-white/20 dark:to-white/10 rounded-full transition-all duration-500 ease-in-out"
+        className="absolute top-1 bottom-1 rounded-full transition-all duration-500 ease-in-out bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200 dark:from-white/10 dark:via-white/20 dark:to-white/10"
         style={{
           left: `${indicatorStyle.left}px`,
           width: `${indicatorStyle.width}px`,
@@ -57,8 +56,8 @@ export function GalleryFilters({
             className={cn(
               "relative z-10 flex items-center gap-2 cursor-pointer ease-out px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
               isSelected
-                ? "text-foreground font-medium"
-                : "text-muted-foreground hover:text-foreground/90",
+                ? "text-neutral-900 dark:text-foreground"
+                : "text-neutral-500 dark:text-muted-foreground hover:text-neutral-700 dark:hover:text-foreground/90",
             )}
           >
             {label}

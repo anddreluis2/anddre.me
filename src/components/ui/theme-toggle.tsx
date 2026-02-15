@@ -23,9 +23,8 @@ export function ThemeToggle() {
     const root = document.documentElement;
 
     if (newTheme === "light") {
-      // Light mode: clean white background with dark text for good contrast
-      root.style.setProperty("--background", "#ffffff");
-      root.style.setProperty("--foreground", "#171717");
+      root.style.setProperty("--background", "#f0f0ef");
+      root.style.setProperty("--foreground", "#1c1917");
       root.classList.remove("dark");
       root.classList.add("light");
     } else {
@@ -47,7 +46,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative cursor-pointer w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background/80 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center group overflow-hidden"
+      className="relative cursor-pointer w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-neutral-200 border border-neutral-300 hover:border-neutral-400 dark:bg-background/80 dark:backdrop-blur-sm dark:border-white/10 dark:hover:border-white/20 transition-all duration-300 flex items-center justify-center group overflow-hidden"
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       <div className="relative w-3 h-3 sm:w-4 sm:h-4">

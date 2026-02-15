@@ -2,8 +2,8 @@
 @import "highlight.js/styles/github-dark.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f0f0ef;
+  --foreground: #1c1917;
 }
 
 @theme inline {
@@ -13,10 +13,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Light mode (default) */
+/* Light mode – off-white, less harsh than pure white */
 .light {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f0f0ef;
+  --foreground: #1c1917;
 }
 
 /* Dark mode - keeping exactly as it was */

@@ -85,8 +85,8 @@ export function Header({ className }: HeaderProps) {
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      {/* Background with blur */}
-      <div className="absolute inset-0 bg-background/90 backdrop-blur-xl" />
+      {/* Background with blur – light: subtle border, dark: none */}
+      <div className="absolute inset-0 bg-background/90 backdrop-blur-xl border-b border-neutral-200/60 dark:border-transparent" />
 
       <div className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-8 relative z-10">
         {/* Spacer for layout balance on desktop */}
@@ -96,9 +96,9 @@ export function Header({ className }: HeaderProps) {
         <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <NavigationMenu>
             <NavigationMenuList className="relative rounded-md px-2 py-1">
-              {/* Sliding background */}
+              {/* Sliding background – light: subtle gray pill, dark: white tint */}
               <div
-                className="absolute top-1 bottom-1 bg-gradient-to-r from-white/20 via-white/30 to-white/20 dark:from-white/10 dark:via-white/20 dark:to-white/10 rounded-full transition-all duration-500 ease-in-out"
+                className="absolute top-1 bottom-1 rounded-full transition-all duration-500 ease-in-out bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200 dark:from-white/10 dark:via-white/20 dark:to-white/10"
                 style={{
                   left: `${indicatorStyle.left}px`,
                   width: `${indicatorStyle.width}px`,
