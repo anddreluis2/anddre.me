@@ -151,20 +151,95 @@
         "location": "Curitiba",
         "path": "/gallery/bakery-with-bituca.jpeg",
         "format": "landscape",
-        "date": "09-2025"
+        "date": "09-2025",
+        "analog": true
     },
     {
         "id": 23,
         "location": "Rio de Janeiro",
         "path": "/gallery/forte-duque-de-caxias.jpeg",
         "format": "landscape",
-        "date": "01-2026"
+        "date": "01-2026",
+        "analog": true
     },
     {
         "id": 24,
         "location": "Rio de Janeiro",
         "path": "/gallery/sunset-rio.jpeg",
         "format": "landscape",
-        "date": "01-2026"
+        "date": "01-2026",
+        "analog": true
+    },
+    {
+        "id": 25,
+        "location": "Amsterdam",
+        "path": "/gallery/amsterdam_bikes.jpg",
+        "format": "portrait",
+        "date": "03-2025"
+    },
+    {
+        "id": 26,
+        "location": "Amsterdam",
+        "path": "/gallery/sunny_amsterdam.jpg",
+        "format": "portrait",
+        "date": "03-2025"
+    },
+    {
+        "id": 27,
+        "location": "Rome",
+        "path": "/gallery/fontana-di-trevi.jpg",
+        "format": "portrait",
+        "date": "04-2025"
+    },
+    {
+        "id": 28,
+        "location": "Paris",
+        "path": "/gallery/some-european-church.jpg",
+        "format": "portrait",
+        "date": "04-2025"
+    },
+    {
+        "id": 29,
+        "location": "Venice",
+        "path": "/gallery/venezia_home.jpg",
+        "format": "portrait",
+        "date": "04-2025"
+    },
+    {
+        "id": 30,
+        "location": "Venice",
+        "path": "/gallery/venezia_street.jpg",
+        "format": "portrait",
+        "date": "04-2025"
+    },
+    {
+        "id": 31,
+        "location": "Curitiba",
+        "path": "/gallery/agua-verde-market.jpg",
+        "format": "portrait",
+        "date": "02-2026"
+    },
+    {
+        "id": 32,
+        "location": "Curitiba",
+        "path": "/gallery/bituca_regina.jpg",
+        "format": "portrait",
+        "date": "02-2026",
+        "analog": true
+    },
+    {
+        "id": 33,
+        "location": "Curitiba",
+        "path": "/gallery/home.jpg",
+        "format": "portrait",
+        "date": "02-2026",
+        "analog": true
+    },
+    {
+        "id": 34,
+        "location": "Amsterdam",
+        "path": "/gallery/morning-coffee.jpg",
+        "format": "portrait",
+        "date": "03-2025"
     }
 ]

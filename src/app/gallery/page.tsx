@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import galleryData from "@/gallery-data.json";
 import { GalleryContent } from "@/components/gallery/gallery-content";
+import type { GalleryImage } from "@/components/gallery/gallery-types";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -8,13 +9,7 @@ export const metadata: Metadata = {
     "Photography and visual moments. A collection of images capturing my perspective through the lens.",
 };
 
-const IMAGES = galleryData as {
-  id: number;
-  location: string;
-  path: string;
-  format: string;
-  date?: string;
-}[];
+const IMAGES = galleryData as GalleryImage[];
 
 export default function Gallery() {
   return (
