@@ -151,21 +151,24 @@
         "location": "Curitiba",
         "path": "/gallery/bakery-with-bituca.jpeg",
         "format": "landscape",
-        "date": "09-2025"
+        "date": "09-2025",
+        "analog": true
     },
     {
         "id": 23,
         "location": "Rio de Janeiro",
         "path": "/gallery/forte-duque-de-caxias.jpeg",
         "format": "landscape",
-        "date": "01-2026"
+        "date": "01-2026",
+        "analog": true
     },
     {
         "id": 24,
         "location": "Rio de Janeiro",
         "path": "/gallery/sunset-rio.jpeg",
         "format": "landscape",
-        "date": "01-2026"
+        "date": "01-2026",
+        "analog": true
     },
     {
         "id": 25,
@@ -221,14 +224,16 @@
         "location": "Curitiba",
         "path": "/gallery/bituca_regina.jpg",
         "format": "portrait",
-        "date": "02-2026"
+        "date": "02-2026",
+        "analog": true
     },
     {
         "id": 33,
         "location": "Curitiba",
         "path": "/gallery/home.jpg",
         "format": "portrait",
-        "date": "02-2026"
+        "date": "02-2026",
+        "analog": true
     },
     {
         "id": 34,

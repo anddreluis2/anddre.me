@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-export type OrderBy = "default" | "location" | "date";
+export type OrderBy = "default" | "location" | "date" | "analog";
 
 export interface GalleryFiltersProps {
   orderBy: OrderBy;
@@ -15,6 +15,7 @@ const OPTIONS: { value: OrderBy; label: string }[] = [
   { value: "default", label: "default" },
   { value: "location", label: "by location" },
   { value: "date", label: "by date" },
+  { value: "analog", label: "analog" },
 ];
 
 export function GalleryFilters({

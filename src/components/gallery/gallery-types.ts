@@ -4,6 +4,7 @@ export interface GalleryImage {
   path: string;
   format: string;
   date?: string;
+  analog?: boolean;
 }
 
 export interface GalleryGroup {

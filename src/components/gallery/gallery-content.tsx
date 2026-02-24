@@ -47,6 +47,10 @@ export function GalleryContent({ images }: GalleryContentProps) {
   const [orderBy, setOrderBy] = useState<OrderBy>("default");
   /** Memo: grouping is O(n); skip when images/orderBy unchanged. */
   const groups = useMemo(() => {
+    if (orderBy === "analog") {
+      const analog = images.filter((img) => img.analog);
+      return [{ label: null, images: analog }];
+    }
     if (orderBy === "location") return groupBy(images, (img) => img.location);
     if (orderBy === "date")
       return groupBy(

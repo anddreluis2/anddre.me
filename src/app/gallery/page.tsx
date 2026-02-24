@@ -14,6 +14,7 @@ const IMAGES = galleryData as {
   path: string;
   format: string;
   date?: string;
+  analog?: boolean;
 }[];
 
 export default function Gallery() {
