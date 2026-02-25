@@ -1,49 +1,41 @@
 "use client";
 
-import { motion } from "motion/react";
 import { GalleryMasonryImage } from "./gallery-masonry-image";
-import type { GalleryGroup } from "./gallery-types";
-
-const LAYOUT = {
-  type: "spring" as const,
-  stiffness: 120,
-  damping: 25,
-  mass: 0.8,
-};
+import type { GalleryGroup, GalleryImage } from "./gallery-types";
 
 interface GalleryMasonryGroupProps {
   group: GalleryGroup;
   priorityIds: Set<number>;
-  onSelectImage: (image: import("./gallery-types").GalleryImage) => void;
+  onSelectImage: (image: GalleryImage) => void;
+  indexOffset: number;
 }
 
-/** Renders a labeled group of images in a masonry column layout. */
 export function GalleryMasonryGroup({
   group,
   priorityIds,
   onSelectImage,
+  indexOffset,
 }: GalleryMasonryGroupProps) {
   return (
-    <div className="mb-8">
+    <section className="mb-10">
       {group.label && (
-        <motion.h2
-          className="text-xs font-medium text-muted-foreground lowercase tracking-wider mb-3"
-          layout
-          transition={LAYOUT}
-        >
-          {group.label}
-        </motion.h2>
+        <div className="mb-4 pb-2 border-b border-neutral-200/60 dark:border-white/10">
+          <h2 className="text-sm font-medium text-muted-foreground lowercase tracking-wider">
+            {group.label}
+          </h2>
+        </div>
       )}
-      <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">
-        {group.images.map((image) => (
+      <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-3">
+        {group.images.map((image, i) => (
           <GalleryMasonryImage
             key={image.id}
             image={image}
             priority={priorityIds.has(image.id)}
             onSelect={() => onSelectImage(image)}
+            index={indexOffset + i}
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
