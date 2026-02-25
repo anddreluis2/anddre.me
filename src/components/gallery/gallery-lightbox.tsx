@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { formatDate } from "./gallery-utils";
@@ -9,8 +9,8 @@ import type { GalleryImage } from "./gallery-types";
 
 const TRANSITION = {
   type: "tween" as const,
-  duration: 0.4,
-  ease: [0.25, 0.46, 0.45, 0.94] as const, /* ease-out-quad – suave, sem pico */
+  duration: 0.35,
+  ease: [0.25, 0.46, 0.45, 0.94] as const,
 };
 
 interface GalleryLightboxProps {
@@ -20,7 +20,6 @@ interface GalleryLightboxProps {
   onNavigate: (index: number) => void;
 }
 
-/** Modal lightbox: click outside to close, body scroll locked. */
 export function GalleryLightbox({
   images,
   currentIndex,
@@ -32,6 +31,7 @@ export function GalleryLightbox({
   const hasNext = currentIndex < images.length - 1;
   const [direction, setDirection] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const progress = ((currentIndex + 1) / images.length) * 100;
 
   const goPrev = useCallback(() => {
     if (hasPrev) {
@@ -89,32 +89,35 @@ export function GalleryLightbox({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={TRANSITION}
-      className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black/90"
+      className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black/95 backdrop-blur-sm"
       onClick={onClose}
     >
-      {/* Instagram-style progress bar – click segment to jump */}
+      {/* Top bar: progress + counter + close */}
       <div
-        className="absolute top-0 left-0 right-0 flex gap-0.5 px-4 pt-4 z-30"
+        className="absolute top-0 left-0 right-0 z-30"
         onClick={(e) => e.stopPropagation()}
       >
-        {images.map((_, i) => (
+        <div className="w-full h-0.5 bg-white/10">
+          <div
+            className="h-full bg-white/70 transition-all duration-300 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <div className="flex items-center justify-between px-5 py-3">
+          <span className="text-white/60 text-sm tabular-nums font-medium">
+            {currentIndex + 1} / {images.length}
+          </span>
           <button
-            key={i}
             type="button"
-            onClick={() => onNavigate(i)}
-            className="flex-1 h-1 min-w-[2px] rounded-full overflow-hidden bg-white/25 hover:bg-white/35 transition-colors"
-            aria-label={`Go to image ${i + 1}`}
+            onClick={onClose}
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-colors"
+            aria-label="Close lightbox"
           >
-            <div
-              className={`h-full rounded-full bg-white transition-all duration-300 ease-out ${
-                i <= currentIndex ? "w-full" : "w-0"
-              }`}
-            />
+            <X className="w-4 h-4" />
           </button>
-        ))}
+        </div>
       </div>
 
-      {/* Prev – fixed to viewport left */}
       {hasPrev && (
         <button
           type="button"
@@ -122,14 +125,13 @@ export function GalleryLightbox({
             e.stopPropagation();
             goPrev();
           }}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm"
+          className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-colors"
           aria-label="Previous image"
         >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          <ChevronLeft className="w-5 h-5" />
         </button>
       )}
 
-      {/* Next – fixed to viewport right */}
       {hasNext && (
         <button
           type="button"
@@ -137,58 +139,58 @@ export function GalleryLightbox({
             e.stopPropagation();
             goNext();
           }}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm"
+          className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-colors"
           aria-label="Next image"
         >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          <ChevronRight className="w-5 h-5" />
         </button>
       )}
 
-      {/* Image wrapper – click doesn't close */}
+      {/* Image wrapper */}
       <div
-        className="relative flex items-center justify-center max-w-[90vw] max-h-[85vh] px-14 sm:px-16"
+        className="relative flex items-center justify-center max-w-[90vw] max-h-[80vh] px-14 sm:px-16"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative overflow-hidden min-w-0">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={image.id}
-              initial={{ opacity: 0.7, x: direction * 12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0.7, x: -direction * 12 }}
-              transition={TRANSITION}
-              className="relative flex flex-col items-center"
-            >
-              <div className="relative">
-                {isLoading && (
-                  <div
-                    className="absolute inset-0 rounded-lg bg-white/8 min-w-[240px] min-h-[180px]"
-                    aria-hidden
-                  />
-                )}
-                <Image
-                  src={image.path}
-                  alt={image.location}
-                  width={1920}
-                  height={1080}
-                  className={`max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-lg transition-opacity duration-300 ease-out ${
-                    isLoading ? "opacity-0" : "opacity-100"
-                  }`}
-                  sizes="90vw"
-                  onLoad={() => setIsLoading(false)}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={image.id}
+            initial={{ opacity: 0.6, x: direction * 16 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0.6, x: -direction * 16 }}
+            transition={TRANSITION}
+            className="relative flex flex-col items-center"
+          >
+            <div className="relative">
+              {isLoading && (
+                <div
+                  className="absolute inset-0 rounded-lg bg-white/5 min-w-[240px] min-h-[180px]"
+                  aria-hidden
                 />
-              </div>
-              <div className="mt-4 text-center text-white text-sm shrink-0">
-                <span className="font-medium">{image.location}</span>
-                {image.date && (
-                  <span className="text-white/70 ml-2">
-                    {formatDate(image.date)}
-                  </span>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+              )}
+              <Image
+                src={image.path}
+                alt={image.location}
+                width={1920}
+                height={1080}
+                className={`max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-lg transition-opacity duration-300 ease-out ${
+                  isLoading ? "opacity-0" : "opacity-100"
+                }`}
+                sizes="90vw"
+                onLoad={() => setIsLoading(false)}
+              />
+            </div>
+            <div className="mt-4 text-center shrink-0">
+              <span className="text-white/90 text-sm font-medium">
+                {image.location}
+              </span>
+              {image.date && (
+                <span className="text-white/40 text-sm ml-2">
+                  {formatDate(image.date)}
+                </span>
+              )}
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </motion.div>
   );

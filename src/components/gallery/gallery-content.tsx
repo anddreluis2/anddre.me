@@ -11,7 +11,6 @@ interface GalleryContentProps {
 
 type Group = { label: string | null; images: GalleryImage[] };
 
-/** Groups by getKey; sortKey optional for custom order (e.g. date needs YYYY-MM, not MM-YYYY). */
 function groupBy(
   images: GalleryImage[],
   getKey: (img: GalleryImage) => string | undefined,
@@ -34,7 +33,6 @@ function groupBy(
     .map(({ label, images }) => ({ label, images }));
 }
 
-/** Uses Intl so month names follow user locale (en-US → "Mar", pt-BR → "mar"). */
 function formatDate(dateStr: string): string {
   const [month, year] = dateStr.split("-").map(Number);
   return new Date(year, month - 1, 1).toLocaleDateString("en-US", {
@@ -45,7 +43,7 @@ function formatDate(dateStr: string): string {
 
 export function GalleryContent({ images }: GalleryContentProps) {
   const [orderBy, setOrderBy] = useState<OrderBy>("default");
-  /** Memo: grouping is O(n); skip when images/orderBy unchanged. */
+
   const groups = useMemo(() => {
     if (orderBy === "analog") {
       const analog = images.filter((img) => img.analog);
@@ -58,16 +56,25 @@ export function GalleryContent({ images }: GalleryContentProps) {
         (img) => img.date,
         (d) => {
           const [m, y] = d.split("-").map(Number);
-          return `${y}-${String(m).padStart(2, "0")}`; /* MM-YYYY → YYYY-MM for chronological sort */
+          return `${y}-${String(m).padStart(2, "0")}`;
         },
       ).map((g) => ({ ...g, label: formatDate(g.label ?? "") }));
-    return [{ label: null, images }]; /* Default: no labels, single group */
+    return [{ label: null, images }];
   }, [images, orderBy]);
+
+  const totalImages = useMemo(
+    () => groups.reduce((sum, g) => sum + g.images.length, 0),
+    [groups],
+  );
 
   return (
     <div className="flex flex-col w-full min-h-screen">
-      <GalleryFilters orderBy={orderBy} onOrderByChange={setOrderBy} />
-      <GalleryImageGrid groups={groups} />
+      <GalleryFilters
+        orderBy={orderBy}
+        onOrderByChange={setOrderBy}
+        imageCount={totalImages}
+      />
+      <GalleryImageGrid key={orderBy} groups={groups} />
     </div>
   );
 }
